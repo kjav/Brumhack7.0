@@ -1,0 +1,95 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://CharacterItem.gd" type="Script" id=1]
+[ext_resource path="res://Range.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/8BitTheme.tres" type="Theme" id=3]
+
+[node name="Node2D" type="Node2D"]
+
+script/script = ExtResource( 1 )
+characterTexture = null
+characterName = null
+characterStrength = null
+characterDefence = null
+characterHitpoints = null
+characterSpeed = null
+characterDescription = null
+
+[node name="CharacterImage" type="TextureFrame" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -320.0
+margin/top = -320.0
+margin/right = 320.0
+margin/bottom = 320.0
+expand = true
+stretch_mode = 0
+
+[node name="StrengthRange" parent="." instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 125, 400 )
+maxProgress = 12
+progress = 0
+name = "Strength"
+
+[node name="HitpointsRange" parent="." instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 125, 640 )
+maxProgress = 12
+progress = 0
+name = "Hitpoints"
+
+[node name="SpeedRange" parent="." instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 125, 760 )
+maxProgress = 12
+progress = 0
+name = "Speed"
+
+[node name="DefenceRange" parent="." instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 125, 520 )
+maxProgress = 12
+progress = 0
+name = "Defence"
+
+[node name="CharacterNameLabel" type="Label" parent="."]
+
+rect/scale = Vector2( 5, 5 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+theme/theme = ExtResource( 3 )
+margin/left = -1250.0
+margin/top = -700.0
+margin/right = -750.0
+margin/bottom = -580.0
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="CharacterDescriptionLabel" type="Label" parent="."]
+
+rect/scale = Vector2( 2, 2 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+theme/theme = ExtResource( 3 )
+margin/left = -500.0
+margin/top = 900.0
+margin/right = 0.0
+margin/bottom = 1150.0
+align = 1
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+

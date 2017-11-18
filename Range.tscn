@@ -1,9 +1,87 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://Range.gd" type="Script" id=1]
+[ext_resource path="res://assets/range_plus.png" type="Texture" id=2]
+[ext_resource path="res://RangePlusButton.gd" type="Script" id=3]
+[ext_resource path="res://assets/range_minus.png" type="Texture" id=4]
+[ext_resource path="res://RangeMinusButton.gd" type="Script" id=5]
+[ext_resource path="res://assets/8BitTheme.tres" type="Theme" id=6]
 
 [node name="Node2D" type="Node2D"]
 
+transform/pos = Vector2( 90, 0 )
 script/script = ExtResource( 1 )
+maxProgress = null
+progress = null
+name = null
+
+[node name="RangePlusButton" type="TextureButton" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -35.0
+margin/top = -60.0
+margin/right = 85.0
+margin/bottom = 60.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 2 )
+params/resize_mode = 1
+params/stretch_mode = 4
+script/script = ExtResource( 3 )
+
+[node name="RangeMinusButton" type="TextureButton" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -85.0
+margin/top = -60.0
+margin/right = 35.0
+margin/bottom = 60.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 4 )
+params/resize_mode = 1
+params/stretch_mode = 4
+script/script = ExtResource( 5 )
+
+[node name="RangeValueLabel" type="Label" parent="."]
+
+rect/scale = Vector2( 3, 3 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+theme/theme = ExtResource( 6 )
+margin/left = 55.0
+margin/top = -21.0
+margin/right = 95.0
+margin/bottom = -7.0
+text = "0"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="RangeNameLabel" type="Label" parent="."]
+
+rect/scale = Vector2( 1.8, 1.8 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+theme/theme = ExtResource( 6 )
+margin/left = -240.0
+margin/top = -12.6
+margin/right = -200.0
+margin/bottom = 3.4
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 
