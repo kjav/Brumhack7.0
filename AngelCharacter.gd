@@ -1,4 +1,4 @@
-extends TextureButton
+extends Node2D
 
 # class member variables go here, for example:
 # var a = 2
@@ -7,7 +7,5 @@ extends TextureButton
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
+	find_node("StrengthRange").init(20, 8)
 	pass
-
-func _pressed():
-	get_tree().change_scene("res://CharacterSelect.tscn")
