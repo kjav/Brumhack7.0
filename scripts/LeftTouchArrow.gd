@@ -11,4 +11,4 @@ func _ready():
 
 func _input_event(event):
 	if (event.type == InputEvent.MOUSE_BUTTON and event.pressed):
-		self.get_parent().right()
+		self.get_parent().left()
