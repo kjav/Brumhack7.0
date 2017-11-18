@@ -1,5 +1,12 @@
-[gd_scene format=1]
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://assets/angel_icon.png" type="Texture" id=1]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Character" type="Sprite" parent="."]
+
+transform/pos = Vector2( 471.821, 239.048 )
+texture = ExtResource( 1 )
 
 
