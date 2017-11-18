@@ -15,8 +15,6 @@ func _ready():
 	pass
 
 func setFrameStyle(style):
-	print(style)
-	print("aaaaaa")
 	if typeof(style) == typeof(0):
 		frameStyle = style
 		if frameStyle == 2:
