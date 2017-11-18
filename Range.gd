@@ -17,11 +17,12 @@ func set_value(value):
 			blocks[i].set_texture(off_texture)
 
 func init(num_blocks, value):
+	self.set_pos(Vector2(-(num_blocks * 30 - 20) / 2, self.get_pos().y))
 	for i in range(num_blocks):
 		var new_block = TextureFrame.new()
 		self.add_child(new_block)
 		new_block.set_owner(self)
-		new_block.set_pos(Vector2(i * 25, 0))
+		new_block.set_pos(Vector2(i * 30, 0))
 		blocks.push_back(new_block)
 	
 	set_value(value)

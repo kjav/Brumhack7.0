@@ -16,34 +16,35 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = -31.0
-margin/top = 451.0
-margin/right = 209.0
-margin/bottom = 691.0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 250.0
+margin/bottom = 1700.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 textures/normal = ExtResource( 2 )
-params/resize_mode = 0
-params/stretch_mode = 0
+params/resize_mode = 1
+params/stretch_mode = 4
 script/script = ExtResource( 3 )
 
 [node name="RightArrow" type="TextureButton" parent="."]
 
+visibility/opacity = 0.5
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 867.0
-margin/top = 459.0
-margin/right = 1107.0
-margin/bottom = 699.0
+margin/left = 830.0
+margin/top = 8.0
+margin/right = 1080.0
+margin/bottom = 1708.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 textures/normal = ExtResource( 4 )
-params/resize_mode = 0
-params/stretch_mode = 0
+params/resize_mode = 1
+params/stretch_mode = 4
 script/script = ExtResource( 5 )
 
 

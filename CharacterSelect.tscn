@@ -5,7 +5,7 @@
 [ext_resource path="res://AngelCharacter.gd" type="Script" id=3]
 [ext_resource path="res://assets/angel_icon.png" type="Texture" id=4]
 [ext_resource path="res://Range.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/parallax-mountain.png" type="Texture" id=6]
+[ext_resource path="res://assets/knight_icon.png" type="Texture" id=6]
 [ext_resource path="res://assets/menu_button.png" type="Texture" id=7]
 [ext_resource path="res://assets/menu_button_selected.png" type="Texture" id=8]
 [ext_resource path="res://SelectCharacterButton.gd" type="Script" id=9]
@@ -26,43 +26,45 @@ margin/right = 40.0
 margin/bottom = 40.0
 stretch_mode = 0
 
-[node name="Node2D" parent="." instance=ExtResource( 2 )]
+[node name="SelectScreen" parent="." instance=ExtResource( 2 )]
 
 [node name="AngelCharacter" type="Node2D" parent="."]
 
-transform/pos = Vector2( 437.042, 196.254 )
+transform/pos = Vector2( 2203.96, 150.546 )
 script/script = ExtResource( 3 )
 
 [node name="TextureFrame" type="TextureFrame" parent="AngelCharacter"]
 
+rect/scale = Vector2( 2.5, 2.5 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
+margin/left = -320.0
 margin/top = 0.0
-margin/right = 256.0
+margin/right = -64.0
 margin/bottom = 256.0
 texture = ExtResource( 4 )
 stretch_mode = 0
 
 [node name="StrengthRange" parent="AngelCharacter" instance=ExtResource( 5 )]
 
-transform/pos = Vector2( -133.429, 649.523 )
+transform/pos = Vector2( 0, 750 )
 
-[node name="AngelCharacter1" type="Node2D" parent="."]
+[node name="WarriorCharacter" type="Node2D" parent="."]
 
-transform/pos = Vector2( 437.042, 196.254 )
+transform/pos = Vector2( 540, 200 )
 
-[node name="TextureFrame" type="TextureFrame" parent="AngelCharacter1"]
+[node name="TextureFrame" type="TextureFrame" parent="WarriorCharacter"]
 
+rect/scale = Vector2( 2.5, 2.5 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
+margin/left = -320.0
 margin/top = 0.0
-margin/right = 272.0
+margin/right = -64.0
 margin/bottom = 256.0
 texture = ExtResource( 6 )
 stretch_mode = 0

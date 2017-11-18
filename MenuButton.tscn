@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://MenuButton.gd" type="Script" id=1]
+[ext_resource path="res://assets/menu_button.png" type="Texture" id=2]
+[ext_resource path="res://assets/menu_button_selected.png" type="Texture" id=3]
+[ext_resource path="res://MenuButtonPressed.gd" type="Script" id=4]
+
+[node name="Node2D" type="Node2D"]
+
+script/script = ExtResource( 1 )
+text = null
+scene = null
+
+[node name="MenuButtonTextureButton" type="TextureButton" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -450.0
+margin/top = -200.0
+margin/right = 450.0
+margin/bottom = 200.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 2 )
+textures/pressed = ExtResource( 3 )
+textures/hover = ExtResource( 3 )
+params/resize_mode = 0
+params/scale = Vector2( 3, 2 )
+params/stretch_mode = 0
+script/script = ExtResource( 4 )
+
+[node name="MenuButtonLabel" type="Label" parent="."]
+
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
+rect/scale = Vector2( 7, 7 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 3532.0
+margin/top = 3532.0
+margin/right = 2532.0
+margin/bottom = 2532.0
+text = "Hello World"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+
