@@ -4,6 +4,7 @@ extends Node2D
 export(int) var maxProgress setget setMaxProgress, getMaxProgress
 export(int) var progress setget setProgress, getProgress
 export(String) var name setget setName, getName
+export(bool) var editable setget setEditable, getEditable
 
 var off_texture = preload("res://assets/range_tile_off.png")
 var on_texture = preload("res://assets/range_tile_on.png")
@@ -86,3 +87,12 @@ func setName(value):
 	if typeof(value) == TYPE_STRING:
 		getNameLabel().text = str(value)
 		name = value
+
+func setEditable(value):
+	if typeof(value) == TYPE_BOOL:
+		editable = value
+		get_node("RangePlusButton").set_disabled(!value)
+		get_node("RangeMinusButton").set_disabled(!value)
+
+func getEditable():
+	return editable

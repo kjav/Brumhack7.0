@@ -1,57 +1,62 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://CharacterSelect.gd" type="Script" id=1]
-[ext_resource path="res://SelectScreen.tscn" type="PackedScene" id=2]
-[ext_resource path="res://CharacterItem.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/angel_icon.png" type="Texture" id=4]
-[ext_resource path="res://assets/knight_icon.png" type="Texture" id=5]
-[ext_resource path="res://MenuButton.tscn" type="PackedScene" id=6]
-[ext_resource path="res://WorldSelect.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/parallax-mountain.png" type="Texture" id=2]
+[ext_resource path="res://SelectScreen.tscn" type="PackedScene" id=3]
+[ext_resource path="res://CharacterItem.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/angel_icon.png" type="Texture" id=5]
+[ext_resource path="res://assets/knight_icon.png" type="Texture" id=6]
+[ext_resource path="res://MenuButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://WorldSelect.tscn" type="PackedScene" id=8]
 
 [node name="Node2D" type="Node2D"]
 
 script/script = ExtResource( 1 )
 
-[node name="TextureFrame" type="TextureFrame" parent="."]
+[node name="Background" type="TextureFrame" parent="."]
 
+rect/scale = Vector2( 12, 12 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
+margin/left = -848.0
 margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
+margin/right = -576.0
+margin/bottom = 160.0
+texture = ExtResource( 2 )
 stretch_mode = 0
 
-[node name="SelectScreen" parent="." instance=ExtResource( 2 )]
+[node name="SelectScreen" parent="." instance=ExtResource( 3 )]
 
-[node name="AngelCharacter" parent="." instance=ExtResource( 3 )]
+[node name="AngelCharacter" parent="." instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 540, 550 )
-characterTexture = ExtResource( 4 )
+characterTexture = ExtResource( 5 )
 characterName = "Angel"
 characterStrength = 3
 characterDefence = 4
 characterHitpoints = 12
 characterSpeed = 10
 characterDescription = "The Angel is from another realm. Where it lacks in physical strength, it makes up for with massive hitpoints, and a very high speed gives them the first hit in most battles."
+characterEditable = false
 
-[node name="WarriorCharacter" parent="." instance=ExtResource( 3 )]
+[node name="WarriorCharacter" parent="." instance=ExtResource( 4 )]
 
 transform/pos = Vector2( -705.747, 502.113 )
-characterTexture = ExtResource( 5 )
+characterTexture = ExtResource( 6 )
 characterName = "Warrior"
 characterStrength = 7
 characterDefence = 10
 characterHitpoints = 8
 characterSpeed = 4
 characterDescription = "A fierce human warrior from the Surface, this character has the strength to hit hard - but will they survive to make the final blow?"
+characterEditable = false
 
-[node name="Node2D" parent="." instance=ExtResource( 6 )]
+[node name="SelectCharacterButton" parent="." instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 540, 1800 )
 text = "Select Character"
-scene = ExtResource( 7 )
+scene = ExtResource( 8 )
 
 

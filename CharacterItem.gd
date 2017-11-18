@@ -8,6 +8,7 @@ export(int) var characterDefence setget setCharacterDefence, getCharacterDefence
 export(int) var characterHitpoints setget setCharacterHitpoints, getCharacterHitpoints
 export(int) var characterSpeed setget setCharacterSpeed, getCharacterSpeed
 export(String) var characterDescription setget setCharacterDescription, getCharacterDescription
+export(bool) var characterEditable setget setCharacterEditable, getCharacterEditable
 
 func setCharacterTexture(t):
 	if typeof(t) == TYPE_OBJECT:
@@ -64,3 +65,14 @@ func setCharacterDescription(value):
 
 func getCharacterDescription():
 	return characterDescription
+
+func setCharacterEditable(value):
+	if typeof(value) == TYPE_BOOL:
+		characterEditable = value
+		get_node("StrengthRange").editable = value
+		get_node("DefenceRange").editable = value
+		get_node("HitpointsRange").editable = value
+		get_node("SpeedRange").editable = value
+
+func getCharacterEditable():
+	return characterEditable

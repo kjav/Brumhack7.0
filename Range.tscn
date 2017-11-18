@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://Range.gd" type="Script" id=1]
 [ext_resource path="res://assets/range_plus.png" type="Texture" id=2]
-[ext_resource path="res://RangePlusButton.gd" type="Script" id=3]
-[ext_resource path="res://assets/range_minus.png" type="Texture" id=4]
-[ext_resource path="res://RangeMinusButton.gd" type="Script" id=5]
-[ext_resource path="res://assets/8BitTheme.tres" type="Theme" id=6]
+[ext_resource path="res://assets/transparent_pixel.png" type="Texture" id=3]
+[ext_resource path="res://RangePlusButton.gd" type="Script" id=4]
+[ext_resource path="res://assets/range_minus.png" type="Texture" id=5]
+[ext_resource path="res://RangeMinusButton.gd" type="Script" id=6]
+[ext_resource path="res://assets/8BitTheme.tres" type="Theme" id=7]
 
 [node name="Node2D" type="Node2D"]
 
@@ -14,6 +15,7 @@ script/script = ExtResource( 1 )
 maxProgress = null
 progress = null
 name = null
+editable = null
 
 [node name="RangePlusButton" type="TextureButton" parent="."]
 
@@ -29,9 +31,10 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 textures/normal = ExtResource( 2 )
+textures/disabled = ExtResource( 3 )
 params/resize_mode = 1
 params/stretch_mode = 4
-script/script = ExtResource( 3 )
+script/script = ExtResource( 4 )
 
 [node name="RangeMinusButton" type="TextureButton" parent="."]
 
@@ -46,10 +49,11 @@ margin/bottom = 60.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = ExtResource( 4 )
+textures/normal = ExtResource( 5 )
+textures/disabled = ExtResource( 3 )
 params/resize_mode = 1
 params/stretch_mode = 4
-script/script = ExtResource( 5 )
+script/script = ExtResource( 6 )
 
 [node name="RangeValueLabel" type="Label" parent="."]
 
@@ -58,7 +62,7 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-theme/theme = ExtResource( 6 )
+theme/theme = ExtResource( 7 )
 margin/left = 55.0
 margin/top = -21.0
 margin/right = 95.0
@@ -75,7 +79,7 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-theme/theme = ExtResource( 6 )
+theme/theme = ExtResource( 7 )
 margin/left = -240.0
 margin/top = -12.6
 margin/right = -200.0
