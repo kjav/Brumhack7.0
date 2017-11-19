@@ -12,6 +12,7 @@ type = null
 
 [node name="Background" type="TextureFrame" parent="."]
 
+visibility/visible = false
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -25,11 +26,12 @@ stretch_mode = 0
 
 [node name="ItemDescription" parent="." instance=ExtResource( 3 )]
 
-transform/pos = Vector2( 2, 129 )
+transform/pos = Vector2( -29.9513, 154.855 )
+transform/scale = Vector2( 1.3, 1.3 )
 
 [node name="ItemIcon" parent="." instance=ExtResource( 4 )]
 
-transform/pos = Vector2( 31.0675, -0.58886 )
-transform/scale = Vector2( 4, 4 )
+transform/pos = Vector2( 14.1683, -4.92975 )
+transform/scale = Vector2( 5, 5 )
 
 

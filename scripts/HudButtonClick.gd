@@ -2,7 +2,6 @@ extends TextureButton
 const InventoryType = preload("res://Inventory.tscn")
 
 func _pressed():
-	print(EventListener.raise("SwipeCommand", randi()%4))
 	if get_tree().get_current_scene().get_node("HudNode").inventoryOpen:
 		get_tree().get_current_scene().get_node("HudNode").inventoryOpen = false
 		get_tree().get_current_scene().get_node("HudNode").get_node("HudCanvasLayer").get_node("Inventory").queue_free()

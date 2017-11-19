@@ -47,7 +47,6 @@ type = null
 
 [node name="TextureButton" type="TextureFrame" parent="."]
 
-visibility/opacity = 0.1
 rect/scale = Vector2( 3, 5 )
 focus/ignore_mouse = false
 focus/stop_mouse = true

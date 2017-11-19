@@ -214,6 +214,17 @@ func swipe_stop(area, forced=false):
 
 		if forced:
 			state.capturing = false
+		
+		var direction = gesture.get_direction()
+		
+		if direction == "up":
+			EventListener.raise("SwipeCommand", Enums.DIRECTION.UP)
+		elif direction == "down":
+			EventListener.raise("SwipeCommand", Enums.DIRECTION.DOWN)
+		elif direction == "left":
+			EventListener.raise("SwipeCommand", Enums.DIRECTION.LEFT)
+		elif direction == "right":
+			EventListener.raise("SwipeCommand", Enums.DIRECTION.RIGHT)
 
 		print('(Direction: ' + gesture.get_direction()  + ')')
 		emit_signal('swiped', gesture)

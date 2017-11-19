@@ -18,7 +18,8 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 160.0
 margin/bottom = 18.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.867188, 0.867188, 0.867188, 1 )
 text = "Sharp Shield - T3"
 align = 1
 percent_visible = 1.0
@@ -27,6 +28,7 @@ max_lines_visible = -1
 
 [node name="Description" type="RichTextLabel" parent="."]
 
+visibility/visible = false
 rect/scale = Vector2( 1.1, 1.1 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
