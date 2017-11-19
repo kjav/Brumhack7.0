@@ -4,6 +4,8 @@ var potions = []
 var food = []
 var spells = []
 var tilemap
+var character
+var enemies = []
 
 func _ready():
 	addPotions(["HealthPot", "StrengthPot", "StrengthPot", "HealthPot", "SpeedPot"])
