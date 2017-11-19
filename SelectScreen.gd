@@ -31,7 +31,7 @@ func select_item(item):
 	current_item = item
 	for i in range(items.size()):
 		items[i].set_pos(Vector2(10000, 10000))
-	items[current_item].set_pos(Vector2(540, 200))
+	items[current_item].set_pos(Vector2(540, 550))
 	
 	# Disable arrows if they can't be used
 	var leftmost = current_item == 0
