@@ -180,9 +180,24 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 234.0
+margin/left = 232.0
 margin/top = 27.0
-margin/right = 266.0
+margin/right = 264.0
+margin/bottom = 60.0
+texture = ExtResource( 7 )
+stretch_mode = 0
+
+[node name="Heart6" type="TextureFrame" parent="HudCanvasLayer/HealthBar"]
+
+visibility/visible = false
+rect/scale = Vector2( 1.5, 1.5 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 290.0
+margin/top = 27.0
+margin/right = 322.0
 margin/bottom = 60.0
 texture = ExtResource( 7 )
 stretch_mode = 0
