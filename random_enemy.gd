@@ -4,6 +4,8 @@ var time_elapsed = 0
 var movement_direction = -1
 var original_pos
 var moving = false
+var health = 2
+var attack
 
 func _ready():
 	set_process(true)
@@ -46,6 +48,7 @@ func faceDirection(direction):
 
 func moveDirection(direction):
 	faceDirection(direction)
+	attack = false
 	var pos = get_pos()
 	pos.x = int(pos.x / 128)
 	pos.y = int(pos.y / 128)
@@ -54,10 +57,17 @@ func moveDirection(direction):
 	elif direction == Enums.DIRECTION.DOWN:
 		pos.y += 1
 	elif direction == Enums.DIRECTION.LEFT:
+		self.set_flip_h( true )
 		pos.x -= 1
 	elif direction == Enums.DIRECTION.RIGHT:
+		self.set_flip_h( false )
 		pos.x += 1
-	if GameData.walkable(pos.x, pos.y) and GameData.character.original_pos.x / 128 == pos.x and GameData.character.original_pos.y / 128 == pos.y:
+	for i in range(GameData.enemies.size()):
+		if GameData.enemies[i].original_pos.x / 128 == pos.x and GameData.enemies[i].original_pos.y / 128 == pos.y:
+			attack = true
+	if GameData.character.original_pos.x / 128 == pos.x and GameData.character.original_pos.y / 128 == pos.y:
+		attack = true
+	if GameData.walkable(pos.x, pos.y) and !attack:
 		#should remove some health from them
 		return true
 	return false
