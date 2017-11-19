@@ -1,6 +1,6 @@
 extends Node2D
 
-var _items = []
+var _items = ["DungeonMap"]
 
 func items():
 	if _items.size() > 0 and (typeof(_items[0]) == typeof("")):
