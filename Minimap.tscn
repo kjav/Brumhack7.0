@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://assets/frame_right.png" type="Texture" id=1]
+[ext_resource path="res://assets/minimap.png" type="Texture" id=2]
+[ext_resource path="res://assets/frame_front.png" type="Texture" id=3]
 
 [node name="Node2D" type="Node2D"]
 
@@ -16,6 +18,34 @@ margin/top = -1.0
 margin/right = 70.0
 margin/bottom = 85.0
 texture = ExtResource( 1 )
+stretch_mode = 0
+
+[node name="TextureFrame 2" type="TextureFrame" parent="."]
+
+rect/scale = Vector2( 0.45, 0.45 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 51.0
+margin/top = 62.0
+margin/right = 556.0
+margin/bottom = 567.0
+texture = ExtResource( 2 )
+stretch_mode = 0
+
+[node name="TextureFrame 3" type="TextureFrame" parent="."]
+
+rect/scale = Vector2( 4, 4 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -29.0
+margin/top = 1.0
+margin/right = 69.0
+margin/bottom = 87.0
+texture = ExtResource( 3 )
 stretch_mode = 0
 
 

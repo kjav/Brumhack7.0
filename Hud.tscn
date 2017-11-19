@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://Hud.gd" type="Script" id=1]
 [ext_resource path="res://assets/frame_left.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/basic_shield.png" type="Texture" id=6]
 [ext_resource path="res://assets/heart.png" type="Texture" id=7]
 [ext_resource path="res://HudButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Minimap.tscn" type="PackedScene" id=9]
 
 [node name="HudNode" type="Node2D"]
 
@@ -20,21 +21,9 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 
-[node name="Minimap" type="ColorFrame" parent="HudCanvasLayer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 269.0
-margin/bottom = 269.0
-color = Color( 1, 1, 1, 1 )
-
 [node name="ActiveSlot" type="Node2D" parent="HudCanvasLayer"]
 
-[node name="ActveFrame" type="TextureFrame" parent="HudCanvasLayer"]
+[node name="ActveFrame" type="TextureFrame" parent="HudCanvasLayer/ActiveSlot"]
 
 rect/scale = Vector2( 2, 2 )
 focus/ignore_mouse = true
@@ -48,7 +37,7 @@ margin/bottom = 1832.0
 texture = ExtResource( 2 )
 stretch_mode = 3
 
-[node name="ActiveWeapon" type="TextureFrame" parent="HudCanvasLayer"]
+[node name="ActiveWeapon" type="TextureFrame" parent="HudCanvasLayer/ActiveSlot"]
 
 rect/scale = Vector2( 3.6, 3.6 )
 focus/ignore_mouse = true
@@ -62,7 +51,7 @@ margin/bottom = 1809.0
 texture = ExtResource( 3 )
 stretch_mode = 4
 
-[node name="ActiveFrameFront" type="TextureFrame" parent="HudCanvasLayer"]
+[node name="ActiveFrameFront" type="TextureFrame" parent="HudCanvasLayer/ActiveSlot"]
 
 rect/scale = Vector2( 2, 2 )
 focus/ignore_mouse = true
@@ -81,44 +70,44 @@ stretch_mode = 3
 
 transform/pos = Vector2( 20, 0 )
 
-[node name="InactiveFrame" type="TextureFrame" parent="HudCanvasLayer"]
+[node name="InactiveFrame" type="TextureFrame" parent="HudCanvasLayer/InactiveSlot"]
 
 rect/scale = Vector2( 2, 2 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 172.0
+margin/left = 152.0
 margin/top = 1746.0
-margin/right = 270.0
+margin/right = 250.0
 margin/bottom = 1832.0
 texture = ExtResource( 5 )
 stretch_mode = 3
 
-[node name="InactiveWeapon" type="TextureFrame" parent="HudCanvasLayer"]
+[node name="InactiveWeapon" type="TextureFrame" parent="HudCanvasLayer/InactiveSlot"]
 
 rect/scale = Vector2( 3.6, 3.6 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 209.0
+margin/left = 189.0
 margin/top = 1779.0
-margin/right = 241.0
+margin/right = 221.0
 margin/bottom = 1811.0
 texture = ExtResource( 6 )
 stretch_mode = 4
 
-[node name="InactiveFrameFront" type="TextureFrame" parent="HudCanvasLayer"]
+[node name="InactiveFrameFront" type="TextureFrame" parent="HudCanvasLayer/InactiveSlot"]
 
 rect/scale = Vector2( 2, 2 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 172.0
+margin/left = 152.0
 margin/top = 1746.0
-margin/right = 270.0
+margin/right = 250.0
 margin/bottom = 1832.0
 texture = ExtResource( 4 )
 modulate = Color( 0.609375, 0.485509, 0.357056, 1 )
@@ -126,74 +115,74 @@ stretch_mode = 3
 
 [node name="HealthBar" type="Node2D" parent="HudCanvasLayer"]
 
-transform/pos = Vector2( 300, 0 )
+transform/pos = Vector2( 390, 3.09088 )
 
-[node name="Heart1" type="TextureFrame" parent="HudCanvasLayer"]
+[node name="Heart1" type="TextureFrame" parent="HudCanvasLayer/HealthBar"]
 
 rect/scale = Vector2( 1.5, 1.5 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 335.0
+margin/left = 5.0
 margin/top = 27.0
-margin/right = 367.0
+margin/right = 37.0
 margin/bottom = 60.0
 texture = ExtResource( 7 )
 stretch_mode = 0
 
-[node name="Heart2" type="TextureFrame" parent="HudCanvasLayer"]
+[node name="Heart2" type="TextureFrame" parent="HudCanvasLayer/HealthBar"]
 
 rect/scale = Vector2( 1.5, 1.5 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 392.0
+margin/left = 62.0
 margin/top = 27.0
-margin/right = 424.0
+margin/right = 94.0
 margin/bottom = 60.0
 texture = ExtResource( 7 )
 stretch_mode = 0
 
-[node name="Heart3" type="TextureFrame" parent="HudCanvasLayer"]
+[node name="Heart3" type="TextureFrame" parent="HudCanvasLayer/HealthBar"]
 
 rect/scale = Vector2( 1.5, 1.5 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 449.0
+margin/left = 119.0
 margin/top = 27.0
-margin/right = 481.0
+margin/right = 151.0
 margin/bottom = 60.0
 texture = ExtResource( 7 )
 stretch_mode = 0
 
-[node name="Heart4" type="TextureFrame" parent="HudCanvasLayer"]
+[node name="Heart4" type="TextureFrame" parent="HudCanvasLayer/HealthBar"]
 
 rect/scale = Vector2( 1.5, 1.5 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 505.0
+margin/left = 175.0
 margin/top = 27.0
-margin/right = 537.0
+margin/right = 207.0
 margin/bottom = 60.0
 texture = ExtResource( 7 )
 stretch_mode = 0
 
-[node name="Heart5" type="TextureFrame" parent="HudCanvasLayer"]
+[node name="Heart5" type="TextureFrame" parent="HudCanvasLayer/HealthBar"]
 
 rect/scale = Vector2( 1.5, 1.5 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 564.0
+margin/left = 234.0
 margin/top = 27.0
-margin/right = 596.0
+margin/right = 266.0
 margin/bottom = 60.0
 texture = ExtResource( 7 )
 stretch_mode = 0
@@ -217,5 +206,7 @@ transform/pos = Vector2( 713.633, 1742.23 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = "Centre"
 type = "Spell"
+
+[node name="Node2D" parent="HudCanvasLayer" instance=ExtResource( 9 )]
 
 
