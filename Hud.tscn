@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=11 format=1]
 
 [ext_resource path="res://Hud.gd" type="Script" id=1]
 [ext_resource path="res://Game.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/basic_shield.png" type="Texture" id=7]
 [ext_resource path="res://assets/heart.png" type="Texture" id=8]
 [ext_resource path="res://HudButton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/menu.png" type="Texture" id=10]
 
 [node name="Node2D" type="Node2D"]
 
@@ -213,5 +214,24 @@ transform/pos = Vector2( 713.633, 1742.23 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = "Centre"
 type = "Spell"
+
+[node name="MenuButton" type="MenuButton" parent="."]
+
+rect/scale = Vector2( 2, 2 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 980.0
+margin/top = 13.0
+margin/right = 1026.0
+margin/bottom = 49.0
+toggle_mode = false
+click_on_press = true
+enabled_focus_mode = 0
+shortcut = null
+icon = ExtResource( 10 )
+flat = true
+items = [  ]
 
 
