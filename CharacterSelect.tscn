@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://scripts/CharacterSelect.gd" type="Script" id=1]
 [ext_resource path="res://assets/parallax-mountain.png" type="Texture" id=2]
@@ -6,9 +6,9 @@
 [ext_resource path="res://CharacterItem.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/angel_icon.png" type="Texture" id=5]
 [ext_resource path="res://assets/knight_icon.png" type="Texture" id=6]
-[ext_resource path="res://MenuButton.tscn" type="PackedScene" id=7]
-[ext_resource path="res://WorldSelect.tscn" type="PackedScene" id=8]
-
+[ext_resource path="res://assets/Beserker_full.png" type="Texture" id=7]
+[ext_resource path="res://MenuButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://WorldSelect.tscn" type="PackedScene" id=9]
 
 [node name="Node2D" type="Node2D"]
 
@@ -54,10 +54,20 @@ characterSpeed = 4
 characterDescription = "A fierce human warrior from the Surface, this character has the strength to hit hard - but will they survive to make the final blow?"
 characterEditable = false
 
-[node name="SelectCharacterButton" parent="." instance=ExtResource( 7 )]
+[node name="BeserkerCharacter" parent="." instance=ExtResource( 4 )]
+
+characterTexture = ExtResource( 7 )
+characterName = "Beserker"
+characterStrength = 12
+characterDefence = 1
+characterHitpoints = 10
+characterSpeed = 9
+characterDescription = "The beserker will never let you down with the damage he will inflict on evil creatures. But they may gravely injure him while he's striking..."
+
+[node name="SelectCharacterButton" parent="." instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 540, 1800 )
 text = "Select Character"
-scene = ExtResource( 8 )
+scene = ExtResource( 9 )
 
 
