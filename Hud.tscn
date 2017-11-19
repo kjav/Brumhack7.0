@@ -81,10 +81,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 163.0
-margin/top = 1747.0
-margin/right = 261.0
-margin/bottom = 1833.0
+margin/left = 152.0
+margin/top = 1746.0
+margin/right = 250.0
+margin/bottom = 1832.0
 texture = ExtResource( 5 )
 stretch_mode = 3
 
@@ -95,10 +95,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 200.0
-margin/top = 1780.0
-margin/right = 232.0
-margin/bottom = 1812.0
+margin/left = 189.0
+margin/top = 1779.0
+margin/right = 221.0
+margin/bottom = 1811.0
 texture = ExtResource( 6 )
 stretch_mode = 4
 
@@ -109,10 +109,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 163.0
-margin/top = 1747.0
-margin/right = 261.0
-margin/bottom = 1833.0
+margin/left = 152.0
+margin/top = 1746.0
+margin/right = 250.0
+margin/bottom = 1832.0
 texture = ExtResource( 4 )
 modulate = Color( 0.609375, 0.485509, 0.357056, 1 )
 stretch_mode = 3
@@ -193,20 +193,20 @@ stretch_mode = 0
 
 [node name="Node2D 2" parent="." instance=ExtResource( 8 )]
 
-transform/pos = Vector2( 878.997, 1742.68 )
+transform/pos = Vector2( 880.997, 1742.68 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = 0
 
 [node name="Node2D 3" parent="." instance=ExtResource( 8 )]
 
-transform/pos = Vector2( 705.633, 1742.23 )
+transform/pos = Vector2( 713.633, 1742.23 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = 1
 type = 2
 
 [node name="Node2D4" parent="." instance=ExtResource( 8 )]
 
-transform/pos = Vector2( 529.633, 1742.23 )
+transform/pos = Vector2( 545.633, 1742.23 )
 transform/scale = Vector2( 2, 2 )
 type = 1
 

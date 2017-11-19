@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://ItemDescription.gd" type="Script" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+script/script = ExtResource( 1 )
+type = null
+
+[node name="Name" type="Label" parent="."]
+
+rect/scale = Vector2( 1.2, 1.2 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 160.0
+margin/bottom = 18.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Sharp Shield - T3"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Description" type="RichTextLabel" parent="."]
+
+rect/scale = Vector2( 1.1, 1.1 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 6.0
+margin/top = 19.0
+margin/right = 171.0
+margin/bottom = 115.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode/enabled = false
+bbcode/bbcode = ""
+visible_characters = -1
+percent_visible = 1.0
+
+
