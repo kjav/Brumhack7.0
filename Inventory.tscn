@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://assets/Inventory.png" type="Texture" id=1]
-[ext_resource path="res://InventoryItem.tscn" type="PackedScene" id=2]
 
 [sub_resource type="GDScript" id=1]
 
@@ -9,32 +8,34 @@ script/source = "extends Node2D
 
 export(int, \"Potion\", \"Food\", \"Spell\") var type setget setType, getType
 
-var potions = []
-var food = []
-var spells = []
-
 const InventoryItem = preload(\"res://InventoryItem.tscn\")
 
-func _ready():
-	addItemPotions(\"HealthPot\")
-	addItemPotions(\"StrengthPot\")
-
-func addItemPotions(new):
-	potions.push_back(new)
-	print(potions)
-
+#var pos1 = Vector2(130, 140)
+#var pos2 = Vector2(355, 140)
+#var pos3 = Vector2(580, 140)
 func populateInventory():
-	var new_node = InventoryItem.instance()
-	#new_inventory_instance.set_pos(Vector2(97, 245))
-	#get_tree().get_current_scene().add_child(new_inventory_instance)
-	for i in range(potions.size()):
-		print(potions[i] + \"inventory\")
-		new_node.setType(potions[i])
+	var inc = 225
+	var start = Vector2(130,130)
+	var selected = []
+	
+	if type == \"Potion\":
+		selected = GameData.potions
+	elif type == \"Food\":
+		selected = GameData.food
+	elif type == \"Spell\":
+		selected = GameData.spells
+	
+	for i in range(selected.size()):
+		var new_node = InventoryItem.instance()
+		new_node.setType(selected[i])
+		var row = i / 3
+		var col = i % 3
+		new_node.set_pos(start + Vector2(inc*col, inc*row))
+		get_tree().get_current_scene().get_node(\"Inventory\").add_child(new_node)
 
 func setType(newType):
 	if typeof(newType) == TYPE_STRING:
 		type = newType
-		print(type + \"setting inventory\")
 
 func getType():
 	return type"
@@ -44,30 +45,18 @@ func getType():
 script/script = SubResource( 1 )
 type = null
 
-[node name="TextureFrame" type="TextureFrame" parent="."]
+[node name="TextureButton" type="TextureFrame" parent="."]
 
 rect/scale = Vector2( 3, 5 )
-focus/ignore_mouse = true
+focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 2.0
+margin/left = 0.0
 margin/top = 0.0
-margin/right = 302.0
+margin/right = 300.0
 margin/bottom = 273.0
 texture = ExtResource( 1 )
 stretch_mode = 0
-
-[node name="Node2D" parent="." instance=ExtResource( 2 )]
-
-transform/pos = Vector2( 130.345, 139.995 )
-
-[node name="Node2D1" parent="." instance=ExtResource( 2 )]
-
-transform/pos = Vector2( 357.294, 139.944 )
-
-[node name="Node2D2" parent="." instance=ExtResource( 2 )]
-
-transform/pos = Vector2( 580.345, 139.995 )
 
 
