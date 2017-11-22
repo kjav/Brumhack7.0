@@ -63,6 +63,7 @@ characterDefence = 1
 characterHitpoints = 10
 characterSpeed = 9
 characterDescription = "The beserker will never let you down with the damage he will inflict on evil creatures. But they may gravely injure him while he's striking..."
+characterEditable = false
 
 [node name="SelectCharacterButton" parent="." instance=ExtResource( 8 )]
 
