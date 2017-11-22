@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=1]
 
-[ext_resource path="res://RectangleClickEvent.gd" type="Script" id=1]
+[ext_resource path="res://ClickableRegion.gd" type="Script" id=1]
 
 [node name="Node2D" type="Button"]
 
@@ -17,6 +17,6 @@ enabled_focus_mode = 2
 shortcut = null
 flat = false
 script/script = ExtResource( 1 )
-triggerOn = null
+triggerOn = 0
 
 
