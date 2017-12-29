@@ -4,7 +4,7 @@ var potions = []
 var food = []
 var spells = []
 var tilemap
-var character
+var player
 var enemies = []
 
 func _ready():

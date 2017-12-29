@@ -3,12 +3,13 @@ extends "Character.gd"
 var time_elapsed = 0
 var original_pos
 var attack
+var health 
 
 func _ready():
 	set_process(true)
 	EventListener.listen("SwipeCommand", funcref(self, "moveDirection"))
 	original_pos = get_pos()
-	GameData.character = self
+	GameData.player = self
 
 func _process(delta):
 	if moving:

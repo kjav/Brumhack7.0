@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://Hud.gd" type="Script" id=1]
 [ext_resource path="res://assets/frame_left.png" type="Texture" id=2]
@@ -6,9 +6,8 @@
 [ext_resource path="res://assets/frame_front.png" type="Texture" id=4]
 [ext_resource path="res://assets/frame_right.png" type="Texture" id=5]
 [ext_resource path="res://assets/basic_shield.png" type="Texture" id=6]
-[ext_resource path="res://assets/heart.png" type="Texture" id=7]
-[ext_resource path="res://HudButton.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Minimap.tscn" type="PackedScene" id=9]
+[ext_resource path="res://HudButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Minimap.tscn" type="PackedScene" id=8]
 
 [node name="HudNode" type="Node2D"]
 
@@ -117,111 +116,30 @@ stretch_mode = 3
 
 transform/pos = Vector2( 390, 3.09088 )
 
-[node name="Heart1" type="TextureFrame" parent="HudCanvasLayer/HealthBar"]
+[node name="Node2D" type="Node2D" parent="HudCanvasLayer/HealthBar"]
 
-rect/scale = Vector2( 1.5, 1.5 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 5.0
-margin/top = 27.0
-margin/right = 37.0
-margin/bottom = 60.0
-texture = ExtResource( 7 )
-stretch_mode = 0
+transform/pos = Vector2( -17.7285, 8.86422 )
 
-[node name="Heart2" type="TextureFrame" parent="HudCanvasLayer/HealthBar"]
-
-rect/scale = Vector2( 1.5, 1.5 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 62.0
-margin/top = 27.0
-margin/right = 94.0
-margin/bottom = 60.0
-texture = ExtResource( 7 )
-stretch_mode = 0
-
-[node name="Heart3" type="TextureFrame" parent="HudCanvasLayer/HealthBar"]
-
-rect/scale = Vector2( 1.5, 1.5 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 119.0
-margin/top = 27.0
-margin/right = 151.0
-margin/bottom = 60.0
-texture = ExtResource( 7 )
-stretch_mode = 0
-
-[node name="Heart4" type="TextureFrame" parent="HudCanvasLayer/HealthBar"]
-
-rect/scale = Vector2( 1.5, 1.5 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 175.0
-margin/top = 27.0
-margin/right = 207.0
-margin/bottom = 60.0
-texture = ExtResource( 7 )
-stretch_mode = 0
-
-[node name="Heart5" type="TextureFrame" parent="HudCanvasLayer/HealthBar"]
-
-rect/scale = Vector2( 1.5, 1.5 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 232.0
-margin/top = 27.0
-margin/right = 264.0
-margin/bottom = 60.0
-texture = ExtResource( 7 )
-stretch_mode = 0
-
-[node name="Heart6" type="TextureFrame" parent="HudCanvasLayer/HealthBar"]
-
-visibility/visible = false
-rect/scale = Vector2( 1.5, 1.5 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 290.0
-margin/top = 27.0
-margin/right = 322.0
-margin/bottom = 60.0
-texture = ExtResource( 7 )
-stretch_mode = 0
-
-[node name="Node2D 2" parent="HudCanvasLayer" instance=ExtResource( 8 )]
+[node name="Node2D 2" parent="HudCanvasLayer" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 880.997, 1742.68 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = "Right"
 type = "Potion"
 
-[node name="Node2D3" parent="HudCanvasLayer" instance=ExtResource( 8 )]
+[node name="Node2D3" parent="HudCanvasLayer" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 544.997, 1742.68 )
 transform/scale = Vector2( 2, 2 )
 type = "Food"
 
-[node name="Node2D 3" parent="HudCanvasLayer" instance=ExtResource( 8 )]
+[node name="Node2D 3" parent="HudCanvasLayer" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 713.633, 1742.23 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = "Centre"
 type = "Spell"
 
-[node name="Node2D" parent="HudCanvasLayer" instance=ExtResource( 9 )]
+[node name="Node2D" parent="HudCanvasLayer" instance=ExtResource( 8 )]
 
 

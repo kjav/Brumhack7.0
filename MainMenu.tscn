@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://assets/parallax-mountain.png" type="Texture" id=1]
 [ext_resource path="res://MenuButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/PlayerSelect.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Extras.tscn" type="PackedScene" id=4]
 
 [node name="Node2D" type="Node2D"]
 
@@ -31,6 +30,5 @@ scene = ExtResource( 3 )
 
 transform/pos = Vector2( 540, 1400 )
 text = "Extras"
-scene = ExtResource( 4 )
 
 
