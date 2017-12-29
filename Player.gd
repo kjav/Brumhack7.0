@@ -3,7 +3,6 @@ extends "Character.gd"
 var time_elapsed = 0
 var original_pos
 var attack
-var health 
 
 func _ready():
 	set_process(true)
