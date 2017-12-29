@@ -1,11 +1,9 @@
 extends "Character.gd"
 
-var original_pos
 var attack
 
 func _ready():
 	set_process(true)
-	original_pos = get_pos()
 	GameData.characters.append(self)
 
 func turn():
