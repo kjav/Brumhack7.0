@@ -5,12 +5,13 @@ signal healthChanged(change, value)
 var time_elapsed = 0
 var original_pos
 var attack
-
+var maxHealth
 
 func _ready():
 	set_process(true)
 	EventListener.listen("SwipeCommand", funcref(self, "moveDirection"))
 	original_pos = get_pos()
+	maxHealth = health
 	GameData.player = self
 	GameData.characters.append(self)
 func _process(delta):

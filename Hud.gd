@@ -15,10 +15,14 @@ func PlayerHealthChanged(change, value):
 	for child in get_node("HudCanvasLayer/HealthBar").get_children():
 		child.queue_free()
 	var health = GameData.player.health
-	print("ouch: " + str(health))
-	for i in range(health):
+	var maxHealth = GameData.player.maxHealth
+	for i in range(maxHealth):
 		var new_node = Heart.instance()
-		new_node.setType("Full")
 		new_node.set_pos(Vector2(inc*i, 0))
+		if (i < health):
+			new_node.setType("Full")
+		else:
+			new_node.setType("Empty")
+		
 		get_node("HudCanvasLayer/HealthBar").add_child(new_node)
 	
