@@ -34,4 +34,5 @@ func addSpell(new):
 	spells.push_back(new)
 
 func walkable(x, y):
+	print("In walkable in GameData.gd")
 	return tilemap.walkable(x, y)

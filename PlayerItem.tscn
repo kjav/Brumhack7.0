@@ -1,22 +1,22 @@
 [gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://CharacterItem.gd" type="Script" id=1]
+[ext_resource path="res://PlayerItem.gd" type="Script" id=1]
 [ext_resource path="res://Range.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/8BitTheme.tres" type="Theme" id=3]
 
 [node name="Node2D" type="Node2D"]
 
 script/script = ExtResource( 1 )
-characterTexture = null
-characterName = null
-characterStrength = null
-characterDefence = null
-characterHitpoints = null
-characterSpeed = null
-characterDescription = null
-characterEditable = null
+playerTexture = null
+playerName = null
+playerStrength = null
+playerDefence = null
+playerHitpoints = null
+playerSpeed = null
+playerDescription = null
+playerEditable = null
 
-[node name="CharacterImage" type="TextureFrame" parent="."]
+[node name="PlayerImage" type="TextureFrame" parent="."]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -57,7 +57,7 @@ maxProgress = 12
 progress = 0
 name = "Defence"
 
-[node name="CharacterNameLabel" type="Label" parent="."]
+[node name="PlayerNameLabel" type="Label" parent="."]
 
 rect/scale = Vector2( 5, 5 )
 focus/ignore_mouse = true
@@ -75,7 +75,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="CharacterDescriptionLabel" type="Label" parent="."]
+[node name="PlayerDescriptionLabel" type="Label" parent="."]
 
 rect/scale = Vector2( 2, 2 )
 focus/ignore_mouse = true

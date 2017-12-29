@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/parallax-mountain.png" type="Texture" id=1]
 [ext_resource path="res://MenuButton.tscn" type="PackedScene" id=2]
-[ext_resource path="res://CharacterSelect.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/PlayerSelect.tscn" type="PackedScene" id=3]
 
 [node name="Node2D" type="Node2D"]
 
