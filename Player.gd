@@ -3,14 +3,12 @@ extends "Character.gd"
 signal healthChanged(change, value)
 
 var time_elapsed = 0
-var original_pos
 var attack
 var maxHealth
 
 func _ready():
 	set_process(true)
 	EventListener.listen("SwipeCommand", funcref(self, "swiped"))
-	original_pos = get_pos()
 	maxHealth = health
 	GameData.player = self
 	GameData.characters.append(self)
@@ -20,7 +18,8 @@ func swiped(direction):
 		time_elapsed = 0
 		moveDirection(direction)
 		for i in range(GameData.characters.size()):
-			GameData.characters[i].turn()
+			if i < GameData.characters.size():
+				GameData.characters[i].turn()
 
 func _process(delta):
 	if moving:
@@ -34,7 +33,7 @@ func _process(delta):
 			self.set_pos(get_pos() + Vector2(0, -length * (delta / 0.4)))
 		elif movement_direction == Enums.DIRECTION.DOWN:
 			self.set_pos(get_pos() + Vector2(0, length * (delta / 0.4)))
-		if get_pos().distance_to(original_pos) >= length:
+		if time_elapsed >= 0.4:
 			if movement_direction == Enums.DIRECTION.LEFT:
 				set_pos(original_pos + Vector2(-length, 0))
 				set_animation("stand_left")
@@ -49,15 +48,20 @@ func _process(delta):
 				set_animation("stand_down")
 			moving = false
 			time_elapsed = 0
-			original_pos = get_pos()
 	else:
 		time_elapsed += delta
 		if time_elapsed >= 1:
 			# forefit turn
 			time_elapsed = 0
+			moveDirection(Enums.DIRECTION.NONE)
 			for i in range(GameData.characters.size()):
-				GameData.characters[i].turn()
+				if i < GameData.characters.size():
+					GameData.characters[i].turn()
 
 func takeDamage(damage):
-	.takeDamage(damage)
+	self.health -= damage
+	if self.health <= 0:
+		GameData.characters.erase(self)
+		self.hide()
+		self.queue_free()
 	emit_signal("healthChanged", "Down", -damage)

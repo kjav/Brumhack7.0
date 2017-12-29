@@ -2,6 +2,9 @@ extends AnimatedSprite
 
 var moving = false
 var movement_direction
+var original_pos = get_pos()
+var target_pos = get_pos()
+var alive = true
 var health = 3
 var strengh = 5
 
@@ -12,35 +15,38 @@ func turn():
 	pass
 
 func attack(character):
-	character.takeDamage(1)
-	pass
+	if alive:
+		character.takeDamage(1)
 
 func takeDamage(damage):
 	self.health -= damage
 	if self.health <= 0:
 		GameData.characters.erase(self)
-		self.hide()
-		self.queue_free()
+		# self.hide()
+		# self.queue_free()
+		alive = false
+		set_animation("death")
 
 func faceDirection(direction):
-	if direction == Enums.DIRECTION.UP:
-		set_animation("stand_up")
-	elif direction == Enums.DIRECTION.DOWN:
-		set_animation("stand_down")
-	elif direction == Enums.DIRECTION.LEFT:
-		set_animation("stand_left")
-	elif direction == Enums.DIRECTION.RIGHT:
-		set_animation("stand_right")
+	if alive:
+		if direction == Enums.DIRECTION.UP:
+			set_animation("stand_up")
+		elif direction == Enums.DIRECTION.DOWN:
+			set_animation("stand_down")
+		elif direction == Enums.DIRECTION.LEFT:
+			set_animation("stand_left")
+		elif direction == Enums.DIRECTION.RIGHT:
+			set_animation("stand_right")
 
 func moveDirection(direction):
 	# If not already moving
-	if not moving:
+	if (not moving) and alive:
+		original_pos = get_pos()
 		var attack = false
 		faceDirection(direction)
-		var pos = get_pos()
+		var pos = original_pos
 		pos.x = int(pos.x / 128)
 		pos.y = int(pos.y / 128)
-		print(pos)
 		if direction == Enums.DIRECTION.UP:
 			pos.y -= 1
 		elif direction == Enums.DIRECTION.DOWN:
@@ -49,11 +55,16 @@ func moveDirection(direction):
 			pos.x -= 1
 		elif direction == Enums.DIRECTION.RIGHT:
 			pos.x += 1
+		target_pos = pos
+		target_pos.x *= 128
+		target_pos.y *= 128
 		var collisions = GameData.charactersAtPos(pos)
 		for i in range(collisions.size()):
-			#should remove some health from them
-			attack(collisions[i])
-			attack = true
+			if not (collisions[i] == self):
+				#should remove some health from them
+				print("Attacked", self, collisions[i])
+				attack(collisions[i])
+				attack = true
 		if  !attack and GameData.walkable(pos.x, pos.y):
 			if direction == Enums.DIRECTION.UP:
 				self.set_animation("walk_up")
