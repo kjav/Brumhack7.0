@@ -1,83 +1,66 @@
-[gd_scene load_steps=29 format=1]
+[gd_scene load_steps=20 format=1]
 
 [ext_resource path="res://assets/tilesets/Dungeon1Tileset.res" type="TileSet" id=1]
 [ext_resource path="res://TileMap.gd" type="Script" id=2]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkleft_1.png" type="Texture" id=3]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkleft_2.png" type="Texture" id=4]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkleft_3.png" type="Texture" id=5]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkup_2.png" type="Texture" id=6]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkup_1.png" type="Texture" id=7]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkup_3.png" type="Texture" id=8]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkdown_1.png" type="Texture" id=9]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkdown_2.png" type="Texture" id=10]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkdown_3.png" type="Texture" id=11]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkright_2.png" type="Texture" id=12]
+[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkleft_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkup_1.png" type="Texture" id=4]
+[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkup_2.png" type="Texture" id=5]
+[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkup_3.png" type="Texture" id=6]
+[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkdown_1.png" type="Texture" id=7]
+[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkdown_2.png" type="Texture" id=8]
+[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkdown_3.png" type="Texture" id=9]
+[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkright_2.png" type="Texture" id=10]
+[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkleft_1.png" type="Texture" id=11]
+[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkleft_3.png" type="Texture" id=12]
 [ext_resource path="res://assets/tilesets/Beserker/Beserker_walkright_1.png" type="Texture" id=13]
 [ext_resource path="res://assets/tilesets/Beserker/Beserker_walkright_3.png" type="Texture" id=14]
 [ext_resource path="res://Player.gd" type="Script" id=15]
 [ext_resource path="res://Hud.tscn" type="PackedScene" id=16]
 [ext_resource path="res://swipe-detector/swipe_detector.gd" type="Script" id=17]
-[ext_resource path="res://assets/New folder/Bat_Fly_000.tex" type="Texture" id=18]
-[ext_resource path="res://assets/New folder/Bat_Fly_001.tex" type="Texture" id=19]
-[ext_resource path="res://assets/New folder/Bat_Fly_002.tex" type="Texture" id=20]
-[ext_resource path="res://assets/New folder/Bat_Fly_003.tex" type="Texture" id=21]
-[ext_resource path="res://assets/New folder/Bat_Fly_004.tex" type="Texture" id=22]
-[ext_resource path="res://assets/New folder/Bat_Fly_005.tex" type="Texture" id=23]
-[ext_resource path="res://assets/New folder/Bat_Fly_006.tex" type="Texture" id=24]
-[ext_resource path="res://assets/New folder/Bat_Fly_007.tex" type="Texture" id=25]
-[ext_resource path="res://random_enemy.gd" type="Script" id=26]
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=18]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "walk_left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "stand_left",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "stand_up",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "walk_up",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 10 ) ],
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "walk_down",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 12 ) ],
+"frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "stand_right",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ) ],
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "stand_up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 3 ), ExtResource( 12 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "walk_left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "stand_down",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 13 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 12 ) ],
+"frames": [ ExtResource( 13 ), ExtResource( 10 ), ExtResource( 14 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "walk_right",
 "speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=2]
-
-animations = [ {
-"frames": [ ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ) ],
-"loop": true,
-"name": "default",
-"speed": 9.0
 } ]
 
 [node name="Node2D" type="Node2D"]
@@ -119,7 +102,7 @@ script/script = ExtResource( 2 )
 
 transform/pos = Vector2( 640, 1024 )
 transform/scale = Vector2( 2.66667, 2.66667 )
-frames = SubResource( 3 )
+frames = SubResource( 1 )
 animation = "stand_down"
 centered = false
 offset = Vector2( 0, -8 )
@@ -162,70 +145,14 @@ maximum_points = -1
 pattern_detection_score_threshold = 80
 debug_mode = false
 
-[node name="Bat" type="AnimatedSprite" parent="."]
+[node name="Bat2" parent="." instance=ExtResource( 18 )]
 
-transform/pos = Vector2( -128, -128 )
+transform/pos = Vector2( 1024, 640 )
 transform/scale = Vector2( 0.25, 0.25 )
-frames = SubResource( 2 )
-animation = "default"
-frame = 7
-playing = true
-offset = Vector2( 265, 265 )
-script/script = ExtResource( 26 )
 
-[node name="Bat3" type="AnimatedSprite" parent="."]
+[node name="Bat" parent="." instance=ExtResource( 18 )]
 
-transform/pos = Vector2( 1664.06, -1026.03 )
+transform/pos = Vector2( 1024, 768 )
 transform/scale = Vector2( 0.25, 0.25 )
-frames = SubResource( 2 )
-animation = "default"
-frame = 6
-playing = true
-offset = Vector2( 265, 265 )
-script/script = ExtResource( 26 )
-
-[node name="Bat2 2" type="AnimatedSprite" parent="."]
-
-transform/pos = Vector2( 766.805, -1146.16 )
-transform/scale = Vector2( 0.25, 0.25 )
-frames = SubResource( 2 )
-animation = "default"
-frame = 7
-playing = true
-offset = Vector2( 265, 265 )
-script/script = ExtResource( 26 )
-
-[node name="Bat1" type="AnimatedSprite" parent="."]
-
-transform/pos = Vector2( 1025.39, 641.505 )
-transform/scale = Vector2( 0.25, 0.25 )
-frames = SubResource( 2 )
-animation = "default"
-frame = 6
-playing = true
-offset = Vector2( 265, 265 )
-script/script = ExtResource( 26 )
-
-[node name="Bat2" type="AnimatedSprite" parent="."]
-
-transform/pos = Vector2( 2178.24, -384.247 )
-transform/scale = Vector2( 0.25, 0.25 )
-frames = SubResource( 2 )
-animation = "default"
-frame = 6
-playing = true
-offset = Vector2( 265, 265 )
-script/script = ExtResource( 26 )
-
-[node name="Bat3 2" type="AnimatedSprite" parent="."]
-
-transform/pos = Vector2( 3970.3, -1282.27 )
-transform/scale = Vector2( 0.25, 0.25 )
-frames = SubResource( 2 )
-animation = "default"
-frame = 5
-playing = true
-offset = Vector2( 265, 265 )
-script/script = ExtResource( 26 )
 
 
