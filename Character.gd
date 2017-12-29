@@ -24,7 +24,8 @@ func takeDamage(damage):
 		self.hide()
 		self.queue_free()
 	var newNode = Hitmarker.instance()
-	newNode.set_scale(Vector2(1,1) / (8*self.get_scale()) )
+	newNode.set_scale(Vector2(1,1) / (7*self.get_scale()) )
+	newNode.setAmount(damage)
 	self.add_child(newNode)
 
 func faceDirection(direction):

@@ -1,6 +1,16 @@
 extends Node2D
 
 
+var amount setget setAmount, getAmount
+
+func setAmount(newAmount):
+	if typeof(newAmount) == TYPE_INT:
+		amount = newAmount
+		get_node("Amount").set_text(str(amount))
+
+func getAmount():
+	return amount
+	
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
