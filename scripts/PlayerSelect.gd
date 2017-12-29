@@ -4,7 +4,7 @@ extends Node2D
 # var a = 2
 # var b = "textvar"
 
-var _items = ["BeserkerCharacter", "AngelCharacter", "WarriorCharacter"]
+var _items = ["BeserkerPlayer", "AngelPlayer", "WarriorPlayer"]
 
 func _ready():
 	# Called every time the node is added to the scene.
