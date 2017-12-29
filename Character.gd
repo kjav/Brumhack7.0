@@ -5,6 +5,8 @@ var movement_direction
 var health = 3
 var strengh = 5
 
+const Hitmarker = preload("res://Hitmarker.tscn")
+
 func _ready():
 	pass
 
@@ -21,6 +23,9 @@ func takeDamage(damage):
 		GameData.characters.erase(self)
 		self.hide()
 		self.queue_free()
+	var newNode = Hitmarker.instance()
+	newNode.set_scale(Vector2(1,1) / (8*self.get_scale()) )
+	self.add_child(newNode)
 
 func faceDirection(direction):
 	if direction == Enums.DIRECTION.UP:

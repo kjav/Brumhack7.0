@@ -14,6 +14,7 @@ func _ready():
 func PlayerHealthChanged(change, value):
 	for child in get_node("HudCanvasLayer/HealthBar").get_children():
 		child.queue_free()
+		child.hide()
 	var health = GameData.player.health
 	var maxHealth = GameData.player.maxHealth
 	for i in range(maxHealth):
