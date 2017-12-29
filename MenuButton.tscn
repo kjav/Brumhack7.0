@@ -8,8 +8,6 @@
 [node name="Node2D" type="Node2D"]
 
 script/script = ExtResource( 1 )
-text = null
-scene = null
 
 [node name="MenuButtonTextureButton" type="TextureButton" parent="."]
 

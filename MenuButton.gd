@@ -7,16 +7,16 @@ export(PackedScene) var scene setget setScene, getScene
 func _ready():
 	get_node("MenuButtonLabel").set("text", text)
 
-func setText(t):
-	text = t
+func setText(value):
+	text = value
 	if is_inside_tree() and get_tree().is_editor_hint():
 		get_node("MenuButtonLabel").set("text", text)
 
 func getText():
 	return text
 
-func setScene(s):
-	scene = s
+func setScene(value):
+	scene = value
 
 func getScene():
 	return scene
