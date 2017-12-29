@@ -8,6 +8,8 @@ var alive = true
 var health = 3
 var strengh = 5
 
+const Hitmarker = preload("res://Hitmarker.tscn")
+
 func _ready():
 	pass
 
@@ -26,6 +28,9 @@ func takeDamage(damage):
 		# self.queue_free()
 		alive = false
 		set_animation("death")
+	var newNode = Hitmarker.instance()
+	newNode.set_scale(Vector2(1,1) / (8*self.get_scale()) )
+	self.add_child(newNode)
 
 func faceDirection(direction):
 	if alive:
