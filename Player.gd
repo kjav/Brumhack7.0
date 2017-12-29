@@ -1,8 +1,11 @@
 extends "Character.gd"
 
+signal healthChanged(change, value)
+
 var time_elapsed = 0
 var original_pos
 var attack
+
 
 func _ready():
 	set_process(true)
@@ -53,3 +56,7 @@ func _process(delta):
 			time_elapsed = 0
 			for i in range(GameData.characters.size()):
 				GameData.characters[i].turn()
+
+func takeDamage(damage):
+	.takeDamage(damage)
+	emit_signal("healthChanged", "Down", -damage)
