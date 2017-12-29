@@ -5,7 +5,7 @@ var food = []
 var spells = []
 var tilemap
 var character
-var enemies = []
+var characters = []
 
 func _ready():
 	addPotions(["HealthPot", "StrengthPot", "StrengthPot", "HealthPot", "SpeedPot"])
@@ -32,6 +32,14 @@ func addSpells(new_spells):
 
 func addSpell(new):
 	spells.push_back(new)
+
+func charactersAtPos(pos):
+	var collisions = []
+	for i in range(characters.size()):
+		if characters[i].original_pos.x / 128 == pos.x and characters[i].original_pos.y / 128 == pos.y:
+			collisions.append(characters[i])
+	return collisions
+	
 
 func walkable(x, y):
 	print("In walkable in GameData.gd")

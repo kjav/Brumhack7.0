@@ -9,6 +9,7 @@ func _ready():
 	EventListener.listen("SwipeCommand", funcref(self, "moveDirection"))
 	original_pos = get_pos()
 	GameData.character = self
+	GameData.characters.append(self)
 
 func _process(delta):
 	if moving:

@@ -33,18 +33,19 @@ func moveDirection(direction):
 			pos.x -= 1
 		elif direction == Enums.DIRECTION.RIGHT:
 			pos.x += 1
-		for i in range(GameData.enemies.size()):
-			if GameData.enemies[i].original_pos.x / 128 == pos.x and GameData.enemies[i].original_pos.y / 128 == pos.y:
-				#should remove some health from them
-				attack = true
-		if direction == Enums.DIRECTION.UP:
-			self.set_animation("walk_up")
-		elif direction == Enums.DIRECTION.DOWN:
-			self.set_animation("walk_down")
-		elif direction == Enums.DIRECTION.LEFT:
-			self.set_animation("walk_left")
-		elif direction == Enums.DIRECTION.RIGHT:
-			self.set_animation("walk_right")
+		var collisions = GameData.charactersAtPos(pos)
+		for i in range(collisions.size()):
+			#should remove some health from them
+			attack = true
 		if  !attack and GameData.walkable(pos.x, pos.y):
+			if direction == Enums.DIRECTION.UP:
+				self.set_animation("walk_up")
+			elif direction == Enums.DIRECTION.DOWN:
+				self.set_animation("walk_down")
+			elif direction == Enums.DIRECTION.LEFT:
+				self.set_animation("walk_left")
+			elif direction == Enums.DIRECTION.RIGHT:
+				self.set_animation("walk_right")
 			movement_direction = direction
 			moving = true
+			return true
