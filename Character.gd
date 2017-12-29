@@ -8,6 +8,9 @@ var strengh = 5
 func _ready():
 	pass
 
+func turn():
+	pass
+
 func attack(character):
 	character.takeDamage(1)
 	pass

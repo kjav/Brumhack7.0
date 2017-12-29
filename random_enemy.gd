@@ -1,6 +1,5 @@
 extends "Character.gd"
 
-var time_elapsed = 0
 var original_pos
 var attack
 
@@ -9,14 +8,12 @@ func _ready():
 	original_pos = get_pos()
 	GameData.characters.append(self)
 
+func turn():
+	movement_direction = randi()%4
+	moving = moveDirection(movement_direction)
+
 func _process(delta):
-	time_elapsed = time_elapsed + delta
-	if not moving:
-		if time_elapsed > 2:
-			movement_direction = randi()%4
-			moving = moveDirection(movement_direction)
-			time_elapsed = 0
-	else:
+	if moving:
 		if movement_direction == Enums.DIRECTION.LEFT:
 			self.set_pos(get_pos() + Vector2(-128 * (delta / 0.4), 0))
 		elif movement_direction == Enums.DIRECTION.RIGHT:
