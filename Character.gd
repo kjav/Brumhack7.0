@@ -80,5 +80,7 @@ func moveDirection(direction):
 			elif direction == Enums.DIRECTION.RIGHT:
 				self.set_animation("walk_right")
 			movement_direction = direction
-			moving = true
-			return true
+		else:
+			movement_direction = Enums.DIRECTION.NONE
+		moving = true
+		return true
