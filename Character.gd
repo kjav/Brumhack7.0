@@ -2,9 +2,22 @@ extends AnimatedSprite
 
 var moving = false
 var movement_direction
+var health = 3
+var strengh = 5
 
 func _ready():
 	pass
+
+func attack(character):
+	character.takeDamage(1)
+	pass
+
+func takeDamage(damage):
+	self.health -= damage
+	if self.health <= 0:
+		GameData.characters.erase(self)
+		self.hide()
+		self.queue_free()
 
 func faceDirection(direction):
 	if direction == Enums.DIRECTION.UP:
@@ -36,6 +49,7 @@ func moveDirection(direction):
 		var collisions = GameData.charactersAtPos(pos)
 		for i in range(collisions.size()):
 			#should remove some health from them
+			attack(collisions[i])
 			attack = true
 		if  !attack and GameData.walkable(pos.x, pos.y):
 			if direction == Enums.DIRECTION.UP:
