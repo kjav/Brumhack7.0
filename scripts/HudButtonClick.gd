@@ -5,6 +5,7 @@ func _pressed():
 	if get_tree().get_current_scene().get_node("HudNode").inventoryOpen:
 		get_tree().get_current_scene().get_node("HudNode").inventoryOpen = false
 		get_tree().get_current_scene().get_node("HudNode").get_node("HudCanvasLayer").get_node("Inventory").queue_free()
+		get_tree().get_current_scene().get_node("HudNode").get_node("HudCanvasLayer").get_node("Inventory").hide()
 	else:
 		var new_inventory_instance = InventoryType.instance()
 		new_inventory_instance.set_pos(Vector2(97, 245))

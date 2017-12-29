@@ -10,3 +10,6 @@ func setType(newType):
 
 func getType():
 	return type
+
+func _pressed():
+	#do stuff for consumption
