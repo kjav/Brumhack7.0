@@ -9,11 +9,19 @@ var maxHealth
 
 func _ready():
 	set_process(true)
-	EventListener.listen("SwipeCommand", funcref(self, "moveDirection"))
+	EventListener.listen("SwipeCommand", funcref(self, "swiped"))
 	original_pos = get_pos()
 	maxHealth = health
 	GameData.player = self
 	GameData.characters.append(self)
+
+func swiped(direction):
+	if not moving:
+		time_elapsed = 0
+		moveDirection(direction)
+		for i in range(GameData.characters.size()):
+			GameData.characters[i].turn()
+
 func _process(delta):
 	if moving:
 		var length = 128
@@ -40,10 +48,16 @@ func _process(delta):
 				set_pos(original_pos + Vector2(0, length))
 				set_animation("stand_down")
 			moving = false
+			time_elapsed = 0
+			original_pos = get_pos()
 	else:
-		time_elapsed = 0
-		original_pos = get_pos()
+		time_elapsed += delta
+		if time_elapsed >= 1:
+			# forefit turn
+			time_elapsed = 0
+			for i in range(GameData.characters.size()):
+				GameData.characters[i].turn()
+
 func takeDamage(damage):
 	.takeDamage(damage)
 	emit_signal("healthChanged", "Down", -damage)
-	
