@@ -1,37 +1,28 @@
 extends Node
 
 var potions = []
-var food = []
+var foods = []
 var spells = []
 var tilemap
 var player
 var characters = []
 
+const HealthPotion = preload("res://Items//HealthPotion.tscn")
+
 func _ready():
-	addPotions(["HealthPot", "StrengthPot", "StrengthPot", "HealthPot", "SpeedPot"])
-	addFoods(["Cheese", "CookedChicken", "CookedSteak", "CookedChicken"])
-	addSpells(["FireSpell", "FireSpell", "FireSpell", "GrabSpell", "FireSpell", "FreezeSpell"])
+	addPotions([HealthPotion.instance()])
 
 func addPotions(new_potions):
 	for potion in new_potions:
-		addPotion(potion)
-
-func addPotion(new):
-	potions.push_back(new)
+		potions.append(potion)
 
 func addFoods(new_foods):
 	for food in new_foods:
-		addFood(food)
-
-func addFood(new):
-	food.push_back(new)
+		foods.append(food)
 
 func addSpells(new_spells):
 	for spell in new_spells:
-		addSpell(spell)
-
-func addSpell(new):
-	spells.push_back(new)
+		spells.append(spell)
 
 func charactersAtPos(pos):
 	var collisions = []
