@@ -27,7 +27,7 @@ func populateInventory():
 	
 	for i in range(selected.size()):
 		var new_node = InventoryItem.instance()
-		new_node.setType(selected[i])
+		new_node.setInstance(selected[i])
 		var row = i / 3
 		var col = i % 3
 		new_node.set_pos(start + Vector2(inc*col, inc*row))

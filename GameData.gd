@@ -10,7 +10,9 @@ var characters = []
 const HealthPotion = preload("res://Items//HealthPotion.tscn")
 
 func _ready():
-	addPotions([HealthPotion.instance()])
+	var instance = HealthPotion.instance()
+	instance._ready()
+	addPotions([instance])
 
 func addPotions(new_potions):
 	for potion in new_potions:

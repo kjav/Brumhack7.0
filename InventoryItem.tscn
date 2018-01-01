@@ -2,14 +2,13 @@
 
 [ext_resource path="res://InventoryItem.gd" type="Script" id=1]
 [ext_resource path="res://InventoryIconClick.gd" type="Script" id=2]
-[ext_resource path="res://ItemDescription.tscn" type="PackedScene" id=3]
-[ext_resource path="res://ItemIcon.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ItemIcon.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ItemDescription.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/tileInventory.png" type="Texture" id=5]
 
 [node name="Node2D" type="Node2D"]
 
 script/script = ExtResource( 1 )
-type = null
 
 [node name="ClickRegion" type="TextureButton" parent="."]
 
@@ -28,16 +27,16 @@ params/resize_mode = 0
 params/stretch_mode = 0
 script/script = ExtResource( 2 )
 
-[node name="ItemDescription" parent="." instance=ExtResource( 3 )]
+[node name="ItemIcon" parent="." instance=ExtResource( 3 )]
 
-transform/pos = Vector2( -29.9513, 154.855 )
-transform/scale = Vector2( 1.3, 1.3 )
-
-[node name="ItemIcon" parent="." instance=ExtResource( 4 )]
-
-transform/pos = Vector2( 14, 0 )
+transform/pos = Vector2( 12, 0 )
 transform/scale = Vector2( 5, 5 )
-type = null
+
+[node name="ItemDescription" parent="." instance=ExtResource( 4 )]
+
+transform/pos = Vector2( -29.9513, 158.855 )
+transform/scale = Vector2( 1.3, 1.3 )
+script/script = null
 
 [node name="Background" type="TextureFrame" parent="."]
 
