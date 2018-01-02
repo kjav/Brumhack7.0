@@ -65,3 +65,8 @@ func takeDamage(damage):
 		self.hide()
 		self.queue_free()
 	emit_signal("healthChanged", "Down", -damage)
+
+func heal(amount):
+	if self.health < self.maxHealth:
+		self.health += amount
+		emit_signal("healthChanged", "Up", amount)

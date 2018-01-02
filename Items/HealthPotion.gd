@@ -8,8 +8,6 @@ func _ready():
 	name = "Health Potion"
 
 func onUse():
-	if (GameData.player.health < GameData.player.maxHealth):
-		GameData.player.health += 1
-	GameData.potion.remove(self)	
-	emit_signal("healthChanged", "Up", 1)
-	#this signal is not connected yet
+	GameData.player.heal(1)
+	print("potion consumed")
+	GameData.potions.remove(GameData.potions.find(self))

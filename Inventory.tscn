@@ -21,7 +21,7 @@ func populateInventory():
 	if type == \"Potion\":
 		selected = GameData.potions
 	elif type == \"Food\":
-		selected = GameData.food
+		selected = GameData.foods
 	elif type == \"Spell\":
 		selected = GameData.spells
 	
