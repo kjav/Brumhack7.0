@@ -18,7 +18,8 @@ func turn():
 
 func attack(character):
 	if alive:
-		character.takeDamage(1)
+		if (character == GameData.player) or (self == GameData.player):
+			character.takeDamage(1)
 
 func takeDamage(damage):
 	self.health -= damage
