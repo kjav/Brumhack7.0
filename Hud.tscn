@@ -131,6 +131,7 @@ type = "Potion"
 
 transform/pos = Vector2( 544.997, 1742.68 )
 transform/scale = Vector2( 2, 2 )
+frameStyle = "Left"
 type = "Food"
 
 [node name="Node2D 3" parent="HudCanvasLayer" instance=ExtResource( 7 )]
