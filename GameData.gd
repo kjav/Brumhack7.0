@@ -12,7 +12,7 @@ const HealthPotion = preload("res://Items//HealthPotion.tscn")
 func _ready():
 	var instance = HealthPotion.instance()
 	instance._ready()
-	addPotions([instance])
+	addPotions([instance, instance, instance])
 
 func addPotions(new_potions):
 	for potion in new_potions:
