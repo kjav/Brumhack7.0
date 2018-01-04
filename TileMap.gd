@@ -1,10 +1,47 @@
 extends TileMap
 
 var not_walkable = [-1, 6, 13, 21, 22, 23, 25, 26, 27, 28, 29,30,31,32,33, 34 ,35]
+var Pathfinder
+var points = {}
+var ids = {}
 
 func _ready():
 	GameData.tilemap = self
+	Pathfinder = AStar.new()
+	var id
+	var point_left
+	var point_up
+	for j in range(0, 100):
+		for i in range(0, 100):
+			if walkable(i, j):
+				id = Pathfinder.get_available_point_id()
+				points[Vector3(i, j, 0)] = id
+				ids[id] = Vector3(i, j, 0)
+				Pathfinder.add_point(id, Vector3(i, j, 0))
+				point_left = Vector3(i-1, j, 0)
+				point_up = Vector3(i, j-1, 0)
+				if points.has(point_left):
+					Pathfinder.connect_points(id, points[point_left], true)
+				if points.has(point_up):
+					Pathfinder.connect_points(id, points[point_up], true)
 
 func walkable(x, y):
 	var cell = self.get_cell(x, y)
 	return !~not_walkable.find(cell)
+
+func findPath(a, b):
+	var a_vec3 = Vector3(a.x, a.y, 0)
+	var b_vec3 = Vector3(b.x, b.y, 0)
+	
+	var a_id = points[a_vec3]
+	var b_id = points[b_vec3]
+	
+	var id_path = Pathfinder.get_id_path(a_id, b_id)
+	
+	var path = []
+	
+	for id in id_path:
+		var point_vec3 = ids[id]
+		path.push_back(Vector2(point_vec3.x, point_vec3.y))
+	
+	return path

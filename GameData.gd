@@ -35,7 +35,6 @@ func charactersAtPos(pos):
 			collisions.append(characters[i])
 	print(collisions)
 	return collisions
-	
 
 func walkable(x, y):
 	print("In walkable in GameData.gd")
