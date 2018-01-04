@@ -59,9 +59,8 @@ func _process(delta):
 					GameData.characters[i].turn()
 
 func takeDamage(damage):
-	self.health -= damage
+	.takeDamage(damage)
 	if self.health <= 0:
-		GameData.characters.erase(self)
 		self.hide()
 		self.queue_free()
 	emit_signal("healthChanged", "Down", -damage)
@@ -70,3 +69,7 @@ func heal(amount):
 	if self.health < self.maxHealth:
 		self.health += amount
 		emit_signal("healthChanged", "Up", amount)
+
+func increaseMax(amount):
+	self.maxHealth += amount
+	emit_signal("healthChanged", "Max", 0)

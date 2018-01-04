@@ -8,11 +8,19 @@ var player
 var characters = []
 
 const HealthPotion = preload("res://Items//HealthPotion.tscn")
+const CookedSteak = preload("res://Items//CookedSteak.tscn")
+const FireSpell = preload("res://Items//FireSpell.tscn")
 
 func _ready():
 	var instance = HealthPotion.instance()
 	instance._ready()
-	addPotions([instance])
+	addPotions([instance, instance, instance])
+	var instance = CookedSteak.instance()
+	instance._ready()
+	addFoods([instance, instance])
+	var instance = FireSpell.instance()
+	instance._ready()
+	addSpells([instance, instance])
 
 func addPotions(new_potions):
 	for potion in new_potions:
@@ -35,6 +43,24 @@ func charactersAtPos(pos):
 			collisions.append(characters[i])
 	print(collisions)
 	return collisions
+
+func closestEnemy():
+	var closestIndex
+	var minDistance = -1
+	for i in range(0, characters.size()):
+		if characters[i] != player:
+			var distance = getDistance(player, characters[i])
+			if minDistance == -1 || distance < minDistance:
+				minDistance = distance
+				closestIndex = i
+	return characters[closestIndex]
+	
+	
+
+func getDistance(char1, char2):
+	#note this has not been rooted, for efficiency, so is not accurate for some tasks
+	var vector = char1.original_pos - char2.original_pos
+	return vector.x*vector.x + vector.y*vector.y
 
 func walkable(x, y):
 	print("In walkable in GameData.gd")

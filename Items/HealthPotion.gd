@@ -8,6 +8,5 @@ func _ready():
 	name = "Health Potion"
 
 func onUse():
-	GameData.player.heal(1)
-	print("potion consumed")
+	GameData.player.increaseMax(1)
 	GameData.potions.remove(GameData.potions.find(self))
