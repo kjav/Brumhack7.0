@@ -8,5 +8,5 @@ func _ready():
 	name = "Cooked Steak"
 
 func onUse():
-	GameData.player.heal(1)
+	GameData.player.heal(2)
 	GameData.foods.remove(GameData.foods.find(self))
