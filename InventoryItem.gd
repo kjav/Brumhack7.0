@@ -1,12 +1,12 @@
 extends Node2D
 
-export(int, "HealthPot", "StrengthPot", "SpeedPots, FireSpell, GrabSpell, FreezeSpell, CookedSteak, CookedChicken, Cheese") var type setget setType, getType
+var instance
 
-func setType(newType):
-	type = newType
-	if typeof(type) == TYPE_STRING:
-		get_node("ItemIcon").setType(type)
-		get_node("ItemDescription").setType(type)
+func setInstance(newInstance):
+	instance = newInstance
+	get_node("ItemIcon/Icon").set_texture(instance.texture)
+	get_node("ItemDescription/Description").set_text(instance.description)
+	get_node("ItemDescription/Name").set_text(instance.name)
 
-func getType():
-	return type
+func getInstance():
+	return instance

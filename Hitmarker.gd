@@ -23,6 +23,5 @@ func _ready():
 	pass
 
 func Timeout():
-	print("out of time")
 	self.queue_free()
 	self.hide()
