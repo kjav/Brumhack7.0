@@ -8,11 +8,15 @@ var player
 var characters = []
 
 const HealthPotion = preload("res://Items//HealthPotion.tscn")
+const CookedSteak = preload("res://Items//CookedSteak.tscn")
 
 func _ready():
 	var instance = HealthPotion.instance()
 	instance._ready()
 	addPotions([instance, instance, instance])
+	var instance = CookedSteak.instance()
+	instance._ready()
+	addFoods([instance, instance])
 
 func addPotions(new_potions):
 	for potion in new_potions:

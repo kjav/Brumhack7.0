@@ -69,3 +69,7 @@ func heal(amount):
 	if self.health < self.maxHealth:
 		self.health += amount
 		emit_signal("healthChanged", "Up", amount)
+
+func increaseMax(amount):
+	self.maxHealth += amount
+	emit_signal("healthChanged", "Max", 0)
