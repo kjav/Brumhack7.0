@@ -27,7 +27,7 @@ func turn():
 		movement_direction = Enums.DIRECTION.UP
 	# Select random movement direction
 	# movement_direction = randi()%
-	moving = moveDirection(movement_direction)
+	moving = moveDirection(GameData.tilemap.findNextDirection(pos, player_pos))
 
 func _process(delta):
 	if moving:

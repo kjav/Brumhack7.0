@@ -45,3 +45,30 @@ func findPath(a, b):
 		path.push_back(Vector2(point_vec3.x, point_vec3.y))
 	
 	return path
+
+func findNextDirection(a, b):
+	var a_vec3 = Vector3(a.x, a.y, 0)
+	var b_vec3 = Vector3(b.x, b.y, 0)
+	
+	var a_id = points[a_vec3]
+	var b_id = points[b_vec3]
+	
+	var id_path = Pathfinder.get_id_path(a_id, b_id)
+	
+	var direction = Enums.DIRECTION.NONE
+	
+	if id_path.size() > 1:
+		direction = ids[id_path[1]] - ids[id_path[0]]
+		print(direction)
+		if direction.x == 1:
+			direction = Enums.DIRECTION.RIGHT
+		elif direction.x == -1:
+			direction = Enums.DIRECTION.LEFT
+		elif direction.y == 1:
+			direction = Enums.DIRECTION.DOWN
+		elif direction.y == -1:
+			direction = Enums.DIRECTION.UP
+		else:
+			direction = Enums.DIRECTION.NONE
+	
+	return direction
