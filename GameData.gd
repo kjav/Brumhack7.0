@@ -7,19 +7,16 @@ var tilemap
 var player
 var characters = []
 
-const HealthPotion = preload("res://Items//HealthPotion.tscn")
-const CookedSteak = preload("res://Items//CookedSteak.tscn")
-const FireSpell = preload("res://Items//FireSpell.tscn")
+const PotionClasses = preload("res://Items//Potions.gd")
+const FoodClasses = preload("res://Items//Foods.gd")
+const SpellClasses = preload("res://Items//Spells.gd")
 
 func _ready():
-	var instance = HealthPotion.instance()
-	instance._ready()
+	var instance = PotionClasses.HealthPotion.new()
 	addPotions([instance, instance, instance])
-	var instance = CookedSteak.instance()
-	instance._ready()
+	var instance = FoodClasses.CookedSteak.new()
 	addFoods([instance, instance])
-	var instance = FireSpell.instance()
-	instance._ready()
+	var instance = SpellClasses.FireSpell.new()
 	addSpells([instance, instance])
 
 func addPotions(new_potions):
