@@ -17,13 +17,20 @@ func _ready():
 	GameData.player = self
 	GameData.characters.append(self)
 
+func swapWeapons():
+	var temp = primaryWeapon
+	setPrimaryWeapon(secondaryWeapon)
+	setSecondaryWeapon(temp)
+
 func setPrimaryWeapon(weapon):
 	primaryWeapon = weapon
-	emit_signal("weaponChanged", "Primary", weapon)
+	emit_signal("weaponChanged", "Primary", primaryWeapon)
+	get_node("PrimaryWeapon").set_texture(primaryWeapon.texture)
 	
 func setSecondaryWeapon(weapon):
 	secondaryWeapon = weapon
-	emit_signal("weaponChanged", "Secondary", weapon)
+	emit_signal("weaponChanged", "Secondary", secondaryWeapon)
+	get_node("SecondaryWeapon").set_texture(secondaryWeapon.texture)
 
 func swiped(direction):
 	if not moving:
@@ -89,41 +96,41 @@ func increaseMax(amount):
 	emit_signal("healthChanged", "Max", 0)
 
 func set_weapon_positions(dir):
-	var weapon = self.get_node("Weapon")
-	var shield = self.get_node("Shield")
+	var weapon = self.get_node("PrimaryWeapon")
+	var secondary = self.get_node("SecondaryWeapon")
 	if dir == Enums.DIRECTION.DOWN:
 		weapon.set_draw_behind_parent(false)
 		if weapon.is_flipped_h():
 			weapon.set_offset(weapon.get_offset() * Vector2(-1, 1))
 		weapon.set_flip_h(false)
 		weapon.set_pos(Vector2(16, 27))
-		shield.set_draw_behind_parent(false)
-		shield.set_flip_h(false)
-		shield.set_pos(Vector2(32, 27))
+		secondary.set_draw_behind_parent(false)
+		secondary.set_flip_h(false)
+		secondary.set_pos(Vector2(32, 27))
 	elif dir == Enums.DIRECTION.UP:
 		weapon.set_draw_behind_parent(true)
 		if !weapon.is_flipped_h():
 			weapon.set_offset(weapon.get_offset() * Vector2(-1, 1))
 		weapon.set_flip_h(true)
 		weapon.set_pos(Vector2(32, 27))
-		shield.set_draw_behind_parent(true)
-		shield.set_flip_h(true)
-		shield.set_pos(Vector2(16, 27))
+		secondary.set_draw_behind_parent(true)
+		secondary.set_flip_h(true)
+		secondary.set_pos(Vector2(16, 27))
 	elif dir == Enums.DIRECTION.LEFT:
 		weapon.set_draw_behind_parent(true)
 		if weapon.is_flipped_h():
 			weapon.set_offset(weapon.get_offset() * Vector2(-1, 1))
 		weapon.set_flip_h(false)
 		weapon.set_pos(Vector2(24, 27))
-		shield.set_draw_behind_parent(false)
-		shield.set_flip_h(false)
-		shield.set_pos(Vector2(24, 27))
+		secondary.set_draw_behind_parent(false)
+		secondary.set_flip_h(false)
+		secondary.set_pos(Vector2(24, 27))
 	elif dir == Enums.DIRECTION.RIGHT:
 		weapon.set_draw_behind_parent(false)
 		if !weapon.is_flipped_h():
 			weapon.set_offset(weapon.get_offset() * Vector2(-1, 1))
 		weapon.set_flip_h(true)
 		weapon.set_pos(Vector2(24, 27))
-		shield.set_draw_behind_parent(true)
-		shield.set_flip_h(true)
-		shield.set_pos(Vector2(24, 27))
+		secondary.set_draw_behind_parent(true)
+		secondary.set_flip_h(true)
+		secondary.set_pos(Vector2(24, 27))

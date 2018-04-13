@@ -4,7 +4,7 @@ class BasicSword extends "Weapon.gd":
 		iconFilePath = "res://assets/basic_sword.png"
 		name = "Basic Sword"
 		distance = 1
-		damage = 1
+		damage = 3
 	
 	func onUse():
 		var a = 1
