@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=1]
+[gd_scene load_steps=28 format=1]
 
 [ext_resource path="res://assets/tilesets/Dungeon1Tileset.res" type="TileSet" id=1]
 [ext_resource path="res://TileMap.gd" type="Script" id=2]
@@ -21,9 +21,11 @@
 [ext_resource path="res://assets/tilesets/Beserker/Beserker_walkup_2.png" type="Texture" id=19]
 [ext_resource path="res://assets/tilesets/Beserker/Beserker_walkup_3.png" type="Texture" id=20]
 [ext_resource path="res://Player.gd" type="Script" id=21]
-[ext_resource path="res://Enemy.tscn" type="PackedScene" id=22]
-[ext_resource path="res://swipe-detector/swipe_detector.gd" type="Script" id=23]
-[ext_resource path="res://Hud.tscn" type="PackedScene" id=24]
+[ext_resource path="res://assets/basic_sword.png" type="Texture" id=22]
+[ext_resource path="res://assets/basic_shield.png" type="Texture" id=23]
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=24]
+[ext_resource path="res://swipe-detector/swipe_detector.gd" type="Script" id=25]
+[ext_resource path="res://Hud.tscn" type="PackedScene" id=26]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -139,12 +141,24 @@ drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
 
-[node name="Bat" parent="." instance=ExtResource( 22 )]
+[node name="Weapon" type="Sprite" parent="Player"]
+
+transform/pos = Vector2( 7.12499, 19.125 )
+transform/scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 22 )
+
+[node name="Shield" type="Sprite" parent="Player"]
+
+transform/pos = Vector2( 35.25, 24.375 )
+transform/scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 23 )
+
+[node name="Bat" parent="." instance=ExtResource( 24 )]
 
 transform/pos = Vector2( 1024, 768 )
 transform/scale = Vector2( 0.25, 0.25 )
 
-[node name="Bat2" parent="." instance=ExtResource( 22 )]
+[node name="Bat2" parent="." instance=ExtResource( 24 )]
 
 transform/pos = Vector2( 1024, 640 )
 transform/scale = Vector2( 0.25, 0.25 )
@@ -171,7 +185,7 @@ tile_data = IntArray( 65560, 37, 65561, 36, 65562, 36, 65563, 36, 65564, 36, 655
 
 [node name="Node" type="Node" parent="."]
 
-script/script = ExtResource( 23 )
+script/script = ExtResource( 25 )
 detect_gesture = true
 process_method = null
 distance_threshold = 25.0
@@ -184,6 +198,6 @@ maximum_points = -1
 pattern_detection_score_threshold = 80
 debug_mode = false
 
-[node name="HudNode" parent="." instance=ExtResource( 24 )]
+[node name="HudNode" parent="." instance=ExtResource( 26 )]
 
 
