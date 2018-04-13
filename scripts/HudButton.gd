@@ -2,7 +2,7 @@ tool
 extends Node2D
 
 export(String, "Right", "Centre", "Left") var frameStyle setget setFrameStyle, getFrameStyle
-export(String, "Potion", "Food", "Spell") var type setget setType, getType
+export(String, "Potion", "Food", "Spell", "Sword", "Shield") var type setget setType, getType
 
 var leftFrame = preload("res://assets//frame_left.png")
 var middleFrame = preload("res://assets//frame_none.png")
@@ -10,6 +10,8 @@ var rightFrame = preload("res://assets//frame_right.png")
 var potion = preload("res://assets//potion_inventory.png")
 var food = preload("res://assets//food_inventory2.png")
 var spell = preload("res://assets//book1.png")
+var sword = preload("res://assets//basic_sword.png")
+var shield = preload("res://assets//basic_shield.png")
 
 func setFrameStyle(style):
 	if typeof(style) == TYPE_STRING:
@@ -36,3 +38,7 @@ func setType(newType):
 			get_node("Icon").set_texture(food)
 		elif type == "Spell":
 			get_node("Icon").set_texture(spell)
+		elif type == "Sword":
+			get_node("Icon").set_texture(sword)
+		elif type == "Shield":
+			get_node("Icon").set_texture(shield)

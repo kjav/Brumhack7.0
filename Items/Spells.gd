@@ -1,5 +1,5 @@
 class FireSpell extends "Item.gd":
-	const texture = preload("res://assets/red_potion2.png")
+	const texture = preload("res://assets/red_spell2.png")
 	
 	func _init():
 		iconFilePath = "res://assets/red_spell2.png"

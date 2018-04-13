@@ -1,13 +1,8 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://Hud.gd" type="Script" id=1]
-[ext_resource path="res://assets/frame_left.png" type="Texture" id=2]
-[ext_resource path="res://assets/basic_sword.png" type="Texture" id=3]
-[ext_resource path="res://assets/frame_front.png" type="Texture" id=4]
-[ext_resource path="res://assets/frame_right.png" type="Texture" id=5]
-[ext_resource path="res://assets/basic_shield.png" type="Texture" id=6]
-[ext_resource path="res://HudButton.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Minimap.tscn" type="PackedScene" id=8]
+[ext_resource path="res://HudButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Minimap.tscn" type="PackedScene" id=3]
 
 [node name="HudNode" type="Node2D"]
 
@@ -22,95 +17,9 @@ scale = Vector2( 1, 1 )
 
 [node name="ActiveSlot" type="Node2D" parent="HudCanvasLayer"]
 
-[node name="ActveFrame" type="TextureFrame" parent="HudCanvasLayer/ActiveSlot"]
-
-rect/scale = Vector2( 2, 2 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 5.0
-margin/top = 1746.0
-margin/right = 103.0
-margin/bottom = 1832.0
-texture = ExtResource( 2 )
-stretch_mode = 3
-
-[node name="ActiveWeapon" type="TextureFrame" parent="HudCanvasLayer/ActiveSlot"]
-
-rect/scale = Vector2( 3.6, 3.6 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 41.0
-margin/top = 1777.0
-margin/right = 73.0
-margin/bottom = 1809.0
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="ActiveFrameFront" type="TextureFrame" parent="HudCanvasLayer/ActiveSlot"]
-
-rect/scale = Vector2( 2, 2 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 4.0
-margin/top = 1746.0
-margin/right = 102.0
-margin/bottom = 1832.0
-texture = ExtResource( 4 )
-modulate = Color( 0.609375, 0.485509, 0.357056, 1 )
-stretch_mode = 3
-
 [node name="InactiveSlot" type="Node2D" parent="HudCanvasLayer"]
 
 transform/pos = Vector2( 20, 0 )
-
-[node name="InactiveFrame" type="TextureFrame" parent="HudCanvasLayer/InactiveSlot"]
-
-rect/scale = Vector2( 2, 2 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 152.0
-margin/top = 1746.0
-margin/right = 250.0
-margin/bottom = 1832.0
-texture = ExtResource( 5 )
-stretch_mode = 3
-
-[node name="InactiveWeapon" type="TextureFrame" parent="HudCanvasLayer/InactiveSlot"]
-
-rect/scale = Vector2( 3.6, 3.6 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 189.0
-margin/top = 1779.0
-margin/right = 221.0
-margin/bottom = 1811.0
-texture = ExtResource( 6 )
-stretch_mode = 4
-
-[node name="InactiveFrameFront" type="TextureFrame" parent="HudCanvasLayer/InactiveSlot"]
-
-rect/scale = Vector2( 2, 2 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 152.0
-margin/top = 1746.0
-margin/right = 250.0
-margin/bottom = 1832.0
-texture = ExtResource( 4 )
-modulate = Color( 0.609375, 0.485509, 0.357056, 1 )
-stretch_mode = 3
 
 [node name="HealthBar" type="Node2D" parent="HudCanvasLayer"]
 
@@ -120,27 +29,41 @@ transform/pos = Vector2( 390, 3.09088 )
 
 transform/pos = Vector2( -17.7285, 8.86422 )
 
-[node name="Node2D 2" parent="HudCanvasLayer" instance=ExtResource( 7 )]
+[node name="Node2D 2" parent="HudCanvasLayer" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 880.997, 1742.68 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = "Right"
-type = "Potion"
+type = null
 
-[node name="Node2D3" parent="HudCanvasLayer" instance=ExtResource( 7 )]
+[node name="Node2D4" parent="HudCanvasLayer" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 544.997, 1742.68 )
+transform/pos = Vector2( 169.145, 1742.68 )
+transform/scale = Vector2( 2, 2 )
+frameStyle = "Right"
+type = "Shield"
+
+[node name="Node2D3" parent="HudCanvasLayer" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 546.848, 1746.38 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = "Left"
 type = "Food"
 
-[node name="Node2D 3" parent="HudCanvasLayer" instance=ExtResource( 7 )]
+[node name="Node2D4 2" parent="HudCanvasLayer" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 3.86261, 1742.68 )
+transform/scale = Vector2( 2, 2 )
+frameStyle = "Left"
+type = "Sword"
+
+[node name="Node2D 3" parent="HudCanvasLayer" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 713.633, 1742.23 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = "Centre"
 type = "Spell"
 
-[node name="Node2D" parent="HudCanvasLayer" instance=ExtResource( 8 )]
+[node name="Node2D" parent="HudCanvasLayer" instance=ExtResource( 3 )]
 
 
