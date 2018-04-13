@@ -46,18 +46,14 @@ func closestEnemy():
 	var minDistance = -1
 	for i in range(0, characters.size()):
 		if characters[i] != player:
-			var distance = getDistance(player, characters[i])
+			var distance = player.original_pos.distance_squared_to(characters[i].original_pos)
 			if minDistance == -1 || distance < minDistance:
 				minDistance = distance
 				closestIndex = i
-	return characters[closestIndex]
-	
-	
-
-func getDistance(char1, char2):
-	#note this has not been rooted, for efficiency, so is not accurate for some tasks
-	var vector = char1.original_pos - char2.original_pos
-	return vector.x*vector.x + vector.y*vector.y
+	if minDistance > -1:
+		return characters[closestIndex]
+	else:
+		return null
 
 func walkable(x, y):
 	print("In walkable in GameData.gd")
