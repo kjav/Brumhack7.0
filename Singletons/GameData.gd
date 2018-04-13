@@ -6,6 +6,7 @@ var spells = []
 var tilemap
 var player
 var characters = []
+var placedItems = []
 
 const PotionClasses = preload("res://Items/scripts/Potions.gd")
 const FoodClasses = preload("res://Items/scripts/Foods.gd")
@@ -40,6 +41,12 @@ func charactersAtPos(pos):
 			collisions.append(characters[i])
 	print(collisions)
 	return collisions
+	
+func itemAtPos(pos):
+	for i in range(placedItems.size()):
+		if (placedItems[i].x == pos.x and placedItems[i].y == pos.y):
+			return placedItems[i]
+	return null
 
 func closestEnemy():
 	var closestIndex

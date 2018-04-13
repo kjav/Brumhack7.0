@@ -32,6 +32,10 @@ func setSecondaryWeapon(weapon):
 	emit_signal("weaponChanged", "Secondary", secondaryWeapon)
 	get_node("SecondaryWeapon").set_texture(secondaryWeapon.texture)
 
+func dropWeapon():
+	primaryWeapon.place(get_pos())
+	primaryWeapon = null
+
 func swiped(direction):
 	if not moving:
 		time_elapsed = 0
