@@ -7,12 +7,6 @@
 [ext_resource path="res://lib/swipe-detector/swipe_detector.gd" type="Script" id=5]
 [ext_resource path="res://Hud/Hud.tscn" type="PackedScene" id=6]
 
-
-
-
-
-
-
 [node name="Node2D" type="Node2D"]
 
 [node name="Background" type="ColorFrame" parent="."]
