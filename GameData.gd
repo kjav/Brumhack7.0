@@ -46,7 +46,7 @@ func closestEnemy():
 	var minDistance = -1
 	for i in range(0, characters.size()):
 		if characters[i] != player:
-			var distance = player.original_pos.distance_squared_to(characters[i])
+			var distance = player.original_pos.distance_squared_to(characters[i].original_pos)
 			if minDistance == -1 || distance < minDistance:
 				minDistance = distance
 				closestIndex = i
