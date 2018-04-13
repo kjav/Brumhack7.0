@@ -12,6 +12,7 @@ func onUse():
 
 func place(newPos):
 	pos = newPos
+	GameData.placeItem(self)
 
 func pickup():
 	pos = null

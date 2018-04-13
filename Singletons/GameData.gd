@@ -1,5 +1,7 @@
 extends Node
 
+signal itemDropped(item)
+
 var potions = []
 var foods = []
 var spells = []
@@ -17,6 +19,8 @@ const SpellClasses = preload("res://Items/scripts/Spells.gd")
 func _ready():
 	var instance = PotionClasses.HealthPotion.new()
 	addPotions([instance, instance, instance])
+	instance.pos = Vector2(512, 1024)
+	placeItem(instance)
 	var instance = FoodClasses.CookedSteak.new()
 	addFoods([instance, instance])
 	var instance = SpellClasses.FireSpell.new()
@@ -45,11 +49,16 @@ func charactersAtPos(pos):
 	return collisions
 	
 func itemAtPos(pos):
-	for i in range(placedItems.size()):
-		if (placedItems[i].x == pos.x and placedItems[i].y == pos.y):
+	for i in range(placedItems.size()-1, -1, -1):
+		if (placedItems[i].pos.x == pos.x and placedItems[i].pos.y == pos.y):
+			print(placedItems[i].name)
 			return placedItems[i]
 	return null
 
+func placeItem(item):
+	GameData.placedItems.append(item)
+	emit_signal("itemDropped", item)
+	
 func closestEnemy():
 	var closestIndex
 	var minDistance = -1

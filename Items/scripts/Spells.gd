@@ -10,6 +10,10 @@ class FireSpell extends "Item.gd":
 		name = "Fire Spell"
 
 	func onUse():
+		GameData.closestEnemy().takeDamage(1)
+		#animate a fireball
+		GameData.spells.remove(GameData.spells.find(self))
+
 		var closest_enemy = GameData.closestEnemy()
 		if closest_enemy:
 			# Remove potion
@@ -25,8 +29,7 @@ class FireSpell extends "Item.gd":
 				25,
 				10
 			)
-
-func pickup():
-	#todo, needs to check if inventory is full first
-	GameData.addSpells([self])
-	.pickup()
+	func pickup():
+		#todo, needs to check if inventory is full first
+		GameData.addSpells([self])
+		.pickup()
