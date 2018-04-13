@@ -1,8 +1,6 @@
 extends Node2D
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+signal changed(index)
 
 var items
 var current_item = 0
@@ -11,8 +9,6 @@ var right_arrow
 var left_arrow
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
 	items = self.get_parent().items()
 	left_arrow = get_node("LeftArrow")
 	right_arrow = get_node("RightArrow")
@@ -38,6 +34,7 @@ func select_item(item):
 	var rightmost = current_item == items.size() - 1
 	left_arrow.set_opacity(1 - 0.8 * leftmost)
 	right_arrow.set_opacity(1 - 0.8 * rightmost)
+	emit_signal("changed", current_item)
 
 func selected_item():
 	return items[current_item]

@@ -68,4 +68,6 @@ transform/pos = Vector2( 552.195, 1815.34 )
 text = "Select Character"
 scene = ExtResource( 9 )
 
+[connection signal="changed" from="SelectScreen" to="." method="_on_changed"]
+
 
