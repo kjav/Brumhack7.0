@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://assets/parallax-mountain.png" type="Texture" id=1]
-[ext_resource path="res://MenuButton.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scripts/PlayerSelect.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Extras.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Menus/MenuButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Menus/PlayerSelect.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Menus/Extras.tscn" type="PackedScene" id=4]
 
 [node name="Node2D" type="Node2D"]
 

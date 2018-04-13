@@ -3,7 +3,7 @@ extends Node2D
 var inventoryOpen
 var inc = 40
 
-const Heart = preload("res://Heart.tscn")
+const Heart = preload("res://Hud/Heart.tscn")
 
 func _ready():
 	inventoryOpen = false

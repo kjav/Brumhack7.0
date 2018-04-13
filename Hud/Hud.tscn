@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://Hud.gd" type="Script" id=1]
-[ext_resource path="res://HudButton.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Minimap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Hud/scripts/Hud.gd" type="Script" id=1]
+[ext_resource path="res://Hud/HudButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Hud/Minimap.tscn" type="PackedScene" id=3]
 
 [node name="HudNode" type="Node2D"]
 

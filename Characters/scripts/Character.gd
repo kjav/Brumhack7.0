@@ -8,7 +8,7 @@ var alive = true
 var health = 3
 var strengh = 5
 
-const Hitmarker = preload("res://Hitmarker.tscn")
+const Hitmarker = preload("res://Characters/Hitmarker.tscn")
 
 func _ready():
 	pass

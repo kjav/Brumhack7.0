@@ -16,22 +16,22 @@ var blocks = []
 
 func getMinusButton():
 	if !minus_button:
-		minus_button = get_node("RangeMinusButton")
+		minus_button = self.get_node("RangeMinusButton")
 	return minus_button
 
 func getPlusButton():
 	if !plus_button:
-		plus_button = get_node("RangePlusButton")
+		plus_button = self.get_node("RangePlusButton")
 	return plus_button
 
 func getValueLabel():
 	if !value_label:
-		value_label = get_node("RangeValueLabel")
+		value_label = self.get_node("RangeValueLabel")
 	return value_label
 
 func getNameLabel():
 	if !name_label:
-		name_label = get_node("RangeNameLabel")
+		name_label = self.get_node("RangeNameLabel")
 	return name_label
 
 func setupBlocks():

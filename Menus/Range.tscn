@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=1]
 
-[ext_resource path="res://Range.gd" type="Script" id=1]
+[ext_resource path="res://Menus/scripts/Range.gd" type="Script" id=1]
 [ext_resource path="res://assets/range_plus.png" type="Texture" id=2]
 [ext_resource path="res://assets/transparent_pixel.png" type="Texture" id=3]
-[ext_resource path="res://RangePlusButton.gd" type="Script" id=4]
+[ext_resource path="res://Menus/scripts/RangePlusButton.gd" type="Script" id=4]
 [ext_resource path="res://assets/range_minus.png" type="Texture" id=5]
-[ext_resource path="res://RangeMinusButton.gd" type="Script" id=6]
+[ext_resource path="res://Menus/scripts/RangeMinusButton.gd" type="Script" id=6]
 [ext_resource path="res://assets/8BitTheme.tres" type="Theme" id=7]
 
 [node name="Node2D" type="Node2D"]
@@ -66,7 +66,7 @@ theme/theme = ExtResource( 7 )
 margin/left = 55.0
 margin/top = -21.0
 margin/right = 95.0
-margin/bottom = -7.0
+margin/bottom = -5.0
 text = "0"
 percent_visible = 1.0
 lines_skipped = 0
@@ -80,10 +80,11 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 theme/theme = ExtResource( 7 )
-margin/left = -240.0
-margin/top = -12.6
-margin/right = -200.0
-margin/bottom = 3.4
+margin/left = -335.0
+margin/top = -21.0
+margin/right = -223.0
+margin/bottom = -5.0
+text = "example"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1

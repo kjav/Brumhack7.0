@@ -1,5 +1,5 @@
 extends TextureButton
-const InventoryType = preload("res://Inventory.tscn")
+const InventoryType = preload("res://Hud/Inventory.tscn")
 
 func _pressed():
 	if not get_tree().get_current_scene().get_node("HudNode").inventoryOpen:
