@@ -18,7 +18,7 @@
 [ext_resource path="res://assets/tilesets/Beserker/Beserker_walkleft_1.png" type="Texture" id=16]
 [ext_resource path="res://assets/tilesets/Beserker/Beserker_walkleft_2.png" type="Texture" id=17]
 [ext_resource path="res://assets/tilesets/Beserker/Beserker_walkleft_3.png" type="Texture" id=18]
-[ext_resource path="res://Player.gd" type="Script" id=19]
+[ext_resource path="res://Characters/scripts/Player.gd" type="Script" id=19]
 [ext_resource path="res://assets/basic_sword.png" type="Texture" id=20]
 [ext_resource path="res://assets/basic_shield.png" type="Texture" id=21]
 
