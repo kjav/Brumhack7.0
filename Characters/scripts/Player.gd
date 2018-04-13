@@ -2,6 +2,7 @@ extends "Character.gd"
 
 signal healthChanged(change, value)
 signal weaponChanged(slot, weapon)
+signal itemPickedUp(item)
 
 var time_elapsed = 0
 var attack
@@ -89,6 +90,11 @@ func _process(delta):
 func takeDamage(damage):
 	.takeDamage(damage)
 	emit_signal("healthChanged", "Down", -damage)
+
+func pickUp():
+	var item = GameData.itemAtPos(self.get_pos())
+	emit_signal("itemPickedUp", item)
+	item.pickup()
 
 func heal(amount):
 	if self.health < self.maxHealth:

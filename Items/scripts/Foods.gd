@@ -9,8 +9,8 @@ class CookedSteak extends "Item.gd":
 	func onUse():
 		GameData.player.heal(2)
 		GameData.foods.remove(GameData.foods.find(self))
-
-func pickup():
-	#todo, needs to check if inventory is full first
-	GameData.addFoods([self])
-	.pickup()
+		
+	func pickup():
+		#todo, needs to check if inventory is full first
+		GameData.addFoods([self])
+		.pickup()

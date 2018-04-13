@@ -9,8 +9,8 @@ class HealthPotion extends "Item.gd":
 	func onUse():
 		GameData.player.increaseMax(1)
 		GameData.potions.remove(GameData.potions.find(self))
-
-func pickup():
-	#todo, needs to check if inventory is full first
-	GameData.addPotions([self])
-	.pickup()
+	
+	func pickup():
+		#todo, needs to check if inventory is full first
+		GameData.addPotions([self])
+		.pickup()
