@@ -8,6 +8,8 @@ func _ready():
 	name = "Fire Spell"
 
 func onUse():
-	GameData.closestEnemy().takeDamage(1)
+	var closest_enemy = GameData.closestEnemy()
+	if closest_enemy:
+		closest_enemy.takeDamage(1)
 	#animate a fireball
 	GameData.spells.remove(GameData.spells.find(self))

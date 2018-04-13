@@ -1,6 +1,6 @@
 extends TileMap
 
-var not_walkable = [-1, 6, 13, 21, 22, 23, 25, 26, 27, 28, 29,30,31,32,33, 34 ,35]
+var not_walkable = [-1, 6, 13, 21, 22, 23, 25, 26, 27, 28, 30, 32, 33, 34, 35]
 var Pathfinder
 var points = {}
 var ids = {}
@@ -11,8 +11,8 @@ func _ready():
 	var id
 	var point_left
 	var point_up
-	for j in range(0, 100):
-		for i in range(0, 100):
+	for j in range(-100, 100):
+		for i in range(-100, 100):
 			if walkable(i, j):
 				id = Pathfinder.get_available_point_id()
 				points[Vector3(i, j, 0)] = id

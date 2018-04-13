@@ -60,9 +60,6 @@ func _process(delta):
 
 func takeDamage(damage):
 	.takeDamage(damage)
-	if self.health <= 0:
-		self.hide()
-		self.queue_free()
 	emit_signal("healthChanged", "Down", -damage)
 
 func heal(amount):
