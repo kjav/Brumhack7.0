@@ -35,4 +35,5 @@ func PlayerHealthChanged(change, value):
 			new_node.setType("Empty")
 		
 		get_node("HudCanvasLayer/HealthBar").add_child(new_node)
+		
 	
