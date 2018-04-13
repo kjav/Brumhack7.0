@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://Menus/scripts/PlayerSelect.gd" type="Script" id=1]
-[ext_resource path="res://assets/parallax-mountain.png" type="Texture" id=2]
+[ext_resource path="res://assets/parallax-mountain-2.png" type="Texture" id=2]
 [ext_resource path="res://Menus/SelectScreen.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Menus/PlayerItem.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/angel_icon.png" type="Texture" id=5]
