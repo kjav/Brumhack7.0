@@ -10,6 +10,8 @@
 
 transform/pos = Vector2( 0, -0.663414 )
 script/script = ExtResource( 1 )
+frameStyle = null
+type = null
 
 [node name="Background" type="TextureFrame" parent="."]
 

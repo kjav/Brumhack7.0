@@ -7,7 +7,7 @@ class BasicSword extends "Weapon.gd":
 		damage = 1
 	
 	func onUse():
-		break
+		var a = 1
 
 class BasicShield extends "Weapon.gd":
 	const texture = preload("res://assets/basic_shield.png")
@@ -19,4 +19,4 @@ class BasicShield extends "Weapon.gd":
 	
 	#todo, somehow needs to block damage or something
 	func onUse():
-		break
+		var b = 1

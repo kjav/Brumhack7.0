@@ -34,9 +34,9 @@ transform/pos = Vector2( -17.7285, 8.86422 )
 transform/pos = Vector2( 880.997, 1742.68 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = "Right"
-type = null
+type = "Potion"
 
-[node name="Node2D4" parent="HudCanvasLayer" instance=ExtResource( 2 )]
+[node name="SecondaryWeaponSlot" parent="HudCanvasLayer" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 169.145, 1742.68 )
 transform/scale = Vector2( 2, 2 )
@@ -50,7 +50,7 @@ transform/scale = Vector2( 2, 2 )
 frameStyle = "Left"
 type = "Food"
 
-[node name="Node2D4 2" parent="HudCanvasLayer" instance=ExtResource( 2 )]
+[node name="PrimaryWeaponSlot" parent="HudCanvasLayer" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 3.86261, 1742.68 )
 transform/scale = Vector2( 2, 2 )

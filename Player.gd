@@ -1,10 +1,14 @@
 extends "Character.gd"
 
 signal healthChanged(change, value)
+signal weaponChanged(slot, weapon)
 
 var time_elapsed = 0
 var attack
 var maxHealth
+var weapons = preload("Weapons.gd")
+var primaryWeapon = weapons.BasicSword.new()
+var secondaryWeapon = weapons.BasicShield.new()
 
 func _ready():
 	set_process(true)
@@ -13,6 +17,14 @@ func _ready():
 	GameData.player = self
 	GameData.characters.append(self)
 
+func setPrimaryWeapon(weapon):
+	primaryWeapon = weapon
+	emit_signal("weaponChanged", "Primary", weapon)
+	
+func setSecondaryWeapon(weapon):
+	secondaryWeapon = weapon
+	emit_signal("weaponChanged", "Secondary", weapon)
+
 func swiped(direction):
 	if not moving:
 		time_elapsed = 0
@@ -20,6 +32,10 @@ func swiped(direction):
 		for i in range(GameData.characters.size()):
 			if i < GameData.characters.size():
 				GameData.characters[i].turn()
+
+func attack(character):
+	if alive:
+		character.takeDamage(primaryWeapon.damage)
 
 func _process(delta):
 	if moving:

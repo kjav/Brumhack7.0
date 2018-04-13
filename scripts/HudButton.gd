@@ -13,6 +13,9 @@ var spell = preload("res://assets//book1.png")
 var sword = preload("res://assets//basic_sword.png")
 var shield = preload("res://assets//basic_shield.png")
 
+func setIconTexture(texture):
+	get_node("Icon").set_texture(texture)
+
 func setFrameStyle(style):
 	if typeof(style) == TYPE_STRING:
 		frameStyle = style

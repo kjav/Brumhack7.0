@@ -9,7 +9,16 @@ func _ready():
 	inventoryOpen = false
 	PlayerHealthChanged("", 0)
 	GameData.player.connect("healthChanged", self, "PlayerHealthChanged")
+	GameData.player.connect("weaponChanged", self, "PlayerWeaponChanged")
 
+
+func PlayerWeaponChanged(slot, weapon):
+	var selectedSlot
+	if slot == "Primary":
+		selectedSlot = get_node("HudCanvasLayer/PrimaryWeaponSlot")
+	else:
+		selectedSlot = get_node("HudCanvasLayer/SecondaryWeaponSlot")
+	selectedSlot.setIconTexture(weapon.texture)
 
 func PlayerHealthChanged(change, value):
 	for child in get_node("HudCanvasLayer/HealthBar").get_children():
