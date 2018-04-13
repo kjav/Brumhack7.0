@@ -8,9 +8,9 @@ var player
 var characters = []
 var placedItems = []
 
-const PotionClasses = preload("res://Items//Potions.gd")
-const FoodClasses = preload("res://Items//Foods.gd")
-const SpellClasses = preload("res://Items//Spells.gd")
+const PotionClasses = preload("res://Items/scripts/Potions.gd")
+const FoodClasses = preload("res://Items/scripts/Foods.gd")
+const SpellClasses = preload("res://Items/scripts/Spells.gd")
 
 func _ready():
 	var instance = PotionClasses.HealthPotion.new()

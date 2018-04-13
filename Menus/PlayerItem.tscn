@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://PlayerItem.gd" type="Script" id=1]
-[ext_resource path="res://Range.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Menus/scripts/PlayerItem.gd" type="Script" id=1]
+[ext_resource path="res://Menus/Range.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/8BitTheme.tres" type="Theme" id=3]
 
 [node name="Node2D" type="Node2D"]
@@ -33,29 +33,21 @@ stretch_mode = 0
 
 transform/pos = Vector2( 125, 400 )
 maxProgress = 12
-progress = 0
-name = "Strength"
 
 [node name="HitpointsRange" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 125, 640 )
 maxProgress = 12
-progress = 0
-name = "Hitpoints"
 
 [node name="SpeedRange" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 125, 760 )
 maxProgress = 12
-progress = 0
-name = "Speed"
 
 [node name="DefenceRange" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 125, 520 )
 maxProgress = 12
-progress = 0
-name = "Defence"
 
 [node name="PlayerNameLabel" type="Label" parent="."]
 

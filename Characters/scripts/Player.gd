@@ -6,7 +6,7 @@ signal weaponChanged(slot, weapon)
 var time_elapsed = 0
 var attack
 var maxHealth
-var weapons = preload("Weapons.gd")
+var weapons = preload("res://Items/scripts/Weapons.gd")
 var primaryWeapon = weapons.BasicSword.new()
 var secondaryWeapon = weapons.BasicShield.new()
 
