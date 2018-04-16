@@ -6,7 +6,9 @@ var potions = []
 var foods = []
 var spells = []
 var tilemap
+var chosen_player
 var player
+var chosen_map
 var characters = []
 var placedItems = []
 

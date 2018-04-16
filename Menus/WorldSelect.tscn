@@ -69,4 +69,6 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[connection signal="changed" from="SelectScreen" to="." method="_on_changed"]
+
 
