@@ -93,8 +93,9 @@ func takeDamage(damage):
 
 func pickUp():
 	var item = GameData.itemAtPos(self.get_pos())
-	emit_signal("itemPickedUp", item)
-	item.pickup()
+	if (item != null):
+		emit_signal("itemPickedUp", item)
+		item.pickup()
 
 func heal(amount):
 	if self.health < self.maxHealth:

@@ -5,12 +5,15 @@ func _ready():
 	for i in GameData.placedItems:
 		addItem(i)
 	GameData.connect("itemDropped", self, "addItem")
-	#GameData.player.connect("itemPickedUp", self, "remove")
+
+func setupConnection():
+#todo, need to call this
+	GameData.player.connect("itemPickedUp", self, "remove")
 
 func remove(item):
 	for i in get_children(): 
 		#might get wrong one if two of same type in the same place
-		if (i.texture == item.texture and i.pos == item.pos + Vector2(64,64)):
+		if (i.texture == item.texture and i.get_pos() == item.pos + Vector2(64,64)):
 			i.hide()
 			i.queue_free()
 			break

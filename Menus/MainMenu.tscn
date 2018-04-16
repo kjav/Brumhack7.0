@@ -15,9 +15,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = -548.0
-margin/top = 0.0
+margin/top = 6.0
 margin/right = -276.0
-margin/bottom = 160.0
+margin/bottom = 166.0
 texture = ExtResource( 1 )
 stretch_mode = 0
 
