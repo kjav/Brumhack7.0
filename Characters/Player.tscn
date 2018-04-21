@@ -1,85 +1,19 @@
-[gd_scene load_steps=23 format=1]
+[gd_scene load_steps=5 format=1]
 
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkdown_2.png" type="Texture" id=1]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkright_1.png" type="Texture" id=2]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkright_2.png" type="Texture" id=3]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkright_3.png" type="Texture" id=4]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkdown_1.png" type="Texture" id=5]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkdown_3.png" type="Texture" id=6]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkleft_1.png" type="Texture" id=7]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkleft_2.png" type="Texture" id=8]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkleft_3.png" type="Texture" id=9]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkup_2.png" type="Texture" id=10]
-[ext_resource path="res://assets/tilesets/Bat/splattersplash_0.png" type="Texture" id=11]
-[ext_resource path="res://assets/tilesets/Bat/splattersplash_1.png" type="Texture" id=12]
-[ext_resource path="res://assets/tilesets/Bat/splattersplash_2.png" type="Texture" id=13]
-[ext_resource path="res://assets/tilesets/Bat/splattersplash_3.png" type="Texture" id=14]
-[ext_resource path="res://assets/tilesets/Bat/splattersplash_4.png" type="Texture" id=15]
-[ext_resource path="res://assets/tilesets/Bat/splattersplash_5.png" type="Texture" id=16]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkup_1.png" type="Texture" id=17]
-[ext_resource path="res://assets/tilesets/Beserker/Beserker_walkup_3.png" type="Texture" id=18]
-[ext_resource path="res://Characters/scripts/Player.gd" type="Script" id=19]
-[ext_resource path="res://assets/basic_sword.png" type="Texture" id=20]
-[ext_resource path="res://assets/basic_shield.png" type="Texture" id=21]
-
-[sub_resource type="SpriteFrames" id=1]
-
-animations = [ {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "stand_down",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "walk_right",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 5 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 1 ) ],
-"loop": true,
-"name": "walk_down",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 8 ) ],
-"loop": true,
-"name": "walk_left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "stand_right",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "stand_left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "stand_up",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "death",
-"speed": 14.0
-}, {
-"frames": [ ExtResource( 17 ), ExtResource( 10 ), ExtResource( 18 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "walk_up",
-"speed": 5.0
-} ]
+[ext_resource path="res://assets/SpriteFrames/BeserkerPlayer.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Characters/scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://assets/basic_sword.png" type="Texture" id=3]
+[ext_resource path="res://assets/basic_shield.png" type="Texture" id=4]
 
 [node name="Player" type="AnimatedSprite"]
 
 transform/pos = Vector2( 640, 1024 )
-transform/scale = Vector2( 2.66667, 2.66667 )
-frames = SubResource( 1 )
+transform/scale = Vector2( 4, 4 )
+frames = ExtResource( 1 )
 animation = "stand_down"
 centered = false
 offset = Vector2( 0, -8 )
-script/script = ExtResource( 19 )
+script/script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -103,16 +37,16 @@ drag_margin/bottom = 0.2
 
 [node name="PrimaryWeapon" type="Sprite" parent="."]
 
-transform/pos = Vector2( 16, 27 )
-transform/scale = Vector2( 0.75, 0.75 )
-texture = ExtResource( 20 )
+transform/pos = Vector2( 10.6666, 16 )
+transform/scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
 offset = Vector2( -10, -10 )
 
 [node name="SecondaryWeapon" type="Sprite" parent="."]
 
-transform/pos = Vector2( 32, 27 )
-transform/scale = Vector2( 0.75, 0.75 )
-texture = ExtResource( 21 )
+transform/pos = Vector2( 21.3333, 18 )
+transform/scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
 offset = Vector2( 0, -5 )
 
 

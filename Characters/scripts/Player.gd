@@ -17,6 +17,7 @@ func _ready():
 	maxHealth = health
 	GameData.player = self
 	GameData.characters.append(self)
+	self.frames = load("res://assets/SpriteFrames/" + GameData.chosen_player + ".tres")
 
 func swapWeapons():
 	var temp = primaryWeapon
@@ -113,34 +114,34 @@ func set_weapon_positions(dir):
 		if weapon.is_flipped_h():
 			weapon.set_offset(weapon.get_offset() * Vector2(-1, 1))
 		weapon.set_flip_h(false)
-		weapon.set_pos(Vector2(16, 27))
+		weapon.set_pos(Vector2(10.6666, 16))
 		secondary.set_draw_behind_parent(false)
 		secondary.set_flip_h(false)
-		secondary.set_pos(Vector2(32, 27))
+		secondary.set_pos(Vector2(21.3333, 18))
 	elif dir == Enums.DIRECTION.UP:
 		weapon.set_draw_behind_parent(true)
 		if !weapon.is_flipped_h():
 			weapon.set_offset(weapon.get_offset() * Vector2(-1, 1))
 		weapon.set_flip_h(true)
-		weapon.set_pos(Vector2(32, 27))
+		weapon.set_pos(Vector2(21.3333, 16))
 		secondary.set_draw_behind_parent(true)
 		secondary.set_flip_h(true)
-		secondary.set_pos(Vector2(16, 27))
+		secondary.set_pos(Vector2(10.6666, 16))
 	elif dir == Enums.DIRECTION.LEFT:
 		weapon.set_draw_behind_parent(true)
 		if weapon.is_flipped_h():
 			weapon.set_offset(weapon.get_offset() * Vector2(-1, 1))
 		weapon.set_flip_h(false)
-		weapon.set_pos(Vector2(24, 27))
+		weapon.set_pos(Vector2(16, 18))
 		secondary.set_draw_behind_parent(false)
 		secondary.set_flip_h(false)
-		secondary.set_pos(Vector2(24, 27))
+		secondary.set_pos(Vector2(16, 16))
 	elif dir == Enums.DIRECTION.RIGHT:
 		weapon.set_draw_behind_parent(false)
 		if !weapon.is_flipped_h():
 			weapon.set_offset(weapon.get_offset() * Vector2(-1, 1))
 		weapon.set_flip_h(true)
-		weapon.set_pos(Vector2(24, 27))
+		weapon.set_pos(Vector2(16, 18))
 		secondary.set_draw_behind_parent(true)
 		secondary.set_flip_h(true)
-		secondary.set_pos(Vector2(24, 27))
+		secondary.set_pos(Vector2(16, 18))
