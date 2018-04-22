@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://Hud/scripts/Hud.gd" type="Script" id=1]
 [ext_resource path="res://Hud/HudButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Hud/Minimap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Hud/InventoryHudButton.tscn" type="PackedScene" id=4]
 
 [node name="HudNode" type="Node2D"]
 
@@ -29,26 +30,12 @@ transform/pos = Vector2( 390, 3.09088 )
 
 transform/pos = Vector2( -17.7285, 8.86422 )
 
-[node name="Node2D 2" parent="HudCanvasLayer" instance=ExtResource( 2 )]
-
-transform/pos = Vector2( 880.997, 1742.68 )
-transform/scale = Vector2( 2, 2 )
-frameStyle = "Right"
-type = "Potion"
-
 [node name="SecondaryWeaponSlot" parent="HudCanvasLayer" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 169.145, 1742.68 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = "Right"
 type = "Shield"
-
-[node name="Node2D3" parent="HudCanvasLayer" instance=ExtResource( 2 )]
-
-transform/pos = Vector2( 546.848, 1746.38 )
-transform/scale = Vector2( 2, 2 )
-frameStyle = "Left"
-type = "Food"
 
 [node name="PrimaryWeaponSlot" parent="HudCanvasLayer" instance=ExtResource( 2 )]
 
@@ -57,13 +44,27 @@ transform/scale = Vector2( 2, 2 )
 frameStyle = "Left"
 type = "Sword"
 
-[node name="Node2D 3" parent="HudCanvasLayer" instance=ExtResource( 2 )]
+[node name="Node2D" parent="HudCanvasLayer" instance=ExtResource( 3 )]
 
-transform/pos = Vector2( 713.633, 1742.23 )
+[node name="Node2D 4" parent="HudCanvasLayer" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 544.626, 1743.11 )
+transform/scale = Vector2( 2, 2 )
+frameStyle = "Left"
+type = "Food"
+
+[node name="Node2D 2" parent="HudCanvasLayer" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 880.509, 1744.86 )
+transform/scale = Vector2( 2, 2 )
+frameStyle = "Right"
+type = "Potion"
+
+[node name="Node2D 2 2" parent="HudCanvasLayer" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 713, 1745.23 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = "Centre"
 type = "Spell"
-
-[node name="Node2D" parent="HudCanvasLayer" instance=ExtResource( 3 )]
 
 
