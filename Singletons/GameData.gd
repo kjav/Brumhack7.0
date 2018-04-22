@@ -19,12 +19,16 @@ const SpellClasses = preload("res://Items/scripts/Spells.gd")
 func _ready():
 	var instance = PotionClasses.HealthPotion.new()
 	addPotions([instance, instance, instance])
-	instance.pos = Vector2(512, 1024)
+	instance.pos = Vector2(4 * 128, 8 * 128)
 	placeItem(instance)
 	var instance = FoodClasses.CookedSteak.new()
 	addFoods([instance, instance])
+	instance.pos = Vector2(2 * 128, 0 * 128)
+	placeItem(instance)
 	var instance = SpellClasses.FireSpell.new()
 	addSpells([instance, instance])
+	instance.pos = Vector2(6 * 128, 12 * 128)
+	placeItem(instance)
 
 func addPotions(new_potions):
 	for potion in new_potions:
@@ -48,8 +52,12 @@ func charactersAtPos(pos):
 	print(collisions)
 	return collisions
 	
+func pickedUp(item):
+	placedItems.remove(placedItems.find(item))
+
 func itemAtPos(pos):
-	for i in range(placedItems.size()-1, -1, -1):
+	var a = placedItems.size()
+	for i in range(placedItems.size()-1,-1, -1):
 		if (placedItems[i].pos.x / 128 == pos.x and placedItems[i].pos.y / 128 == pos.y):
 			return placedItems[i]
 	return null

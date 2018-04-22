@@ -16,5 +16,6 @@ func place(newPos):
 
 func pickup():
 	pos = null
+	GameData.pickedUp(self)
 	GameData.player.dropWeapon()
 	GameData.player.setPrimaryWeapon(self)
