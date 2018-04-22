@@ -50,7 +50,7 @@ func charactersAtPos(pos):
 	
 func itemAtPos(pos):
 	for i in range(placedItems.size()-1, -1, -1):
-		if (placedItems[i].pos.x == pos.x and placedItems[i].pos.y == pos.y):
+		if (placedItems[i].pos.x / 128 == pos.x and placedItems[i].pos.y / 128 == pos.y):
 			return placedItems[i]
 	return null
 

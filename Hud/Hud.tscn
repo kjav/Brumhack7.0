@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://Hud/scripts/Hud.gd" type="Script" id=1]
 [ext_resource path="res://Hud/HudButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Hud/Minimap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Hud/InventoryHudButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Hud/PickupHudButton.tscn" type="PackedScene" id=5]
 
 [node name="HudNode" type="Node2D"]
 
@@ -66,5 +67,10 @@ transform/pos = Vector2( 713, 1745.23 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = "Centre"
 type = "Spell"
+
+[node name="Pickup" parent="HudCanvasLayer" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 710.954, 1547.64 )
+transform/scale = Vector2( 2, 2 )
 
 

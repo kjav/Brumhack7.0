@@ -45,26 +45,30 @@ func faceDirection(direction):
 		elif direction == Enums.DIRECTION.RIGHT:
 			set_animation("stand_right")
 
+func setTarget(pos, direction):
+	var pos = original_pos
+	pos.x = int(pos.x / 128)
+	pos.y = int(pos.y / 128)
+	if direction == Enums.DIRECTION.UP:
+		pos.y -= 1
+	elif direction == Enums.DIRECTION.DOWN:
+		pos.y += 1
+	elif direction == Enums.DIRECTION.LEFT:
+		pos.x -= 1
+	elif direction == Enums.DIRECTION.RIGHT:
+		pos.x += 1
+	target_pos = pos
+	target_pos.x *= 128
+	target_pos.y *= 128
+	return pos
+
 func moveDirection(direction):
 	# If not already moving
 	if (not moving) and alive:
 		original_pos = get_pos()
 		var attack = false
 		faceDirection(direction)
-		var pos = original_pos
-		pos.x = int(pos.x / 128)
-		pos.y = int(pos.y / 128)
-		if direction == Enums.DIRECTION.UP:
-			pos.y -= 1
-		elif direction == Enums.DIRECTION.DOWN:
-			pos.y += 1
-		elif direction == Enums.DIRECTION.LEFT:
-			pos.x -= 1
-		elif direction == Enums.DIRECTION.RIGHT:
-			pos.x += 1
-		target_pos = pos
-		target_pos.x *= 128
-		target_pos.y *= 128
+		var pos = setTarget(pos, direction)
 		var collisions = GameData.charactersAtPos(pos)
 		for i in range(collisions.size()):
 			if not (collisions[i] == self):
