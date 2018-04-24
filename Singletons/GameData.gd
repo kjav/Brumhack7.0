@@ -23,7 +23,7 @@ func _ready():
 	placeItem(instance)
 	var instance = FoodClasses.CookedSteak.new()
 	addFoods([instance, instance])
-	instance.pos = Vector2(2 * 128, 0 * 128)
+	instance.pos = Vector2(2 * 128, 2 * 128)
 	placeItem(instance)
 	var instance = SpellClasses.FireSpell.new()
 	addSpells([instance, instance])
