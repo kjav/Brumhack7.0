@@ -56,11 +56,9 @@ func pickedUp(item):
 	placedItems.remove(placedItems.find(item))
 
 func itemAtPos(pos):
-	var a = placedItems.size()
-	for i in range(placedItems.size()-1,-1, -1):
-		if (placedItems[i].pos.x / 128 == pos.x and placedItems[i].pos.y / 128 == pos.y):
-			return placedItems[i]
-	return null
+	for item in placedItems:
+		if (item.pos.x / 128 == round(pos.x) and item.pos.y / 128 == round(pos.y)):
+			return item
 
 func placeItem(item):
 	GameData.placedItems.append(item)
