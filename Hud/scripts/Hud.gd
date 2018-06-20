@@ -1,12 +1,14 @@
 extends Node2D
 
 var inventoryOpen
+var settingsOpen
 var inc = 40
 
 const Heart = preload("res://Hud/Heart.tscn")
 
 func _ready():
 	inventoryOpen = false
+	settingsOpen = false
 	PlayerHealthChanged("", 0)
 	GameData.player.connect("healthChanged", self, "PlayerHealthChanged")
 	GameData.player.connect("weaponChanged", self, "PlayerWeaponChanged")
