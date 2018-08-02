@@ -5,6 +5,8 @@ var name
 var distance
 var iconFilePath
 var pos
+#Down, Up, Left, Right
+var holdOffset
 
 #can be used for things like bows later on
 func onUse():
