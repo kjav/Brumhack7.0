@@ -13,3 +13,4 @@ func place(newPos):
 
 func pickup():
 	pos = null
+	GameData.pickedUp(self)

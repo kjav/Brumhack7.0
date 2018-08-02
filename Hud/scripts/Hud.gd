@@ -1,16 +1,25 @@
 extends Node2D
 
 var inventoryOpen
+var settingsOpen
 var inc = 40
 
 const Heart = preload("res://Hud/Heart.tscn")
 
 func _ready():
 	inventoryOpen = false
+	settingsOpen = false
 	PlayerHealthChanged("", 0)
 	GameData.player.connect("healthChanged", self, "PlayerHealthChanged")
 	GameData.player.connect("weaponChanged", self, "PlayerWeaponChanged")
+	GameData.player.connect("playerMove", self, "CheckFloor")
+	get_node("HudCanvasLayer/Pickup").hide()
 
+func CheckFloor(pos):
+	if GameData.itemAtPos(pos):
+		get_node("HudCanvasLayer/Pickup").show()
+	else:
+		get_node("HudCanvasLayer/Pickup").hide()
 
 func PlayerWeaponChanged(slot, weapon):
 	var selectedSlot

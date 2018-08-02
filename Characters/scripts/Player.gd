@@ -3,6 +3,7 @@ extends "Character.gd"
 signal healthChanged(change, value)
 signal weaponChanged(slot, weapon)
 signal itemPickedUp(item)
+signal playerMove(pos)
 
 var time_elapsed = 0
 var attack
@@ -46,6 +47,7 @@ func swiped(direction):
 		for i in range(GameData.characters.size()):
 			if i < GameData.characters.size():
 				GameData.characters[i].turn()
+		emit_signal("playerMove", self.target_pos / 128)
 
 func attack(character):
 	if alive:
@@ -93,9 +95,10 @@ func takeDamage(damage):
 	emit_signal("healthChanged", "Down", -damage)
 
 func pickUp():
-	var item = GameData.itemAtPos(self.get_pos())
-	emit_signal("itemPickedUp", item)
-	item.pickup()
+	var item = GameData.itemAtPos(self.get_pos()/128)
+	if (item != null):
+		emit_signal("itemPickedUp", item)
+		item.pickup()
 
 func heal(amount):
 	if self.health < self.maxHealth:
