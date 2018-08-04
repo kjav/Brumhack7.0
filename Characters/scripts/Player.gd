@@ -18,6 +18,7 @@ func _ready():
 	maxHealth = health
 	GameData.player = self
 	GameData.characters.append(self)
+	self.frames = load("res://assets/SpriteFrames/" + GameData.chosen_player + ".tres")
 
 func swapWeapons():
 	var temp = primaryWeapon
@@ -28,7 +29,7 @@ func setPrimaryWeapon(weapon):
 	primaryWeapon = weapon
 	emit_signal("weaponChanged", "Primary", primaryWeapon)
 	get_node("PrimaryWeapon").set_texture(primaryWeapon.texture)
-	
+
 func setSecondaryWeapon(weapon):
 	secondaryWeapon = weapon
 	emit_signal("weaponChanged", "Secondary", secondaryWeapon)
