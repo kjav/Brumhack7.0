@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=1]
+[gd_scene load_steps=21 format=1]
 
 [ext_resource path="res://assets/Audio/Background_Music.wav" type="Sample" id=1]
 [ext_resource path="res://assets/Audio/Bat_Noticed.wav" type="Sample" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://assets/Audio/Walk_1.wav" type="Sample" id=16]
 [ext_resource path="res://assets/Audio/Walk_2.wav" type="Sample" id=17]
 [ext_resource path="res://assets/Audio/Walk_3.wav" type="Sample" id=18]
+[ext_resource path="res://Singletons/Audio.gd" type="Script" id=19]
 
 [sub_resource type="SampleLibrary" id=1]
 
@@ -146,5 +147,6 @@ default/filter/gain = 1.0
 default/reverb_room = 2
 default/reverb_send = 0.0
 default/chorus_send = 0.0
+script/script = ExtResource( 19 )
 
 

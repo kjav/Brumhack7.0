@@ -18,6 +18,7 @@ func turn():
 
 func attack(character):
 	if alive:
+		Audio.playHit()
 		if (character == GameData.player) or (self == GameData.player):
 			character.takeDamage(1)
 

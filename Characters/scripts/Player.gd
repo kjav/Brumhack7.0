@@ -51,6 +51,7 @@ func swiped(direction):
 
 func attack(character):
 	if alive:
+		Audio.playHit()
 		character.takeDamage(primaryWeapon.damage)
 
 func _process(delta):
