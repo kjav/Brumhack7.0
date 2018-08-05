@@ -24,7 +24,7 @@ stretch_mode = 0
 [node name="StartButton" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 540, 1100 )
-text = "Start"
+text = "Play"
 scene = ExtResource( 3 )
 
 [node name="Node2D" parent="." instance=ExtResource( 2 )]
