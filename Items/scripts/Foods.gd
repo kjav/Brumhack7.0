@@ -5,8 +5,10 @@ class CookedSteak extends "Item.gd":
 		iconFilePath = "res://assets/cooked_steak2.png"
 		description = "Mmmh suculent steak..."
 		name = "Cooked Steak"
+		useSound = "Food_Use"
 	
 	func onUse():
+		Audio.play(useSound, true)
 		GameData.player.heal(2)
 		GameData.foods.remove(GameData.foods.find(self))
 		

@@ -3,6 +3,7 @@ var description
 var name
 var iconFilePath
 var pos = null
+var useSound
 
 func onUse():
 	pass

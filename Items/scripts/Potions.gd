@@ -5,8 +5,10 @@ class HealthPotion extends "Item.gd":
 		iconFilePath = "res://assets/red_potion2.png"
 		description = "This drink heal your wounds!"
 		name = "Health Potion"
+		useSound = "HealthPotion_Drink"
 	
 	func onUse():
+		Audio.play(useSound, true)
 		GameData.player.increaseMax(1)
 		GameData.potions.remove(GameData.potions.find(self))
 	
