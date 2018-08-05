@@ -69,6 +69,41 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="MazeMap" type="Node2D" parent="."]
+
+transform/pos = Vector2( 540, 700 )
+
+[node name="TextureFrame" type="TextureFrame" parent="MazeMap"]
+
+rect/scale = Vector2( 1.4, 1.4 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -385.0
+margin/top = -340.0
+margin/right = 165.0
+margin/bottom = 210.0
+texture = ExtResource( 6 )
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MazeMap"]
+
+rect/scale = Vector2( 5, 5 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+theme/theme = ExtResource( 7 )
+margin/left = -424.0
+margin/top = 484.0
+margin/right = -248.0
+margin/bottom = 500.0
+text = "MAZE MAP"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [connection signal="changed" from="SelectScreen" to="." method="_on_changed"]
 
 
