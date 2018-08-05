@@ -24,7 +24,9 @@ class FireSpell extends "Item.gd":
 				missile_texture,
 				GameData.player.get_pos(),
 				25,
-				10
+				10,
+				"Fireball_Flying",
+				"Fireball_Hit"
 			)
 
 	func pickup():

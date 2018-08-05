@@ -26,9 +26,9 @@ func takeDamage(damage):
 	self.health -= damage
 	if self.health <= 0:
 		if(self == GameData.player):
-			Audio.play("Player_Death")
+			Audio.play("Player_Death", true)
 		else:
-			Audio.play("Enemy_Death")
+			Audio.play("Enemy_Death", true)
 		GameData.characters.erase(self)
 		# self.hide()
 		# self.queue_free()
