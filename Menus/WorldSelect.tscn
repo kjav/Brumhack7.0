@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://Menus/scripts/WorldSelect.gd" type="Script" id=1]
 [ext_resource path="res://assets/parallax-mountain-3.png" type="Texture" id=2]
 [ext_resource path="res://Menus/SelectScreen.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Menus/MenuButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/dungeon_map_screenshot.png" type="Texture" id=6]
+[ext_resource path="res://assets/maps/dungeon_map_screenshot.png" type="Texture" id=6]
 [ext_resource path="res://assets/8BitTheme.tres" type="Theme" id=7]
+[ext_resource path="res://assets/maps/maze_map_screenshot.png" type="Texture" id=8]
 
 [node name="Node2D" type="Node2D"]
 
@@ -65,13 +66,14 @@ margin/top = 484.0
 margin/right = -248.0
 margin/bottom = 500.0
 text = "DUNGEON MAP"
+align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
 [node name="MazeMap" type="Node2D" parent="."]
 
-transform/pos = Vector2( 540, 700 )
+transform/pos = Vector2( 1600, 700 )
 
 [node name="TextureFrame" type="TextureFrame" parent="MazeMap"]
 
@@ -84,7 +86,7 @@ margin/left = -385.0
 margin/top = -340.0
 margin/right = 165.0
 margin/bottom = 210.0
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="MazeMap"]
@@ -100,6 +102,7 @@ margin/top = 484.0
 margin/right = -248.0
 margin/bottom = 500.0
 text = "MAZE MAP"
+align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
