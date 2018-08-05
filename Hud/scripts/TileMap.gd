@@ -6,6 +6,11 @@ var points = {}
 var ids = {}
 
 func _ready():
+	var cells = load_csv("res://assets/maps/" + GameData.chosen_map + ".csv")
+	print("Chosen map: ", GameData.chosen_map)
+	for i in range(-100, 100):
+		for j in range(-100, 100):
+			self.set_cell(i, j, cells[j + 100][i + 100])
 	GameData.tilemap = self
 	Pathfinder = AStar.new()
 	var id
@@ -24,6 +29,32 @@ func _ready():
 					Pathfinder.connect_points(id, points[point_left], true)
 				if points.has(point_up):
 					Pathfinder.connect_points(id, points[point_up], true)
+
+func save_csv(cells, path):
+	var file = File.new()
+	file.open(path, file.WRITE)
+	for row in cells:
+		var row_string = ""
+		for cell in row:
+			row_string = row_string + str(cell) + ","
+		file.store_string(row_string + "\n")
+	file.close()
+
+func load_csv(path):
+	var file = File.new()
+	file.open(path, file.READ)
+	var row_strings = file.get_as_text().split("\n")
+	var cells = []
+	for row_string in row_strings:
+		if row_string.length() > 0:
+			var row = []
+			var cell_strings = row_string.split(",")
+			for cell_string in cell_strings:
+				if cell_string.length() > 0:
+					row.append(int(cell_string))
+			cells.append(row)
+	file.close()
+	return cells
 
 func walkable(x, y):
 	var cell = self.get_cell(x, y)

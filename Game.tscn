@@ -52,12 +52,12 @@ script/script = ExtResource( 3 )
 
 [node name="Bat" parent="." instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 1024, 768 )
+transform/pos = Vector2( 1024, 128 )
 transform/scale = Vector2( 0.25, 0.25 )
 
 [node name="Bat2" parent="." instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 1024, 640 )
+transform/pos = Vector2( 1024, 256 )
 transform/scale = Vector2( 0.25, 0.25 )
 
 [node name="TileMap_top" type="TileMap" parent="."]
