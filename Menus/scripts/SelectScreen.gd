@@ -9,7 +9,7 @@ var right_arrow
 var left_arrow
 
 func _ready():
-	items = self.get_parent().items()
+	items = self.get_parent().get_items()
 	left_arrow = get_node("LeftArrow")
 	right_arrow = get_node("RightArrow")
 	if items.size() > 0:

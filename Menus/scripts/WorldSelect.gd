@@ -1,15 +1,16 @@
 extends Node2D
 
+var _item_names = ["DungeonMap", "MazeMap"]
 var _items = []
 
 func _ready():
 	pass
 
-func items():
-	if _items.size() > 0 and (typeof(_items[0]) == typeof("")):
-		for i in range(_items.size()):
-			_items[i] = get_node(_items[i])
+func get_items():
+	for i in range(_item_names.size()):
+		if typeof(_item_names[i]) == typeof("") and has_node(_item_names[i]):
+			_items.append(get_node(_item_names[i]))
 	return _items
 
 func _on_changed(index):
-	GameData.chosen_map = index
+	GameData.chosen_map = _item_names[index]
