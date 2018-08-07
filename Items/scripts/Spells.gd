@@ -12,12 +12,12 @@ class FireSpell extends "Item.gd":
 	func onUse():
 		var closest_enemy = GameData.closestEnemy()
 		if closest_enemy:
-			closest_enemy.takeDamage(1)
 			# Remove potion
 			GameData.spells.remove(GameData.spells.find(self))
 			
 			# Launch a fireball
 			var new_missile = missile.instance()
+			Audio.playSoundEffect("Fireball_Flying")
 			GameData.player.get_parent().add_child(new_missile)
 			new_missile.init(
 				closest_enemy.get_path(),
@@ -25,7 +25,6 @@ class FireSpell extends "Item.gd":
 				GameData.player.get_pos(),
 				25,
 				10,
-				"Fireball_Flying",
 				"Fireball_Hit"
 			)
 

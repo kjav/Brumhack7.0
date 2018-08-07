@@ -1,30 +1,27 @@
 extends SamplePlayer
 
+func playSoundEffect(name, unique = false):
+	return play(name, false)
+
 func playHit():
 	randomize()
 	var which = randi()%3
 	if (which == 0):
-		Audio.play("Hit_1", true)
+		playSoundEffect("Hit_1", false)
 	elif (which == 1):
-		Audio.play("Hit_2", true)
+		playSoundEffect("Hit_2", false)
 	else:
-		Audio.play("Hit_3", true)
+		playSoundEffect("Hit_3", false)
 
-func stopLooped(soundID):
-	var id = soundID
-	#stop the audio associated with iD
-
-func playLooped(name):
-	Audio.play(name, true)
-	#creat an ID, associate and return
+func stopSound(voiceId):
+	stop(voiceId)
 
 func playWalk():
-	#commented out because walk sounds horrible with compression
 	randomize()
 	var which = randi()%3
-	#if (which == 0):
-		#Audio.play("Walk_1", true)
-	#elif (which == 1):
-		#Audio.play("Walk_2", true)
-	#else:
-		#Audio.play("Walk_3", true)
+	if (which == 0):
+		Audio.play("Walk_1", false)
+	elif (which == 1):
+		Audio.play("Walk_2", false)
+	else:
+		Audio.play("Walk_3", false)

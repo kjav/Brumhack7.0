@@ -42,6 +42,7 @@ func dropWeapon():
 func swiped(direction):
 	if not moving:
 		time_elapsed = 0
+		Audio.playWalk()
 		moveDirection(direction)
 		set_weapon_positions(direction)
 		for i in range(GameData.characters.size()):
@@ -59,16 +60,12 @@ func _process(delta):
 		var length = 128
 		time_elapsed = time_elapsed + delta
 		if movement_direction == Enums.DIRECTION.LEFT:
-			Audio.playWalk()
 			self.set_pos(get_pos() + Vector2(-length * (delta / 0.4), 0))
 		elif movement_direction == Enums.DIRECTION.RIGHT:
-			Audio.playWalk()
 			self.set_pos(get_pos() + Vector2(length * (delta / 0.4), 0))
 		if movement_direction == Enums.DIRECTION.UP:
-			Audio.playWalk()
 			self.set_pos(get_pos() + Vector2(0, -length * (delta / 0.4)))
 		elif movement_direction == Enums.DIRECTION.DOWN:
-			Audio.playWalk()
 			self.set_pos(get_pos() + Vector2(0, length * (delta / 0.4)))
 		if time_elapsed >= 0.4:
 			if movement_direction == Enums.DIRECTION.LEFT:

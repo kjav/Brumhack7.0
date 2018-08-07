@@ -40,6 +40,7 @@ func setType(newType):
 		type = newType
 
 func hideMenu(event):
+	Audio.playSoundEffect(\"Inventory_Close\", false)
 	get_tree().get_current_scene().get_node(\"HudNode\").inventoryOpen = false
 	self.queue_free()
 	self.hide()

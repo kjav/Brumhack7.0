@@ -8,7 +8,7 @@ class HealthPotion extends "Item.gd":
 		useSound = "HealthPotion_Drink"
 	
 	func onUse():
-		Audio.play(useSound, true)
+		Audio.playSoundEffect(useSound, true)
 		GameData.player.increaseMax(1)
 		GameData.potions.remove(GameData.potions.find(self))
 	

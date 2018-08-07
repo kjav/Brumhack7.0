@@ -20,7 +20,6 @@ func init(_target, _texture, _pos, _speed, _damage, _flyingSound, _hitSound):
 	speed = _speed
 	damage = _damage
 	target = _target
-	flyingSound = _flyingSound
 	hitSound = _hitSound
 
 func _process(delta):
@@ -31,14 +30,12 @@ func _process(delta):
 		var half_tile = Vector2(64, 64)
 		var target_pos = get_node(target).get_pos() + half_tile
 		if get_pos().distance_squared_to(target_pos) <= speed * speed:
-			Audio.stopLooped(soundID)
-			Audio.play(hitSound)
+			Audio.playSoundEffect(hitSound, true)
 			set_process(false)
 			get_node(target).takeDamage(damage)
 			get_parent().remove_child(self)
 			queue_free()
 		else:
-			soundID = Audio.playLooped(flyingSound)
 			set_rot((get_pos()).angle_to_point(target_pos) + 90)
 			set_pos(get_pos() + (target_pos - get_pos()).normalized() * speed)
 
