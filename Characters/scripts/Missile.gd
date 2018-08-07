@@ -14,7 +14,7 @@ func _ready():
 	if target:
 		set_process(true)
 
-func init(_target, _texture, _pos, _speed, _damage, _flyingSound, _hitSound):
+func init(_target, _texture, _pos, _speed, _damage, _hitSound):
 	set_texture(_texture)
 	set_pos(_pos)
 	speed = _speed
