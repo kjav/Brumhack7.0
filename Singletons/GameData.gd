@@ -84,10 +84,10 @@ func walkable(x, y):
 	return tilemap.walkable(x, y)
 
 func reset():
-	var potions = []
-	var foods = []
-	var spells = []
-	var tilemap = null
-	var player = null
-	var characters = []
-	var placedItems = []
+	potions = []
+	foods = []
+	spells = []
+	tilemap = null
+	player = null
+	characters = []
+	placedItems = []
