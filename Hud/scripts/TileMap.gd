@@ -11,7 +11,7 @@ func _ready():
 	for i in range(-100, 100):
 		for j in range(-100, 100):
 			self.set_cell(i, j, cells[j + 100][i + 100])
-	GameData.tilemap = self
+	#GameData.tilemap = self
 	Pathfinder = AStar.new()
 	var id
 	var point_left
