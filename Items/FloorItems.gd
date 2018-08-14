@@ -7,7 +7,6 @@ func _ready():
 	GameData.connect("itemDropped", self, "addItem")
 
 func setupConnection():
-#todo, need to call this
 	GameData.player.connect("itemPickedUp", self, "remove")
 
 func remove(item):

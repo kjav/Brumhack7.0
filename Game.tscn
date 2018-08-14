@@ -97,4 +97,6 @@ debug_mode = false
 
 [node name="HudNode" parent="." instance=ExtResource( 8 )]
 
+[connection signal="healthChanged" from="Player" to="HudNode" method="_on_Player_healthChanged"]
+
 
