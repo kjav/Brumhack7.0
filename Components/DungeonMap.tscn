@@ -6,9 +6,6 @@
 [node name="DungeonMap" type="Node2D"]
 
 script/script = ExtResource( 1 )
-bottom_z_index = 0
-top_z_index = 2
-map_type = 0
 
 [node name="BottomTileMap" type="TileMap" parent="."]
 

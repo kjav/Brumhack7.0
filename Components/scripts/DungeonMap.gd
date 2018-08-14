@@ -23,7 +23,11 @@ class Map:
 				tiles.append([])
 				for j in range(0, 100):
 					tiles[i].append(0)
-				for j in range(100, 113):
+				for j in range(100, 105):
+					tiles[i].append(6)
+				for j in range(105, 106):
+					tiles[i].append(0)
+				for j in range(106, 113):
 					tiles[i].append(6)
 				for j in range(113, width):
 					tiles[i].append(0)
@@ -69,16 +73,16 @@ func set_map_type(type):
 		Pathfinder = AStar.new()
 		GameData.tilemap = self
 		
-		var i = -100
+		var j = -100
 		for row in map.tiles:
-			var j = -100
+			var i = -100
 			for tile in row:
 				self.get_node("BottomTileMap").set_cell(i, j, tile)
 
 				if tile in top_layer_tiles:
 					self.get_node("TopTileMap").set_cell(i, j, tile)
 
-				if !~not_walkable.find(tile):
+				if walkable(i, j):
 					var id = Pathfinder.get_available_point_id()
 					points[Vector3(i, j, 0)] = id
 					ids[id] = Vector3(i, j, 0)
@@ -89,8 +93,8 @@ func set_map_type(type):
 						Pathfinder.connect_points(id, points[point_left], true)
 					if points.has(point_up):
 						Pathfinder.connect_points(id, points[point_up], true)
-				j = j + 1
-			i = i + 1
+				i = i + 1
+			j = j + 1
 	map_type = type
 
 func get_map_type():
@@ -124,13 +128,9 @@ func findNextDirection(a, b):
 	var a_id = points[a_vec3]
 	var b_id = points[b_vec3]
 	
-	print("Before this")
 	var id_path = Pathfinder.get_id_path(a_id, b_id)
-	print(id_path)
-	print("After this")
 	
 	var direction = Enums.DIRECTION.NONE
-	
 	if id_path.size() > 1:
 		direction = ids[id_path[1]] - ids[id_path[0]]
 		print(direction)
@@ -141,3 +141,5 @@ func findNextDirection(a, b):
 		elif direction.y == 1:
 			direction = Enums.DIRECTION.DOWN
 		elif direction.y == -1:
+			direction = Enums.DIRECTION.UP
+	return direction
