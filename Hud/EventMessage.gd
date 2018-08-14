@@ -7,8 +7,7 @@ func set_text(text):
 	get_node("Output").set_text(text);
 	
 
-func _on_Timer_timeout():
-	
+func _on_Timer_timeout(): 
 	hide();
 	queue_free(); 
 	get_parent().remove_child(self)
