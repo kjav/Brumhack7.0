@@ -5,7 +5,7 @@ func _pressed():
 	if not get_tree().get_current_scene().get_node("HudNode").inventoryOpen:
 	#	get_tree().get_current_scene().get_node("HudNode").get_node("HudCanvasLayer").get_node("Inventory").queue_free()
 	#else:
-		Audio.play("Inventory_Open",true)
+		Audio.playSoundEffect("Inventory_Open",true)
 		var new_inventory_instance = InventoryType.instance()
 		new_inventory_instance.set_pos(Vector2(97, 245))
 		new_inventory_instance.setType(self.get_parent().getType())  

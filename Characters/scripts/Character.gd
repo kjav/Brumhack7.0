@@ -18,17 +18,17 @@ func turn():
 
 func attack(character):
 	if alive:
-		Audio.playHit()
 		if (character == GameData.player) or (self == GameData.player):
+			Audio.playHit()
 			character.takeDamage(1)
 
 func takeDamage(damage):
 	self.health -= damage
 	if self.health <= 0:
 		if(self == GameData.player):
-			Audio.play("Player_Death", true)
+			Audio.playSoundEffect("Player_Death", true)
 		else:
-			Audio.play("Enemy_Death", true)
+			Audio.playSoundEffect("Enemy_Death", true)
 		GameData.characters.erase(self)
 		# self.hide()
 		# self.queue_free()

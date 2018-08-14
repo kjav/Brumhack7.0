@@ -15,16 +15,16 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = -548.0
-margin/top = 0.0
+margin/top = 4.0
 margin/right = -276.0
-margin/bottom = 160.0
+margin/bottom = 164.0
 texture = ExtResource( 1 )
 stretch_mode = 0
 
 [node name="StartButton" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 540, 1100 )
-text = "Play"
+text = "Start"
 scene = ExtResource( 3 )
 
 [node name="Node2D" parent="." instance=ExtResource( 2 )]

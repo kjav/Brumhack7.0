@@ -8,7 +8,7 @@ class CookedSteak extends "Item.gd":
 		useSound = "Food_Use"
 	
 	func onUse():
-		Audio.play(useSound, true)
+		Audio.playSoundEffect(useSound, true)
 		GameData.player.heal(2)
 		GameData.foods.remove(GameData.foods.find(self))
 		
