@@ -11,14 +11,20 @@ var maxHealth
 var weapons = preload("res://Items/scripts/Weapons.gd")
 var primaryWeapon = weapons.BasicSword.new()
 var secondaryWeapon = weapons.BasicShield.new()
+var swipe_funcref
 
 func _ready():
 	set_process(true)
-	EventListener.listen("SwipeCommand", funcref(self, "swiped"))
+	swipe_funcref = funcref(self, "swiped")
+	EventListener.listen("SwipeCommand", swipe_funcref)
 	maxHealth = health
 	GameData.player = self
 	GameData.characters.append(self)
 	self.frames = load("res://assets/SpriteFrames/" + GameData.chosen_player + ".tres")
+
+func _exit_tree():
+	EventListener.ignore("SwipeCommand", swipe_funcref)
+	GameData.reset()
 
 func swapWeapons():
 	var temp = primaryWeapon

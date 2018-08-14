@@ -82,3 +82,12 @@ func closestEnemy():
 func walkable(x, y):
 	print("In walkable in GameData.gd")
 	return tilemap.walkable(x, y)
+
+func reset():
+	var potions = []
+	var foods = []
+	var spells = []
+	var tilemap = null
+	var player = null
+	var characters = []
+	var placedItems = []
