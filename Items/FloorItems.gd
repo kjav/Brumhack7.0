@@ -11,7 +11,6 @@ func setupConnection():
 
 func remove(item):
 	for i in get_children(): 
-		#might get wrong one if two of same type in the same place
 		if (i.texture == item.texture and i.get_pos() == item.pos + Vector2(64,64)):
 			i.hide()
 			i.queue_free()

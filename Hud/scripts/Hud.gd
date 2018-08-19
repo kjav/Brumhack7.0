@@ -30,7 +30,6 @@ func PlayerWeaponChanged(slot, weapon):
 	selectedSlot.setIconTexture(weapon.texture)
 
 func PlayerHealthChanged(change, value):
-	print("hp changed")
 	for child in get_node("HudCanvasLayer/HealthBar").get_children():
 		child.queue_free()
 		child.hide()
@@ -50,3 +49,15 @@ func PlayerHealthChanged(change, value):
 
 func _on_Player_healthChanged( change, value ):
 	get_node("HudCanvasLayer/EventMessageHolder")._on_Player_healthChanged(change, value);
+
+func _on_Player_itemPickedUp( item ):
+	get_node("HudCanvasLayer/EventMessageHolder")._on_Player_itemPickedUp(item);
+
+func _on_Player_weaponChanged( slot, weapon ):
+	get_node("HudCanvasLayer/EventMessageHolder")._on_Player_weaponChanged(slot, weapon);
+
+func _on_Player_playerAttack( character, amount ):
+	get_node("HudCanvasLayer/EventMessageHolder")._on_Player_playerAttack(character, amount);
+
+func _on_Enemy_attack( character, amount ):
+	get_node("HudCanvasLayer/EventMessageHolder")._on_Enemy_attack(character, amount);

@@ -4,6 +4,7 @@ signal healthChanged(change, value)
 signal weaponChanged(slot, weapon)
 signal itemPickedUp(item)
 signal playerMove(pos)
+signal playerAttack(character, amount)
 
 var time_elapsed = 0
 var attack
@@ -11,6 +12,7 @@ var maxHealth
 var weapons = preload("res://Items/scripts/Weapons.gd")
 var primaryWeapon = weapons.BasicSword.new()
 var secondaryWeapon = weapons.BasicShield.new()
+var name = 'Player'
 
 func _ready():
 	set_process(true)
@@ -52,6 +54,7 @@ func swiped(direction):
 
 func attack(character):
 	if alive:
+		emit_signal("playerAttack", character, primaryWeapon.damage)
 		Audio.playHit()
 		character.takeDamage(primaryWeapon.damage)
 
