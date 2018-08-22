@@ -1,11 +1,17 @@
 extends "Character.gd"
 
 var attack
+var name = 'Bat'
+signal attack(character, amount)
 
 func _ready():
 	set_process(true)
 	GameData.characters.append(self)
 
+func attack(character):
+	emit_signal("attack", self, 1);
+	.attack(character);
+	
 func turn():
 	var pos = original_pos
 	pos.x = int(pos.x / 128)
