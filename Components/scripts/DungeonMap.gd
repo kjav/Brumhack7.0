@@ -5,71 +5,22 @@ export(int) var bottom_z_index = 0
 export(int) var top_z_index = 2
 export(int, "Basic Dungeon", "Maze Dungeon") var map_type = 0 setget set_map_type, get_map_type
 
+var TestMap = load("res://Components/scripts/TestMap.gd")
+
 var not_walkable = [-1, 6, 13, 21, 22, 23, 25, 26, 27, 28, 30, 32, 33, 34, 35]
 var Pathfinder
 var points = {}
 var ids = {}
 var map = null
 
-class Map:
-	var tiles = []
-	func _init(width, height, type):
-		if type == "DungeonMap":
-			for i in range(0, 102):
-				tiles.append([])
-				for j in range(0, width):
-					tiles[i].append(0)
-			for i in range(102, 103):
-				tiles.append([])
-				for j in range(0, 100):
-					tiles[i].append(0)
-				for j in range(100, 105):
-					tiles[i].append(6)
-				for j in range(105, 106):
-					tiles[i].append(0)
-				for j in range(106, 113):
-					tiles[i].append(6)
-				for j in range(113, width):
-					tiles[i].append(0)
-			for i in range(103, 112):
-				tiles.append([])
-				for j in range(0, 100):
-					tiles[i].append(0)
-				for j in range(100, 101):
-					tiles[i].append(6)
-				for j in range(101, 112):
-					tiles[i].append(0)
-				for j in range(112, 113):
-					tiles[i].append(6)
-				for j in range(110, width):
-					tiles[i].append(0)
-			for i in range(112, 113):
-				tiles.append([])
-				for j in range(0, 100):
-					tiles[i].append(0)
-				for j in range(100, 113):
-					tiles[i].append(6)
-				for j in range(113, width):
-					tiles[i].append(0)
-			for i in range(113, height):
-				tiles.append([])
-				for j in range(0, width):
-					tiles[i].append(0)
-		elif type == "MazeMap":
-			var cell_type = 1
-			for i in range(0, height):
-				tiles.append([])
-				for j in range(0, width):
-					tiles[i].append(cell_type)
-
 var top_layer_tiles = []
 
 func _ready():
+	map = TestMap.new()
 	set_map_type(GameData.chosen_map)
 
 func set_map_type(type):
 	if has_node("BottomTileMap"):
-		map = Map.new(200, 200, type)
 		Pathfinder = AStar.new()
 		GameData.tilemap = self
 		

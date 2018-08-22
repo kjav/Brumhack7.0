@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=1]
+[gd_scene load_steps=40 format=1]
 
 [ext_resource path="res://assets/floor_tiles/Tile1.png" type="Texture" id=1]
 [ext_resource path="res://assets/floor_tiles/Tile1_under_wall.png" type="Texture" id=2]
@@ -38,6 +38,7 @@
 [ext_resource path="res://assets/floor_tiles/Tile6_left_wall.png" type="Texture" id=36]
 [ext_resource path="res://assets/wall_middle_free.png" type="Texture" id=37]
 [ext_resource path="res://assets/wall_middle.png" type="Texture" id=38]
+[ext_resource path="res://assets/floor_tiles/Tile1_over_corner_bottomrightleft.png" type="Texture" id=39]
 
 [node name="Node2D" type="Node2D"]
 
@@ -340,6 +341,14 @@ region_rect = Rect2( 0, 0, 32, 32 )
 
 transform/pos = Vector2( 32, 224 )
 texture = ExtResource( 38 )
+centered = false
+region = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="Floor1_over_corner_bottomrightleft" type="Sprite" parent="."]
+
+transform/pos = Vector2( 128, 288 )
+texture = ExtResource( 39 )
 centered = false
 region = true
 region_rect = Rect2( 0, 0, 32, 32 )
