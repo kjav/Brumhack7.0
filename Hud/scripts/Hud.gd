@@ -44,16 +44,4 @@ func PlayerHealthChanged(change, value):
 			new_node.setType("Empty")
 		
 		get_node("HudCanvasLayer/HealthBar").add_child(new_node)
-		
 
-
-func _on_Player_itemPickedUp( item ):
-	get_node("HudCanvasLayer/EventMessageHolder")._on_Player_itemPickedUp(item);
-func _on_Player_weaponChanged( slot, weapon ):
-	get_node("HudCanvasLayer/EventMessageHolder")._on_Player_weaponChanged(slot, weapon);
-func _on_Player_playerAttack( character, amount ):
-	get_node("HudCanvasLayer/EventMessageHolder")._on_Player_playerAttack(character, amount);
-func _on_Enemy_attack( character, amount ):
-	get_node("HudCanvasLayer/EventMessageHolder")._on_Enemy_attack(character, amount);
-func _on_Player_healthChanged( change, value ):
-	get_node("HudCanvasLayer/EventMessageHolder")._on_Player_healthChanged(change, value);
