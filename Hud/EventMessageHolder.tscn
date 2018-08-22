@@ -6,6 +6,4 @@
 
 script/script = ExtResource( 1 )
 
-[node name="Timers" type="Node" parent="."]
-
 

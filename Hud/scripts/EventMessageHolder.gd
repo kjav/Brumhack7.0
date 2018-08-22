@@ -23,32 +23,37 @@ func _on_Player_playerAttack( character, amount ):
 func _on_Enemy_attack( character, amount ):
 	addMessage('A ' + character.name + ' hurt you: ' + str(amount) + '.');	
 
-func _on_Timer_timeout():
-	var child = self.get_child(1);
-	var height = child.get_height();
-	child._on_Timer_timeout();
-	self.remove_child(child);
-	#does this leave the timer alive? or does oneshot mean it removes
-	reposition(height);
-	
+func _on_Timer_timeout(node):
+	removeChild(node);
 
-func addMessage(text):
+func createEventMessageNode(y_pos, text):
 	var instance = EventMessage.instance();
-	var timer = Timer.new();
-	timer.set_wait_time(5);
-	timer.connect("timeout", self, "_on_Timer_timeout");
-	timer.start();
-	self.get_child(0).add_child(timer);
-	var y_pos = 0;
-	if(self.get_child_count() > 5):
-		reposition(self.get_child(1).get_height());
-		self.remove_child(1);
-	elif(self.get_child_count() > 1):
-		y_pos = self.get_child(self.get_child_count()-1).get_pos().y;
-		y_pos += self.get_child(self.get_child_count()-1).get_height();
 	instance.set_pos(Vector2(0, y_pos));
 	instance.set_text(text);
-	self.add_child(instance);
+	instance.connect("timeout", self, "on_Timer_timeout");
+	return instance;
+
+func addMessage(text):
+	var y_pos = 0;
+	print ("number " + str(self.get_child_count()));
+	#this number should be one less than wanted
+	if(self.get_child_count() > 1):
+		removeChild(0);
+	if(self.get_child_count() > 0):
+		y_pos = getLastYPosition();
+	self.add_child(createEventMessageNode(y_pos, text));
+
+func getLastYPosition():
+	var y_pos = self.get_child(self.get_child_count()-1).get_pos().y;
+	y_pos += self.get_child(self.get_child_count()-1).get_height();
+	return y_pos;
+
+func removeChild(child):
+	if (TYPE_INT == typeof(child)):
+		child = self.get_child(child)
+	child.remove();
+	self.remove_child(child);
+	reposition(-child.get_height());
 
 func reposition(height):
 	for item in self.get_children():
