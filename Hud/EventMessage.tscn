@@ -31,7 +31,7 @@ max_lines_visible = -1
 [node name="Timer" type="Timer" parent="."]
 
 process_mode = 1
-wait_time = 100.0
+wait_time = 8.0
 one_shot = false
 autostart = true
 

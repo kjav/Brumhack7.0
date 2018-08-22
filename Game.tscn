@@ -97,6 +97,6 @@ debug_mode = false
 
 [connection signal="attack" from="Bat" to="HudNode" method="_on_Enemy_attack"]
 
-[connection signal="attack" from="Bat2" to="." method="_on_Enemy_attack"]
+[connection signal="attack" from="Bat2" to="HudNode" method="_on_Enemy_attack"]
 
 

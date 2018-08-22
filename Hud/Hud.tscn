@@ -97,4 +97,6 @@ script/script = ExtResource( 7 )
 
 [node name="EventMessageHolder" parent="HudCanvasLayer" instance=ExtResource( 8 )]
 
+transform/pos = Vector2( 390.218, 115.807 )
+
 

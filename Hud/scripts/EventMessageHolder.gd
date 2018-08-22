@@ -37,7 +37,7 @@ func addMessage(text):
 	var y_pos = 0;
 	print ("number " + str(self.get_child_count()));
 	#this number should be one less than wanted
-	if(self.get_child_count() > 1):
+	if(self.get_child_count() > 4):
 		removeChild(0);
 	if(self.get_child_count() > 0):
 		y_pos = getLastYPosition();
