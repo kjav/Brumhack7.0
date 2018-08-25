@@ -87,4 +87,16 @@ maximum_points = -1
 pattern_detection_score_threshold = 80
 debug_mode = false
 
+[connection signal="healthChanged" from="Player" to="HudNode" method="_on_Player_healthChanged"]
+
+[connection signal="itemPickedUp" from="Player" to="HudNode" method="_on_Player_itemPickedUp"]
+
+[connection signal="playerAttack" from="Player" to="HudNode" method="_on_Player_playerAttack"]
+
+[connection signal="weaponChanged" from="Player" to="HudNode" method="_on_Player_weaponChanged"]
+
+[connection signal="attack" from="Bat" to="HudNode" method="_on_Enemy_attack"]
+
+[connection signal="attack" from="Bat2" to="HudNode" method="_on_Enemy_attack"]
+
 
