@@ -5,5 +5,5 @@ func _pressed():
 	parent.queue_free()
 	parent.instance.onUse()
 	parent.hide()
-	parent.get_parent().hideMenu("item used")
+	parent.get_parent().selectItem(parent)
 	#needs to remove from gamedata list

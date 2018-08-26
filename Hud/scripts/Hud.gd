@@ -13,7 +13,17 @@ func _ready():
 	GameData.player.connect("healthChanged", self, "PlayerHealthChanged")
 	GameData.player.connect("weaponChanged", self, "PlayerWeaponChanged")
 	GameData.player.connect("playerMove", self, "CheckFloor")
+	get_node("HudCanvasLayer/SpellInvent/front").connect("InventoryOpened", self, "SpellInventoryOpened")
+	get_node("HudCanvasLayer/PotInvent/front").connect("InventoryOpened", self, "PotInventoryOpened")
+	get_node("HudCanvasLayer/FoodInvent/front").connect("InventoryOpened", self, "FoodInventoryOpened")
 	get_node("HudCanvasLayer/Pickup").hide()
+
+func FoodInventoryOpened(inventory):
+	inventory.connect("ItemUsed", get_node("HudCanvasLayer/EventMessageHolder"), "_on_FoodItem_used")
+func SpellInventoryOpened(inventory):
+	inventory.connect("ItemUsed", get_node("HudCanvasLayer/EventMessageHolder"), "_on_SpellItem_used")
+func PotInventoryOpened(inventory):
+	inventory.connect("ItemUsed", get_node("HudCanvasLayer/EventMessageHolder"), "_on_PotItem_used")
 
 func CheckFloor(pos):
 	if GameData.itemAtPos(pos):

@@ -7,7 +7,7 @@
 
 script/source = "
 extends Node2D
-
+signal ItemUsed(item)
 export(int, \"Potion\", \"Food\", \"Spell\") var type setget setType, getType
 
 const InventoryItem = preload(\"res://Hud/InventoryItem.tscn\")
@@ -38,6 +38,10 @@ func populateInventory():
 func setType(newType):
 	if typeof(newType) == TYPE_STRING:
 		type = newType
+
+func selectItem(item):
+	emit_signal(\"ItemUsed\", item);
+	hideMenu(\"item used\");
 
 func hideMenu(event):
 	Audio.playSoundEffect(\"Inventory_Close\", false)

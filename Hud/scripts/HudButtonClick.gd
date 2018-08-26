@@ -1,4 +1,5 @@
 extends TextureButton
+signal InventoryOpened(inventory)
 const InventoryType = preload("res://Hud/Inventory.tscn")
 
 func _pressed():
@@ -13,3 +14,4 @@ func _pressed():
 		get_tree().get_current_scene().get_node("HudNode").get_node("HudCanvasLayer").add_child(new_inventory_instance)
 		new_inventory_instance.populateInventory()
 		get_tree().get_current_scene().get_node("HudNode").inventoryOpen = true
+		emit_signal("InventoryOpened", get_tree().get_current_scene().get_node("HudNode").get_node("HudCanvasLayer").get_node("Inventory"))

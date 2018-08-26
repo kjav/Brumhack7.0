@@ -21,10 +21,22 @@ func _on_Player_playerAttack( character, amount ):
 	addMessage('You hurt a ' + character.name + ': ' + str(amount) + '.');
 
 func _on_Enemy_attack( character, amount ):
-	addMessage('A ' + character.name + ' hurt you: ' + str(amount) + '.');	
+	addMessage('A ' + character.name + ' hurt you: ' + str(amount) + '.');
 
 func _on_Timer_timeout(node):
 	removeChild(node);
+
+func _on_FoodItem_used(item):
+	addItemMessage(item, "You ate a ");
+	
+func _on_PotItem_used(item):
+	addItemMessage(item, "You drank a ");
+	
+func _on_SpellItem_used(item):
+	addItemMessage(item, "You cast a ");
+
+func addItemMessage(item, messagePretext):
+	addMessage(messagePretext + str(item.getInstance().name) + '.');
 
 func createEventMessageNode(y_pos, text):
 	var instance = EventMessage.instance();
