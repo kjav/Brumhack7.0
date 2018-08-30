@@ -163,7 +163,7 @@ func make_walls_consistent():
 				false, true, true,
 				true
 			]):
-				tiles[point.y][point.x] == 29
+				tiles[point.y][point.x] = 29
 			elif match(surroundings, [
 				null, null, null,
 				null, false, null,
