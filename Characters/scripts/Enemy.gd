@@ -1,0 +1,22 @@
+extends "Character.gd"
+
+signal attack(character, amount)
+
+var attack
+var damage = 0
+var name = 'Unset'
+
+
+func _ready():
+	set_process(true)
+	GameData.characters.append(self)
+
+func attack(character):
+	emit_signal("attack", self, damage);
+	.attack(character); #needs to actually use damage.
+	
+func turn():
+	pass
+
+func _process(delta):
+	pass

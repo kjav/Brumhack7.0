@@ -4,7 +4,7 @@
 [ext_resource path="res://Components/DungeonMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Items/FloorItems.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Characters/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Characters/Bat.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Hud/Hud.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/tilesets/Dungeon1Tileset.res" type="TileSet" id=7]
 [ext_resource path="res://lib/swipe-detector/swipe_detector.gd" type="Script" id=8]
@@ -35,17 +35,17 @@ z/z = 1
 
 z/z = 1
 
-[node name="Bat" parent="." instance=ExtResource( 5 )]
+[node name="Enemies" type="Node" parent="."]
 
-transform/pos = Vector2( 1024, 512 )
+[node name="Bat" parent="Enemies" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 512.901, 384.131 )
 transform/scale = Vector2( 0.25, 0.25 )
-z/z = 1
 
-[node name="Bat2" parent="." instance=ExtResource( 5 )]
+[node name="Bat1" parent="Enemies" instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 1024, 768 )
+transform/pos = Vector2( 895.901, 124.131 )
 transform/scale = Vector2( 0.25, 0.25 )
-z/z = 1
 
 [node name="HudNode" parent="." instance=ExtResource( 6 )]
 
@@ -94,9 +94,5 @@ debug_mode = false
 [connection signal="playerAttack" from="Player" to="HudNode" method="_on_Player_playerAttack"]
 
 [connection signal="weaponChanged" from="Player" to="HudNode" method="_on_Player_weaponChanged"]
-
-[connection signal="attack" from="Bat" to="HudNode" method="_on_Enemy_attack"]
-
-[connection signal="attack" from="Bat2" to="HudNode" method="_on_Enemy_attack"]
 
 
