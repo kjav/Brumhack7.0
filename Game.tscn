@@ -37,7 +37,7 @@ z/z = 1
 
 [node name="Bat" parent="." instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 1024, 512 )
+transform/pos = Vector2( 640, 640 )
 transform/scale = Vector2( 0.25, 0.25 )
 z/z = 1
 
@@ -94,9 +94,5 @@ debug_mode = false
 [connection signal="playerAttack" from="Player" to="HudNode" method="_on_Player_playerAttack"]
 
 [connection signal="weaponChanged" from="Player" to="HudNode" method="_on_Player_weaponChanged"]
-
-[connection signal="attack" from="Bat" to="HudNode" method="_on_Enemy_attack"]
-
-[connection signal="attack" from="Bat2" to="HudNode" method="_on_Enemy_attack"]
 
 

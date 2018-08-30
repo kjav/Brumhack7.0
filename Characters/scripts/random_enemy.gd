@@ -7,6 +7,7 @@ signal attack(character, amount)
 func _ready():
 	set_process(true)
 	GameData.characters.append(self)
+	print("Ready. pos: ", original_pos)
 
 func attack(character):
 	emit_signal("attack", self, 1);
@@ -14,6 +15,7 @@ func attack(character):
 	
 func turn():
 	var pos = original_pos
+	print("Pos: ", pos)
 	pos.x = int(pos.x / 128)
 	pos.y = int(pos.y / 128)
 	var player_pos = GameData.player.original_pos
@@ -21,6 +23,7 @@ func turn():
 	player_pos.y = int(player_pos.y / 128)
 	if GameData.player.alive and pos.distance_squared_to(player_pos) < 100:
 		# Select movement direction towards player
+		print("Getting next direction...")
 		moving = moveDirection(GameData.tilemap.findNextDirection(pos, player_pos))
 	else:
 		# Select random movement direction

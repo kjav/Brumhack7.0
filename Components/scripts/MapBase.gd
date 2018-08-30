@@ -1,7 +1,8 @@
 var tiles = []
+var changed_tiles = {}
 
 func is_wall(tile):
-	return tile in [6, 13, 21, 28, 30, 32, 33, 34, 35, 39]
+	return tile in [6, 13, 21, 28, 30, 32, 33, 34, 35, 39, 41, 42]
 	
 func _init(width, height):
 	for j in range(0, height):
@@ -17,7 +18,7 @@ func fill(tile):
 
 # Does the 9-tile surrounding area match the template?
 func match(tiles, template):
-	for i in range(0, tiles.size()):
+	for i in range(0, template.size()):
 		if template[i] != null:
 			if tiles[i] != template[i]:
 				return false
@@ -33,7 +34,6 @@ func match_any(tiles, templates):
 # Create a wall between the given points
 func wall(path):
 	var path_size = path.size()
-	var changed_tiles = {}
 	if path_size == 0:
 		return
 	if path_size == 1:
@@ -70,8 +70,15 @@ func wall(path):
 		changed_tiles[point + Vector2(-1, 0)] = true
 		changed_tiles[point + Vector2(0, 1)] = true
 		changed_tiles[point + Vector2(0, -1)] = true
-	# Make walls consistent
-	print(changed_tiles.keys())
+
+func remove_wall(path):
+	for index in range(0, path.size()):
+		var point = path[index]
+		tiles[point.y][point.x] = 0
+		changed_tiles[point] = true
+
+func make_walls_consistent():
+	print("Making walls consistent: ")
 	for point in changed_tiles:
 		# If point in map
 		if true:
@@ -79,7 +86,8 @@ func wall(path):
 			var surroundings = [
 				point + Vector2(-1, -1), point + Vector2(0, -1), point + Vector2(1, -1),
 				point + Vector2(-1, 0), point + Vector2(0, 0), point + Vector2(1, 0),
-				point + Vector2(-1, 1), point + Vector2(0, 1), point + Vector2(1, 1)
+				point + Vector2(-1, 1), point + Vector2(0, 1), point + Vector2(1, 1),
+				point + Vector2(0, 2)
 			]
 			for i in range(0, surroundings.size()):
 				surroundings[i] = is_wall(tiles[surroundings[i].y][surroundings[i].x])
@@ -91,20 +99,27 @@ func wall(path):
 				null, true, null
 			]):
 				tiles[point.y][point.x] = 21
-			
-			# Horizontal wall endings
-			if match(surroundings, [
-				null, false, null,
-				true, true, false,
-				null, false, null
-			]):
-				tiles[point.y][point.x] = 34
 			elif match(surroundings, [
-				null, false, null,
-				false, true, true,
+				null, true, null,
+				false, true, false,
 				null, false, null
 			]):
-				tiles[point.y][point.x] = 32
+				tiles[point.y][point.x] = 42
+			
+			# Horizontal walls
+			if match_any(surroundings, [
+				[
+					null, true, null,
+					true, true, null,
+					false, true, false
+				],
+				[
+					null, true, null,
+					null, true, true,
+					false, true, false
+				]
+			]):
+				tiles[point.y][point.x] = 41
 			
 			# Horizontal wall endings with wall above
 			if match(surroundings, [
@@ -138,22 +153,31 @@ func wall(path):
 			if match(surroundings, [
 				null, null, null,
 				null, false, null,
-				true, true, false
+				true, true, false,
+				true
 			]):
 				tiles[point.y][point.x] = 31
 			elif match(surroundings, [
 				null, null, null,
 				null, false, null,
-				false, true, true
+				false, true, true,
+				true
 			]):
-				tiles[point.y][point.x] = 29
+				tiles[point.y][point.x] == 29
 			elif match(surroundings, [
+				null, null, null,
 				null, false, null,
-				null, false, null,
-				true, true, true
+				null, true, null
 			]):
 				tiles[point.y][point.x] = 14
 			
+			# Above vertical wall
+			if match(surroundings, [
+				null, null, null,
+				null, false, null,
+				false, true, false
+			]):
+				tiles[point.y][point.x] = 40
 			
 			# Horizontal 1 way meets vertical 2 ways
 			if match(surroundings, [
@@ -188,3 +212,4 @@ func wall(path):
 				true, true, true
 			]):
 				tiles[point.y][point.x] = 39
+	changed_tiles = {}

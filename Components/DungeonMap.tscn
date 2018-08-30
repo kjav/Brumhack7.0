@@ -29,6 +29,7 @@ tile_data = IntArray( -6488164, 0, -6488163, 0, -6488162, 0, -6488161, 0, -64881
 
 [node name="TopTileMap" type="TileMap" parent="."]
 
+visibility/visible = false
 transform/scale = Vector2( 4, 4 )
 z/relative = false
 mode = 0

@@ -5,9 +5,10 @@ export(int) var bottom_z_index = 0
 export(int) var top_z_index = 2
 export(int, "Basic Dungeon", "Maze Dungeon") var map_type = 0 setget set_map_type, get_map_type
 
-var TestMap = load("res://Components/scripts/TestMap.gd")
+var TestMap = load("res://Components/scripts/TestMap2.gd")
 
-var not_walkable = [-1, 6, 13, 21, 22, 23, 25, 26, 27, 28, 30, 32, 33, 34, 35]
+var not_walkable = [-1, 6, 13, 21, 22, 23, 25, 26, 27, 28, 30, 32, 33, 34, 35, 39, 41, 42]
+
 var Pathfinder
 var points = {}
 var ids = {}
@@ -16,7 +17,7 @@ var map = null
 var top_layer_tiles = []
 
 func _ready():
-	map = TestMap.new()
+	map = TestMap.new(10)
 	set_map_type(GameData.chosen_map)
 
 func set_map_type(type):
@@ -79,7 +80,11 @@ func findNextDirection(a, b):
 	var a_id = points[a_vec3]
 	var b_id = points[b_vec3]
 	
+	print("Getting id path ", a_vec3, ", ", b_vec3)
+	
 	var id_path = Pathfinder.get_id_path(a_id, b_id)
+	
+	print("Got id path ", a_vec3, ", ", b_vec3, ". Length: ", id_path.size())
 	
 	var direction = Enums.DIRECTION.NONE
 	if id_path.size() > 1:
