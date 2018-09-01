@@ -10,7 +10,7 @@ func _ready():
 	self.name = 'Bat'
 
 func turn():
-	moveDirection(turnBehaviour.getDirection(original_pos, 100))
+	moving = moveDirection(turnBehaviour.getDirection(original_pos, 100))
 
 func _process(delta):
 	var state = processBehaviour.getNewState(get_pos(), original_pos, movement_direction, moving, delta)
