@@ -39,12 +39,7 @@ z/z = 1
 
 [node name="Bat" parent="Enemies" instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 512, 384 )
-transform/scale = Vector2( 0.25, 0.25 )
-
-[node name="Bat1" parent="Enemies" instance=ExtResource( 5 )]
-
-transform/pos = Vector2( 895.901, 124.131 )
+transform/pos = Vector2( 1024, 128 )
 transform/scale = Vector2( 0.25, 0.25 )
 
 [node name="HudNode" parent="." instance=ExtResource( 6 )]
