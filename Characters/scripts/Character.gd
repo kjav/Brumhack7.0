@@ -11,7 +11,8 @@ var strengh = 5
 const Hitmarker = preload("res://Characters/Hitmarker.tscn")
 
 func _ready():
-	pass
+	original_pos = get_pos()
+	target_pos = get_pos()
 
 func turn():
 	pass
