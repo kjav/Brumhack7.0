@@ -7,6 +7,7 @@ var target_pos = get_pos()
 var alive = true
 var health = 3
 var strengh = 5
+var damage = 1
 
 const Hitmarker = preload("res://Characters/Hitmarker.tscn")
 

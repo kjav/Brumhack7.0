@@ -11,3 +11,18 @@ class InRangeMoveToOtherwiseRandom extends Node:
 		else:
 			# Select random movement direction
 			return randi()%5
+
+class InRangeMoveToOtherwiseRandomEveryNTurns extends Node:
+	var turnBehaviour = InRangeMoveToOtherwiseRandom.new()
+	var counter = 0
+	var turnWait = 1
+	
+	func setTurnWait(newTurnWait):
+		turnWait = newTurnWait
+	
+	func getDirection(pos, limit):
+		print(counter % 2)
+		print(counter % turnWait)
+		#if (counter % turnWait == 0):
+		return turnBehaviour.getDirection(pos, limit)
+		counter += 1

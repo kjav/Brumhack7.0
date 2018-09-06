@@ -3,7 +3,6 @@ extends "Character.gd"
 signal attack(character, amount)
 
 var attack
-var damage = 0
 var name = 'Unset'
 
 

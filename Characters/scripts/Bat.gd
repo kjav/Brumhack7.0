@@ -7,6 +7,7 @@ var processBehaviour = Process.StraightTransition.new()
 
 func _ready():
 	self.damage = 1
+	self.health = 3
 	self.name = 'Bat'
 
 func turn():
