@@ -17,11 +17,11 @@ func _ready():
 func turn():
 	pass
 
-func attack(character):
+func attack(character, damage):
 	if alive:
 		if (character == GameData.player) or (self == GameData.player):
 			Audio.playHit()
-			character.takeDamage(1)
+			character.takeDamage(damage)
 
 func takeDamage(damage):
 	self.health -= damage

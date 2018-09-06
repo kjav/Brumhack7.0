@@ -13,7 +13,7 @@ func _ready():
 
 func attack(character):
 	emit_signal("attack", self, damage);
-	.attack(character); #needs to actually use damage.
+	.attack(character, damage);
 	
 func turn():
 	pass

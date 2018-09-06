@@ -10,14 +10,13 @@ func _ready():
 	self.name = 'Baby Ogre'
 
 func turn():
-	if (turnCounter % 2 == 0):
-		moving = moveDirection(turnBehaviour.getDirection(original_pos, 100))
 	turnCounter += 1
+	moving = moveDirection(turnBehaviour.getDirection(original_pos, 100))
 
 func _process(delta):
-	var state = processBehaviour.getNewState(get_pos(), original_pos, movement_direction, moving, delta)
-	if state[0] != null:
-		self.set_pos(state[0])
-	if (self.moving && !state[1]):
-		original_pos = get_pos()
-	self.moving = state[1]
+		var state = processBehaviour.getNewState(get_pos(), original_pos, movement_direction, moving, delta)
+		if state[0] != null:
+			self.set_pos(state[0])
+		if (self.moving && !state[1]):
+			original_pos = get_pos()
+		self.moving = state[1]
