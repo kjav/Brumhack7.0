@@ -95,6 +95,5 @@ func moveDirection(direction):
 			movement_direction = direction
 		else:
 			movement_direction = Enums.DIRECTION.NONE
-			moving = false
 		moving = true
 		return true

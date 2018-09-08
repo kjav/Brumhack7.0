@@ -48,7 +48,8 @@ class BehaviourEveryN extends Node:
 		behaviour = newBehaviour
 	
 	func getDirection(pos):
-		counter += 1
+		#todo this needs to be uncommented when stop and start is fixed
+		#counter += 1
 		if (counter % turnWait == 0):
 			return behaviour.getDirection(pos)
 		else:
