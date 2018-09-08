@@ -39,7 +39,7 @@ class InRangeMoveToOtherwiseRandom extends Node:
 class BehaviourEveryN extends Node:
 	var behaviour 
 	var turnWait = 2
-	var counter = 1
+	var counter = 0
 	
 	func setTurnWait(newTurnWait):
 		turnWait = newTurnWait
