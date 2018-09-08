@@ -22,7 +22,7 @@ class InRangeMoveToOtherwiseRandom extends Node:
 		limit = newLimit
 	
 	func getDirection(pos):
-		var divided_pos;
+		var divided_pos = Vector2(0,0)
 		divided_pos.x = int(pos.x / 128)
 		divided_pos.y = int(pos.y / 128)
 		var player_pos = GameData.player.original_pos
@@ -37,9 +37,9 @@ class InRangeMoveToOtherwiseRandom extends Node:
 
 
 class BehaviourEveryN extends Node:
-	var behaviour
-	var turnWait = 1
-	var counter = 0
+	var behaviour 
+	var turnWait = 2
+	var counter = 1
 	
 	func setTurnWait(newTurnWait):
 		turnWait = newTurnWait
@@ -51,27 +51,27 @@ class BehaviourEveryN extends Node:
 		counter += 1
 		if (counter % turnWait == 0):
 			return behaviour.getDirection(pos)
+		else:
+			return Enums.DIRECTION.NONE
 		
 
 class InRangeMoveToOtherwiseRandomEveryNTurns extends Node:
 	var turnBehaviour = InRangeMoveToOtherwiseRandom.new()
 	var behaviourEveryN = BehaviourEveryN.new()
-	var counter = 0
-	var turnWait = 1
+	var turnWait = 2
 	var limit = 100
 	
-	func _ready():
-		BehaviourEveryN.setBehaviour(turnBehaviour)
+	func init():
+		behaviourEveryN.setBehaviour(turnBehaviour)
 	
 	func setTurnWait(newTurnWait):
 		turnWait = newTurnWait
-		BehaviourEveryN.setBehaviour(turnBehaviour)
-		BehaviourEveryN.setTurnWait(turnWait)
+		behaviourEveryN.setTurnWait(turnWait)
 		
 	func setLimit(newLimit):
 		limit = newLimit
 		turnBehaviour.setLimit(limit)
 	
 	func getDirection(pos):
-		return turnBehaviour
+		return behaviourEveryN.getDirection(pos)
 

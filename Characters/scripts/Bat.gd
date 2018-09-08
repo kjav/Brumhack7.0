@@ -9,9 +9,10 @@ func _ready():
 	self.damage = 1
 	self.health = 3
 	self.name = 'Bat'
+	turnBehaviour.setLimit(100)
 
 func turn():
-	moving = moveDirection(turnBehaviour.getDirection(original_pos, 100))
+	moving = moveDirection(turnBehaviour.getDirection(original_pos))
 
 func _process(delta):
 	var state = processBehaviour.getNewState(get_pos(), original_pos, movement_direction, moving, delta)

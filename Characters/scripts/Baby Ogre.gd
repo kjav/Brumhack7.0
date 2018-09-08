@@ -9,9 +9,11 @@ func _ready():
 	self.health = 4
 	self.name = 'Baby Ogre'
 	turnBehaviour.setTurnWait(2)
+	turnBehaviour.setLimit(100)
+	turnBehaviour.init()
 
 func turn():
-	moving = moveDirection(turnBehaviour.getDirection(original_pos, 100))
+	moving = moveDirection(turnBehaviour.getDirection(original_pos))
 
 func _process(delta):
 	var state = processBehaviour.getNewState(get_pos(), original_pos, movement_direction, moving, delta)
