@@ -1,14 +1,16 @@
 var tiles = []
 var changed_tiles = {}
 
+var tree = load("res://Components/scripts/SurroundingsTree.gd").new(10)
+
 func is_wall(tile):
 	return tile in [6, 13, 21, 28, 30, 32, 33, 34, 35, 39, 41, 42]
 	
-func _init(width, height):
+func _init(width, height, initial_tile=-1):
 	for j in range(0, height):
 		tiles.push_back([])
 		for i in range(0, width):
-			tiles[j].push_back(-1)
+			tiles[j].push_back(initial_tile)
 
 # Fill the map with 1 tile type
 func fill(tile):
@@ -92,11 +94,24 @@ func make_walls_consistent():
 			for i in range(0, surroundings.size()):
 				surroundings[i] = is_wall(tiles[surroundings[i].y][surroundings[i].x])
 			
+			if match_any(surroundings, [
+				[
+					null, null, null,
+					null, false, null,
+					true, true, null, false
+				],
+				[
+					null, null, null,
+					null, false, null,
+					null, true, true, false
+				]
+			]):
+				tiles[point.y][point.x] = 14
 			# Vertical wall
-			if match(surroundings, [
+			elif match(surroundings, [
 				null, null, null,
 				false, true, false,
-				null, true, null
+				false, true, false
 			]):
 				tiles[point.y][point.x] = 21
 			elif match(surroundings, [
@@ -106,29 +121,14 @@ func make_walls_consistent():
 			]):
 				tiles[point.y][point.x] = 42
 			
-			# Horizontal walls
-			if match_any(surroundings, [
-				[
-					null, true, null,
-					true, true, null,
-					false, true, false
-				],
-				[
-					null, true, null,
-					null, true, true,
-					false, true, false
-				]
-			]):
-				tiles[point.y][point.x] = 41
-			
 			# Horizontal wall endings with wall above
-			if match(surroundings, [
+			elif match(surroundings, [
 				null, true, null,
 				false, true, true,
 				null, false, null
 			]):
 				tiles[point.y][point.x] = 32
-			if match(surroundings, [
+			elif match(surroundings, [
 				null, true, null,
 				true,  true, false,
 				null, false, null
@@ -136,13 +136,13 @@ func make_walls_consistent():
 				tiles[point.y][point.x] = 34 
 			
 			# Horizontal wall endings with wall below
-			if match(surroundings, [
+			elif match(surroundings, [
 				null, false, null,
 				false, true, true,
 				null, true, null
 			]):
 				tiles[point.y][point.x] = 28
-			if match(surroundings, [
+			elif match(surroundings, [
 				null, false, null,
 				true, true, false,
 				null, true, null
@@ -150,7 +150,7 @@ func make_walls_consistent():
 				tiles[point.y][point.x] = 30
 				
 			# Above horizontal wall
-			if match(surroundings, [
+			elif match(surroundings, [
 				null, null, null,
 				null, false, null,
 				true, true, false,
@@ -164,15 +164,9 @@ func make_walls_consistent():
 				true
 			]):
 				tiles[point.y][point.x] = 29
-			elif match(surroundings, [
-				null, null, null,
-				null, false, null,
-				null, true, null
-			]):
-				tiles[point.y][point.x] = 14
 			
 			# Above vertical wall
-			if match(surroundings, [
+			elif match(surroundings, [
 				null, null, null,
 				null, false, null,
 				false, true, false
@@ -180,7 +174,7 @@ func make_walls_consistent():
 				tiles[point.y][point.x] = 40
 			
 			# Horizontal 1 way meets vertical 2 ways
-			if match(surroundings, [
+			elif match(surroundings, [
 				null, true, null,
 				false, true, true,
 				null, true, null
@@ -194,7 +188,7 @@ func make_walls_consistent():
 				tiles[point.y][point.x] = 30
 			
 			# L shapes
-			if match(surroundings, [
+			elif match(surroundings, [
 				null, null, null,
 				false, true, false,
 				false, true, true
@@ -212,4 +206,19 @@ func make_walls_consistent():
 				true, true, true
 			]):
 				tiles[point.y][point.x] = 39
+			
+			# Horizontal walls
+			elif match_any(surroundings, [
+				[
+					null, true, null,
+					true, true, null,
+					false, true, false
+				],
+				[
+					null, true, null,
+					null, true, true,
+					false, true, false
+				]
+			]):
+				tiles[point.y][point.x] = 41
 	changed_tiles = {}
