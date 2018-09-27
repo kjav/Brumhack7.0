@@ -1,7 +1,17 @@
 extends "MapBase.gd"
 
-func _init(n_rooms).(200, 200):
-	fill(0)
+func _init(n_rooms).(200, 200, 0):
+	
+	var tree = load("res://Components/scripts/SurroundingsTree.gd").new(10)
+	print("Tree: ")
+	tree.add_value([
+		null, true, null,
+		false, true, false,
+		null, false, null, null
+	], 42)
+	
+	var start = OS.get_ticks_msec()
+	print("    Fill Time: ", OS.get_ticks_msec() - start)
 	var rooms = [{
 		"name": "main",
 		"extents": [
@@ -19,6 +29,8 @@ func _init(n_rooms).(200, 200):
 	# TODO: Remove
 	seed(13337)
 	
+	var mid_1 = OS.get_ticks_msec()
+
 	var i = 0;
 	while rooms.size() < n_rooms + 1:
 		# Pick a wall
@@ -44,8 +56,10 @@ func _init(n_rooms).(200, 200):
 			for i in range(0, 2):
 				exterior_walls.push_back([room.extents[i], room.extents[i + 1]])
 	
+	var mid_2 = OS.get_ticks_msec()
+	print("    Rooms time: ", OS.get_ticks_msec() - mid_1)
+	
 	make_walls_consistent()
-	#for  i in range(0, n_rooms):
-	#	wall([Vector2(95, 90), Vector2(95, 110), Vector2(115, 110)])
-	#	wall([Vector2(104, 107), Vector2(104, 113)])
-	#	wall([Vector2(95, 104), Vector2(98, 104), Vector2(98, 110)])
+	print("    Make walls consistent time: ", OS.get_ticks_msec() - mid_2)
+	
+	print("Total Time: ", OS.get_ticks_msec() - start)

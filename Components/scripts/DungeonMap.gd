@@ -8,6 +8,7 @@ export(int, "Basic Dungeon", "Maze Dungeon") var map_type = 0 setget set_map_typ
 var TestMap = load("res://Components/scripts/TestMap2.gd")
 
 var not_walkable = [-1, 6, 13, 21, 22, 23, 25, 26, 27, 28, 30, 32, 33, 34, 35, 39, 41, 42]
+var flat_not_walkable = []
 
 var Pathfinder
 var points = {}
@@ -16,12 +17,19 @@ var map = null
 
 var top_layer_tiles = []
 
+var BottomTileMap
+
 func _ready():
+	BottomTileMap = get_node("BottomTileMap")
 	map = TestMap.new(10)
+	for i in range(0, 128):
+		flat_not_walkable.push_back(not_walkable.has(i))
 	set_map_type(GameData.chosen_map)
 
 func set_map_type(type):
 	if has_node("BottomTileMap"):
+		var BTM = self.get_node("BottomTileMap")
+		var TTM = self.get_node("BottomTileMap")
 		Pathfinder = AStar.new()
 		GameData.tilemap = self
 		
@@ -29,16 +37,17 @@ func set_map_type(type):
 		for row in map.tiles:
 			var i = -100
 			for tile in row:
-				self.get_node("BottomTileMap").set_cell(i, j, tile)
+				BTM.set_cell(i, j, tile)
 
 				if tile in top_layer_tiles:
-					self.get_node("TopTileMap").set_cell(i, j, tile)
+					TTM.set_cell(i, j, tile)
 
-				if walkable(i, j):
+				if !flat_not_walkable[tile]:
+					var vec = Vector3(i, j, 0)
 					var id = Pathfinder.get_available_point_id()
-					points[Vector3(i, j, 0)] = id
-					ids[id] = Vector3(i, j, 0)
-					Pathfinder.add_point(id, Vector3(i, j, 0))
+					points[vec] = id
+					ids[id] = vec
+					Pathfinder.add_point(id, vec)
 					var point_left = Vector3(i-1, j, 0)
 					var point_up = Vector3(i, j-1, 0)
 					if points.has(point_left):
@@ -53,8 +62,8 @@ func get_map_type():
 	return map_type
 
 func walkable(x, y):
-	var cell = self.get_node("BottomTileMap").get_cell(x, y)
-	return !~not_walkable.find(cell)
+	var cell = BottomTileMap.get_cell(x, y)
+	return !not_walkable.has(cell)
 
 func findPath(a, b):
 	var a_vec3 = Vector3(a.x, a.y, 0)

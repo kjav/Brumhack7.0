@@ -7,6 +7,136 @@ func is_wall(tile):
 	return tile in [6, 13, 21, 28, 30, 32, 33, 34, 35, 39, 41, 42]
 	
 func _init(width, height, initial_tile=-1):
+	tree.add_value([
+		null, null, null,
+		null, false, null,
+		true, true, null, false
+	], 14)
+	tree.add_value([
+		null, null, null,
+		null, false, null,
+		null, true, true, false
+	], 14)
+	
+	tree.add_value([
+		null, null, null,
+		true, true, true,
+		null, false, null, null
+	], 6)
+	tree.add_value([
+		null, false, null,
+		false, true, true,
+		null, false, null, null
+	], 6)
+	tree.add_value([
+		null, false, null,
+		true, true, false,
+		null, false, null, null
+	], 6)
+	
+	# Vertical wall
+	tree.add_value([
+		null, null, null,
+		false, true, false,
+		false, true, false, null
+	], 21)
+	tree.add_value([
+		null, true, null,
+		false, true, false,
+		null, false, null, null
+	], 42)
+	
+	# Horizontal wall endings with wall above
+	tree.add_value([
+		null, true, null,
+		false, true, true,
+		null, false, null, null
+	], 32)
+	tree.add_value([
+	
+		null, true, null,
+		true,  true, false,
+		null, false, null, null
+	], 34)
+	
+	# Horizontal wall endings with wall below
+	tree.add_value([
+		null, false, null,
+		false, true, true,
+		null, true, null, null
+	], 28)
+	tree.add_value([
+		null, false, null,
+		true, true, false,
+		null, true, null, null
+	], 30)
+		
+	# Above horizontal wall
+	tree.add_value([
+		null, null, null,
+		null, false, null,
+		true, true, false,
+		true
+	], 31)
+	tree.add_value([
+		null, null, null,
+		null, false, null,
+		false, true, true,
+		true
+	], 29)
+	
+	# Above vertical wall
+	tree.add_value([
+		null, null, null,
+		null, false, null,
+		false, true, false, null
+	], 40)
+	
+	# Horizontal 1 way meets vertical 2 ways
+	tree.add_value([
+		null, true, null,
+		false, true, true,
+		null, true, null, null
+	], 28)
+	tree.add_value([
+		null, true, null,
+		true, true, false,
+		null, true, null, null
+	], 30)
+	
+	# L shapes
+	tree.add_value([
+		null, null, null,
+		false, true, false,
+		false, true, true, null
+	], 33)
+	tree.add_value([
+		null, null, null,
+		false, true, false,
+		true, true, false, null
+	], 35)
+	tree.add_value([
+		null, null, null,
+		false, true, false,
+		true, true, true, null
+	], 39)
+	
+	# Horizontal walls
+	tree.add_value([
+		null, true, null,
+		true, true, false,
+		false, true, false, null
+	], 30)
+	tree.add_value([
+		null, true, null,
+		false, true, true,
+		false, true, false, null
+	], 28)
+	tree.add_value([
+		null, true, null,
+		true, true, true,
+		false, true, false, null
+	], 41)
 	for j in range(0, height):
 		tiles.push_back([])
 		for i in range(0, width):
@@ -33,6 +163,16 @@ func match_any(tiles, templates):
 			return true
 	return false
 
+var up = Vector2(0, -1)
+var down = Vector2(0, 1)
+var left = Vector2(-1, 0)
+var right = Vector2(1, 0)
+var upleft = Vector2(-1, -1)
+var upright = Vector2(1, -1)
+var downleft = Vector2(-1, 1)
+var downright = Vector2(1, 1)
+var zero = Vector2(0, 0)
+var downdown = Vector2(0, 2)
 # Create a wall between the given points
 func wall(path):
 	var path_size = path.size()
@@ -60,18 +200,18 @@ func wall(path):
 			while point_a != point_b:
 				tiles[point_a.y][point_a.x]  = 6
 				changed_tiles[point_a] = true
-				changed_tiles[point_a + Vector2(1, 0)] = true
-				changed_tiles[point_a + Vector2(-1, 0)] = true
-				changed_tiles[point_a + Vector2(0, 1)] = true
-				changed_tiles[point_a + Vector2(0, -1)] = true
+				changed_tiles[point_a + right] = true
+				changed_tiles[point_a + left] = true
+				changed_tiles[point_a + down] = true
+				changed_tiles[point_a + up] = true
 				point_a += move
 		var point = path[-1]
 		tiles[point.y][point.x] = 6
 		changed_tiles[point] = true
-		changed_tiles[point + Vector2(1, 0)] = true
-		changed_tiles[point + Vector2(-1, 0)] = true
-		changed_tiles[point + Vector2(0, 1)] = true
-		changed_tiles[point + Vector2(0, -1)] = true
+		changed_tiles[point + right] = true
+		changed_tiles[point + left] = true
+		changed_tiles[point + down] = true
+		changed_tiles[point + up] = true
 
 func remove_wall(path):
 	for index in range(0, path.size()):
@@ -86,139 +226,12 @@ func make_walls_consistent():
 		if true:
 			# Get the 9 tiles affecting the display of this tile
 			var surroundings = [
-				point + Vector2(-1, -1), point + Vector2(0, -1), point + Vector2(1, -1),
-				point + Vector2(-1, 0), point + Vector2(0, 0), point + Vector2(1, 0),
-				point + Vector2(-1, 1), point + Vector2(0, 1), point + Vector2(1, 1),
-				point + Vector2(0, 2)
+				point + upleft, point + up, point + upright,
+				point + left, point + zero, point + right,
+				point + downleft, point + down, point + downright,
+				point + downdown
 			]
 			for i in range(0, surroundings.size()):
 				surroundings[i] = is_wall(tiles[surroundings[i].y][surroundings[i].x])
-			
-			if match_any(surroundings, [
-				[
-					null, null, null,
-					null, false, null,
-					true, true, null, false
-				],
-				[
-					null, null, null,
-					null, false, null,
-					null, true, true, false
-				]
-			]):
-				tiles[point.y][point.x] = 14
-			# Vertical wall
-			elif match(surroundings, [
-				null, null, null,
-				false, true, false,
-				false, true, false
-			]):
-				tiles[point.y][point.x] = 21
-			elif match(surroundings, [
-				null, true, null,
-				false, true, false,
-				null, false, null
-			]):
-				tiles[point.y][point.x] = 42
-			
-			# Horizontal wall endings with wall above
-			elif match(surroundings, [
-				null, true, null,
-				false, true, true,
-				null, false, null
-			]):
-				tiles[point.y][point.x] = 32
-			elif match(surroundings, [
-				null, true, null,
-				true,  true, false,
-				null, false, null
-			]):
-				tiles[point.y][point.x] = 34 
-			
-			# Horizontal wall endings with wall below
-			elif match(surroundings, [
-				null, false, null,
-				false, true, true,
-				null, true, null
-			]):
-				tiles[point.y][point.x] = 28
-			elif match(surroundings, [
-				null, false, null,
-				true, true, false,
-				null, true, null
-			]):
-				tiles[point.y][point.x] = 30
-				
-			# Above horizontal wall
-			elif match(surroundings, [
-				null, null, null,
-				null, false, null,
-				true, true, false,
-				true
-			]):
-				tiles[point.y][point.x] = 31
-			elif match(surroundings, [
-				null, null, null,
-				null, false, null,
-				false, true, true,
-				true
-			]):
-				tiles[point.y][point.x] = 29
-			
-			# Above vertical wall
-			elif match(surroundings, [
-				null, null, null,
-				null, false, null,
-				false, true, false
-			]):
-				tiles[point.y][point.x] = 40
-			
-			# Horizontal 1 way meets vertical 2 ways
-			elif match(surroundings, [
-				null, true, null,
-				false, true, true,
-				null, true, null
-			]):
-				tiles[point.y][point.x] = 28
-			elif match(surroundings, [
-				null, true, null,
-				true, true, false,
-				null, true, null
-			]):
-				tiles[point.y][point.x] = 30
-			
-			# L shapes
-			elif match(surroundings, [
-				null, null, null,
-				false, true, false,
-				false, true, true
-			]):
-				tiles[point.y][point.x] = 33
-			elif match(surroundings, [
-				null, null, null,
-				false, true, false,
-				true, true, false
-			]):
-				tiles[point.y][point.x] = 35
-			elif match(surroundings, [
-				null, null, null,
-				false, true, false,
-				true, true, true
-			]):
-				tiles[point.y][point.x] = 39
-			
-			# Horizontal walls
-			elif match_any(surroundings, [
-				[
-					null, true, null,
-					true, true, null,
-					false, true, false
-				],
-				[
-					null, true, null,
-					null, true, true,
-					false, true, false
-				]
-			]):
-				tiles[point.y][point.x] = 41
+			tiles[point.y][point.x] = tree.get_value(surroundings)
 	changed_tiles = {}
