@@ -61,8 +61,7 @@ func swiped(direction):
 func attack(character):
 	if alive:
 		emit_signal("playerAttack", character, primaryWeapon.damage)
-		Audio.playHit()
-		character.takeDamage(primaryWeapon.damage)
+		.attack(character, primaryWeapon.damage)
 
 func _process(delta):
 	if moving:
