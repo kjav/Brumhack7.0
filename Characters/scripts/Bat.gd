@@ -20,4 +20,5 @@ func _process(delta):
 		self.set_pos(state[0])
 	if (self.moving && !state[1]):
 		original_pos = get_pos()
-	self.moving = state[1]
+	if state[1] != null:
+		self.moving = state[1]
