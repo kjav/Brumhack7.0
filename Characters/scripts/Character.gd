@@ -7,6 +7,7 @@ var target_pos = get_pos()
 var alive = true
 var health = 3
 var strengh = 5
+var damage = 1
 
 const Hitmarker = preload("res://Characters/Hitmarker.tscn")
 
@@ -17,11 +18,11 @@ func _ready():
 func turn():
 	pass
 
-func attack(character):
+func attack(character, damage):
 	if alive:
 		if (character == GameData.player) or (self == GameData.player):
 			Audio.playHit()
-			character.takeDamage(1)
+			character.takeDamage(damage)
 
 func takeDamage(damage):
 	self.health -= damage
