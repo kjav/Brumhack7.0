@@ -38,7 +38,7 @@ class InRangeMoveToOtherwiseRandom extends Node:
 
 class BehaviourEveryN extends Node:
 	var behaviour 
-	var turnWait = 2
+	var turnWait = 6
 	var counter = 0
 	
 	func setTurnWait(newTurnWait):
@@ -49,8 +49,10 @@ class BehaviourEveryN extends Node:
 	
 	func getDirection(pos):
 		#todo this needs to be uncommented when stop and start is fixed
-		#counter += 1
-		if (counter % turnWait == 0):
+		counter += 1
+		if (counter == 3):
+			var a = 0
+		if (counter % turnWait != 0):
 			return behaviour.getDirection(pos)
 		else:
 			return Enums.DIRECTION.NONE
@@ -59,11 +61,12 @@ class BehaviourEveryN extends Node:
 class InRangeMoveToOtherwiseRandomEveryNTurns extends Node:
 	var turnBehaviour = InRangeMoveToOtherwiseRandom.new()
 	var behaviourEveryN = BehaviourEveryN.new()
-	var turnWait = 2
+	var turnWait = 3
 	var limit = 100
 	
 	func init():
 		behaviourEveryN.setBehaviour(turnBehaviour)
+		behaviourEveryN.setTurnWait(turnWait)
 	
 	func setTurnWait(newTurnWait):
 		turnWait = newTurnWait

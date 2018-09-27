@@ -42,6 +42,7 @@ func takeDamage(damage):
 	self.add_child(newNode)
 
 func faceDirection(direction):
+	#todo, what if direction is null?
 	if alive:
 		if direction == Enums.DIRECTION.UP:
 			set_animation("stand_up")
