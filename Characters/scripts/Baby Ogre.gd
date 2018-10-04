@@ -17,10 +17,11 @@ func turn():
 
 func _process(delta):
 	var state = processBehaviour.getNewState(get_pos(), original_pos, movement_direction, moving, delta)
-	print("self.moving: ")
-	print(self.moving)
-	print("moving: ")
-	print(moving)
+	print(state)
+	print(state[0])
+	print(state[0] != null)
+	print(state[1])
+	print(state[1] != null)
 	if state[0] != null:
 		self.set_pos(state[0])
 	if (self.moving && !state[1]):
