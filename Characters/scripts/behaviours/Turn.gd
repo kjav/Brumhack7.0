@@ -1,10 +1,10 @@
 class MoveTo extends Node:
 	func getDirection(pos):
-		pos.x = int(pos.x / 128)
-		pos.y = int(pos.y / 128)
+		pos.x = int(pos.x / GameData.TileSize)
+		pos.y = int(pos.y / GameData.TileSize)
 		var player_pos = GameData.player.original_pos
-		player_pos.x = int(player_pos.x / 128)
-		player_pos.y = int(player_pos.y / 128)
+		player_pos.x = int(player_pos.x / GameData.TileSize)
+		player_pos.y = int(player_pos.y / GameData.TileSize)
 		return GameData.tilemap.findNextDirection(pos, player_pos) 
 
 class MoveRandom extends Node:
@@ -21,11 +21,11 @@ class InRangeMoveToOtherwiseRandom extends Node:
 	
 	func getDirection(pos):
 		var divided_pos = Vector2(0,0)
-		divided_pos.x = int(pos.x / 128)
-		divided_pos.y = int(pos.y / 128)
+		divided_pos.x = int(pos.x / GameData.TileSize)
+		divided_pos.y = int(pos.y / GameData.TileSize)
 		var player_pos = GameData.player.original_pos
-		player_pos.x = int(player_pos.x / 128)
-		player_pos.y = int(player_pos.y / 128)
+		player_pos.x = int(player_pos.x / GameData.TileSize)
+		player_pos.y = int(player_pos.y / GameData.TileSize)
 		if GameData.player.alive and divided_pos.distance_squared_to(player_pos) < limit:
 			# Select movement direction towards player
 			return moveTo.getDirection(pos)
