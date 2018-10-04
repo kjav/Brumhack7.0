@@ -1,4 +1,3 @@
-
 class MoveTo extends Node:
 	func getDirection(pos):
 		pos.x = int(pos.x / 128)
@@ -6,8 +5,7 @@ class MoveTo extends Node:
 		var player_pos = GameData.player.original_pos
 		player_pos.x = int(player_pos.x / 128)
 		player_pos.y = int(player_pos.y / 128)
-		return GameData.tilemap.findNextDirection(pos, player_pos)
-
+		return GameData.tilemap.findNextDirection(pos, player_pos) 
 
 class MoveRandom extends Node:
 	func getDirection(pos):
@@ -48,10 +46,7 @@ class BehaviourEveryN extends Node:
 		behaviour = newBehaviour
 	
 	func getDirection(pos):
-		#todo this needs to be uncommented when stop and start is fixed
 		counter += 1
-		if (counter == 3):
-			var a = 0
 		if (counter % turnWait != 0):
 			return behaviour.getDirection(pos)
 		else:
@@ -78,4 +73,3 @@ class InRangeMoveToOtherwiseRandomEveryNTurns extends Node:
 	
 	func getDirection(pos):
 		return behaviourEveryN.getDirection(pos)
-

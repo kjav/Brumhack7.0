@@ -11,6 +11,7 @@ var player
 var chosen_map
 var characters = []
 var placedItems = []
+var TileSize = 128;
 
 const PotionClasses = preload("res://Items/scripts/Potions.gd")
 const FoodClasses = preload("res://Items/scripts/Foods.gd")
