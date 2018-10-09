@@ -18,31 +18,29 @@ func _ready():
 func turn():
 	pass
 
-func attack(character, damage):
-	if alive:
-		if (character == GameData.player) or (self == GameData.player):
-			Audio.playHit()
-			character.takeDamage(damage)
+func moveDirection(direction):
+	if (not moving) and alive:
+		original_pos = get_pos()
+		movement_direction = Enums.DIRECTION.NONE
+		if direction != Enums.DIRECTION.NONE:
+			movement_direction = handleMove(direction)
+		moving = true
+		
+		return true
 
-func takeDamage(damage):
-	self.health -= damage
-	if self.health <= 0:
-		if(self == GameData.player):
-			Audio.playSoundEffect("Player_Death", true)
-		else:
-			Audio.playSoundEffect("Enemy_Death", true)
-		GameData.characters.erase(self)
-		# self.hide()
-		# self.queue_free()
-		alive = false
-		set_animation("death")
-	var newNode = Hitmarker.instance()
-	newNode.set_scale(Vector2(1,1) / (7*self.get_scale()) )
-	newNode.setAmount(damage)
-	self.add_child(newNode)
+func handleMove(direction):
+	#think this is why enemies never use stand animation, face direction has no option for direction.none
+	faceDirection(direction)
+	var pos = setTarget(direction)
+	var attack = handleCollisions(pos)
+	if targetWalkable(pos, attack):
+		setWalkAnimation(direction)
+		
+		return direction
+	else:
+		return Enums.DIRECTION.NONE
 
 func faceDirection(direction):
-	#todo, what if direction is null?
 	if alive:
 		if direction == Enums.DIRECTION.UP:
 			set_animation("stand_up")
@@ -53,10 +51,18 @@ func faceDirection(direction):
 		elif direction == Enums.DIRECTION.RIGHT:
 			set_animation("stand_right")
 
-func setTarget(pos, direction):
+func setTarget(direction):
 	var pos = original_pos
-	pos.x = int(pos.x / 128)
-	pos.y = int(pos.y / 128)
+	pos.x = int(pos.x / GameData.TileSize)
+	pos.y = int(pos.y / GameData.TileSize)
+	pos = getNextTargetPos(pos, direction)
+	target_pos = pos
+	target_pos.x *= GameData.TileSize
+	target_pos.y *= GameData.TileSize
+	
+	return pos
+
+func getNextTargetPos(pos, direction):
 	if direction == Enums.DIRECTION.UP:
 		pos.y -= 1
 	elif direction == Enums.DIRECTION.DOWN:
@@ -65,36 +71,58 @@ func setTarget(pos, direction):
 		pos.x -= 1
 	elif direction == Enums.DIRECTION.RIGHT:
 		pos.x += 1
-	target_pos = pos
-	target_pos.x *= 128
-	target_pos.y *= 128
+	
 	return pos
 
-func moveDirection(direction):
-	# If not already moving
-	if (not moving) and alive:
-		original_pos = get_pos()
-		var attack = false
-		faceDirection(direction)
-		var pos = setTarget(pos, direction)
-		var collisions = GameData.charactersAtPos(pos)
-		for i in range(collisions.size()):
+func handleCollisions(pos):
+	var attack = false
+	var collisions = GameData.charactersAtPos(pos)
+	for i in range(collisions.size()):
 			if not (collisions[i] == self):
-				#should remove some health from them
-				print("Attacked", self, collisions[i])
 				attack(collisions[i])
 				attack = true
-		if  !attack and GameData.walkable(pos.x, pos.y):
-			if direction == Enums.DIRECTION.UP:
-				self.set_animation("walk_up")
-			elif direction == Enums.DIRECTION.DOWN:
-				self.set_animation("walk_down")
-			elif direction == Enums.DIRECTION.LEFT:
-				self.set_animation("walk_left")
-			elif direction == Enums.DIRECTION.RIGHT:
-				self.set_animation("walk_right")
-			movement_direction = direction
-		else:
-			movement_direction = Enums.DIRECTION.NONE
-		moving = true
-		return true
+	
+	return attack
+
+func attack(character, damage):
+	if alive:
+		if (character == GameData.player) or (self == GameData.player):
+			Audio.playHit()
+			character.takeDamage(damage)
+
+func takeDamage(damage):
+	self.health -= damage
+	if self.health <= 0:
+		handleCharacterDeath()
+	createHitmarker()
+
+func handleCharacterDeath():
+	playDeathAudio()
+	GameData.characters.erase(self)
+	alive = false
+	set_animation("death")
+
+func playDeathAudio():
+	if(self == GameData.player):
+		Audio.playSoundEffect("Player_Death", true)
+	else:
+		Audio.playSoundEffect("Enemy_Death", true)
+
+func createHitmarker():
+	var newNode = Hitmarker.instance()
+	newNode.set_scale(Vector2(1,1) / (7*self.get_scale()) )
+	newNode.setAmount(damage)
+	self.add_child(newNode)
+
+func targetWalkable(pos, attack):
+	return !attack and GameData.walkable(pos.x, pos.y)
+
+func setWalkAnimation(direction):
+	if direction == Enums.DIRECTION.UP:
+		self.set_animation("walk_up")
+	elif direction == Enums.DIRECTION.DOWN:
+		self.set_animation("walk_down")
+	elif direction == Enums.DIRECTION.LEFT:
+		self.set_animation("walk_left")
+	elif direction == Enums.DIRECTION.RIGHT:
+		self.set_animation("walk_right")
