@@ -33,10 +33,9 @@ class InRangeMoveToOtherwiseRandom extends Node:
 			# Select random movement direction
 			return random.getDirection(pos)
 
-
 class BehaviourEveryN extends Node:
 	var behaviour 
-	var turnWait = 6
+	var turnWait = 2
 	var counter = 0
 	
 	func setTurnWait(newTurnWait):
@@ -47,16 +46,15 @@ class BehaviourEveryN extends Node:
 	
 	func getDirection(pos):
 		counter += 1
-		if (counter % turnWait != 0):
+		if (counter % (turnWait+1) == 0):
 			return behaviour.getDirection(pos)
 		else:
 			return Enums.DIRECTION.NONE
-		
 
 class InRangeMoveToOtherwiseRandomEveryNTurns extends Node:
 	var turnBehaviour = InRangeMoveToOtherwiseRandom.new()
 	var behaviourEveryN = BehaviourEveryN.new()
-	var turnWait = 3
+	var turnWait = 2
 	var limit = 100
 	
 	func init():
@@ -73,3 +71,43 @@ class InRangeMoveToOtherwiseRandomEveryNTurns extends Node:
 	
 	func getDirection(pos):
 		return behaviourEveryN.getDirection(pos)
+		
+
+class WaitEveryN extends Node:
+	var behaviour 
+	var waitEvery = 3
+	var counter = 0
+	
+	func setWaitEvery(newWaitEvery):
+		waitEvery = newWaitEvery
+	
+	func setBehaviour(newBehaviour):
+		behaviour = newBehaviour
+	
+	func getDirection(pos):
+		counter += 1
+		if (counter % waitEvery != 0):
+			return behaviour.getDirection(pos)
+		else:
+			return Enums.DIRECTION.NONE
+
+class InRangeMoveToOtherwiseRandomWaitEveryNTurns extends Node:
+	var turnBehaviour = InRangeMoveToOtherwiseRandom.new()
+	var waitEveryN = WaitEveryN.new()
+	var waitEvery = 3
+	var limit = 100
+	
+	func init():
+		waitEveryN.setBehaviour(turnBehaviour)
+		waitEveryN.setWaitEvery(waitEvery)
+	
+	func setWaitEvery(newWaitEvery):
+		waitEvery = newWaitEvery
+		waitEveryN.setWaitEvery(waitEvery)
+		
+	func setLimit(newLimit):
+		limit = newLimit
+		turnBehaviour.setLimit(limit)
+	
+	func getDirection(pos):
+		return waitEveryN.getDirection(pos)

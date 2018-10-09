@@ -1,15 +1,16 @@
 extends "Enemy.gd"
 
 const Turn = preload("res://Characters/scripts/behaviours/Turn.gd")
-var turnBehaviour = Turn.InRangeMoveToOtherwiseRandom.new()
+var turnBehaviour = Turn.InRangeMoveToOtherwiseRandomEveryNTurns.new()
 const Process = preload("res://Characters/scripts/behaviours/_Process.gd")
 var processBehaviour = Process.StraightTransition.new()
-
 func _ready():
-	self.damage = 1
-	self.health = 3
-	self.name = 'Bat'
+	self.damage = 2
+	self.health = 4
+	self.name = 'Baby Ogre'
+	#turnBehaviour.setTurnWait(2)
 	turnBehaviour.setLimit(100)
+	turnBehaviour.init()
 
 func turn():
 	moving = moveDirection(turnBehaviour.getDirection(original_pos))

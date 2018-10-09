@@ -1,0 +1,73 @@
+[gd_scene load_steps=15 format=1]
+
+[ext_resource path="res://assets/tilesets/Ghost/Ghost_Left.png" type="Texture" id=1]
+[ext_resource path="res://assets/tilesets/Ghost/Ghost_Right.png" type="Texture" id=2]
+[ext_resource path="res://assets/tilesets/Ghost/Ghost_Right_1.png" type="Texture" id=3]
+[ext_resource path="res://assets/tilesets/Ghost/Ghost_Left_Up.png" type="Texture" id=4]
+[ext_resource path="res://assets/tilesets/Ghost/Ghost_Left_1.png" type="Texture" id=5]
+[ext_resource path="res://assets/tilesets/Bat/splattersplash_0.png" type="Texture" id=6]
+[ext_resource path="res://assets/tilesets/Bat/splattersplash_1.png" type="Texture" id=7]
+[ext_resource path="res://assets/tilesets/Bat/splattersplash_2.png" type="Texture" id=8]
+[ext_resource path="res://assets/tilesets/Bat/splattersplash_3.png" type="Texture" id=9]
+[ext_resource path="res://assets/tilesets/Bat/splattersplash_4.png" type="Texture" id=10]
+[ext_resource path="res://assets/tilesets/Bat/splattersplash_5.png" type="Texture" id=11]
+[ext_resource path="res://assets/tilesets/Ghost/Ghost_Left_Up_1.png" type="Texture" id=12]
+[ext_resource path="res://Characters/scripts/Ghost.gd" type="Script" id=13]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "stand_down",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "walk_right",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "stand_up",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "walk_left",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": false,
+"name": "death",
+"speed": 14.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "walk_up",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "stand_right",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "stand_left",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "walk_down",
+"speed": 4.0
+} ]
+
+[node name="Sprite" type="AnimatedSprite"]
+
+transform/pos = Vector2( 15.1705, 7.88676 )
+frames = SubResource( 1 )
+animation = "stand_down"
+script/script = ExtResource( 13 )
+
+
