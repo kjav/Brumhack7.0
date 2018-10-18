@@ -73,6 +73,54 @@ class InRangeMoveToOtherwiseRandomEveryNTurns extends Node:
 		return behaviourEveryN.getDirection(pos)
 		
 
+class BehaviourEveryNInvinsibleOnWait extends Node:
+	var behaviour 
+	var turnWait = 2
+	var counter = 0
+	var damageable = true
+	
+	func setTurnWait(newTurnWait):
+		turnWait = newTurnWait
+	
+	func setBehaviour(newBehaviour):
+		behaviour = newBehaviour
+	
+	func getDirection(pos):
+		counter += 1
+		if (counter % (turnWait+1) == 0):
+			damageable = true
+			return behaviour.getDirection(pos)
+		else:
+			damageable = false
+			return Enums.DIRECTION.NONE
+	
+	func getDamageable():
+		return damageable
+
+class InRangeMoveToOtherwiseRandomEveryNTurnsInvinsibleOnWait extends Node:
+	var turnBehaviour = InRangeMoveToOtherwiseRandom.new()
+	var behaviourEveryNInvinsibleOnWait = BehaviourEveryNInvinsibleOnWait.new()
+	var turnWait = 2
+	var limit = 100
+	
+	func init():
+		behaviourEveryNInvinsibleOnWait.setBehaviour(turnBehaviour)
+		behaviourEveryNInvinsibleOnWait.setTurnWait(turnWait)
+	
+	func setTurnWait(newTurnWait):
+		turnWait = newTurnWait
+		behaviourEveryNInvinsibleOnWait.setTurnWait(turnWait)
+		
+	func setLimit(newLimit):
+		limit = newLimit
+		turnBehaviour.setLimit(limit)
+	
+	func getDirection(pos):
+		return behaviourEveryNInvinsibleOnWait.getDirection(pos)
+	
+	func getDamageable():
+		return behaviourEveryNInvinsibleOnWait.getDamageable()
+
 class WaitEveryN extends Node:
 	var behaviour 
 	var waitEvery = 3
@@ -111,3 +159,51 @@ class InRangeMoveToOtherwiseRandomWaitEveryNTurns extends Node:
 	
 	func getDirection(pos):
 		return waitEveryN.getDirection(pos)
+
+class InvincibleWaitEveryN extends Node:
+	var behaviour 
+	var waitEvery = 3
+	var counter = 0
+	var damageable = true
+	
+	func setWaitEvery(newWaitEvery):
+		waitEvery = newWaitEvery
+	
+	func setBehaviour(newBehaviour):
+		behaviour = newBehaviour
+	
+	func getDirection(pos):
+		counter += 1
+		if (counter % waitEvery != 0):
+			damageable = true
+			return behaviour.getDirection(pos)
+		else:
+			damageable = false
+			return Enums.DIRECTION.NONE
+	
+	func getDamageable():
+		return damageable
+
+class InRangeMoveToOtherwiseRandomInvincibleWaitEveryNTurns extends Node:
+	var turnBehaviour = InRangeMoveToOtherwiseRandom.new()
+	var invincibleWaitEveryN = InvincibleWaitEveryN.new()
+	var waitEvery = 3
+	var limit = 100
+	
+	func init():
+		invincibleWaitEveryN.setBehaviour(turnBehaviour)
+		invincibleWaitEveryN.setWaitEvery(waitEvery)
+	
+	func setWaitEvery(newWaitEvery):
+		waitEvery = newWaitEvery
+		invincibleWaitEveryN.setWaitEvery(waitEvery)
+		
+	func setLimit(newLimit):
+		limit = newLimit
+		turnBehaviour.setLimit(limit)
+	
+	func getDirection(pos):
+		return invincibleWaitEveryN.getDirection(pos)
+	
+	func getDamageable():
+		return invincibleWaitEveryN.getDamageable()

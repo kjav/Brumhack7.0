@@ -5,6 +5,7 @@ var movement_direction
 var original_pos = get_pos()
 var target_pos = get_pos()
 var alive = true
+var damageable = true
 var health = 3
 var strengh = 5
 var damage = 1
@@ -87,8 +88,9 @@ func handleCollisions(pos):
 func attack(character, damage):
 	if alive:
 		if (character == GameData.player) or (self == GameData.player):
-			Audio.playHit()
-			character.takeDamage(damage)
+			if (character.damageable):
+				Audio.playHit()
+				character.takeDamage(damage)
 
 func takeDamage(damage):
 	self.health -= damage
