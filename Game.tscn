@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=12 format=1]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://Components/DungeonMap.tscn" type="PackedScene" id=2]
@@ -7,9 +7,10 @@
 [ext_resource path="res://Characters/Bat.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Characters/BabyOgre.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Characters/Ghost.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Hud/Hud.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/tilesets/Dungeon1Tileset.res" type="TileSet" id=9]
-[ext_resource path="res://lib/swipe-detector/swipe_detector.gd" type="Script" id=10]
+[ext_resource path="res://Environments/Door.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Hud/Hud.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/tilesets/Dungeon1Tileset.res" type="TileSet" id=10]
+[ext_resource path="res://lib/swipe-detector/swipe_detector.gd" type="Script" id=11]
 
 [node name="Node2D" type="Node2D"]
 
@@ -45,7 +46,7 @@ transform/pos = Vector2( 1088, 192 )
 
 [node name="Baby Ogre" parent="Enemies" instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 574.493, 448 )
+transform/pos = Vector2( 448, 448 )
 transform/scale = Vector2( 4, 4 )
 
 [node name="Ghost" parent="Enemies" instance=ExtResource( 7 )]
@@ -53,7 +54,13 @@ transform/scale = Vector2( 4, 4 )
 transform/pos = Vector2( 192, 448 )
 transform/scale = Vector2( 4, 4 )
 
-[node name="HudNode" parent="." instance=ExtResource( 8 )]
+[node name="Environements" type="Node" parent="."]
+
+[node name="Sprite" parent="Environements" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 448, 176 )
+
+[node name="HudNode" parent="." instance=ExtResource( 9 )]
 
 z/z = 3
 
@@ -63,7 +70,7 @@ visibility/visible = false
 transform/pos = Vector2( -0.225952, 0 )
 transform/scale = Vector2( 4, 4 )
 mode = 0
-tile_set = ExtResource( 9 )
+tile_set = ExtResource( 10 )
 cell/size = Vector2( 32, 32 )
 cell/quadrant_size = 16
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -80,7 +87,7 @@ tile_data = IntArray( 65560, 37, 65561, 36, 65562, 36, 65563, 36, 65564, 36, 655
 
 [node name="SwipeNode" type="Node" parent="."]
 
-script/script = ExtResource( 10 )
+script/script = ExtResource( 11 )
 detect_gesture = true
 process_method = null
 distance_threshold = 25.0
