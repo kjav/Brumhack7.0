@@ -14,19 +14,22 @@ class FireSpell extends "Item.gd":
 		if closest_enemy:
 			# Remove potion
 			GameData.spells.remove(GameData.spells.find(self))
-			
-			# Launch a fireball
-			var new_missile = missile.instance()
-			Audio.playSoundEffect("Fireball_Flying")
-			GameData.player.get_parent().add_child(new_missile)
-			new_missile.init(
-				closest_enemy.get_path(),
-				missile_texture,
-				GameData.player.get_pos(),
-				25,
-				10,
-				"Fireball_Hit"
-			)
+			launchFireball(closest_enemy)
+
+
+	func launchFireball(closest_enemy):
+		var new_missile = missile.instance()
+		Audio.playSoundEffect("Fireball_Flying")
+		GameData.player.get_parent().add_child(new_missile)
+		
+		new_missile.init(
+			closest_enemy.get_path(),
+			missile_texture,
+			GameData.player.get_pos(),
+			25,
+			10,
+			"Fireball_Hit"
+		)
 
 	func pickup():
 		#todo, needs to check if inventory is full first
