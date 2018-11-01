@@ -47,8 +47,8 @@ func addSpells(new_spells):
 func charactersAtPos(pos):
 	var collisions = []
 	for i in range(characters.size()):
-		var other_orig_pos = Vector2(characters[i].original_pos.x / 128, characters[i].original_pos.y / 128)
-		var other_target_pos = Vector2(characters[i].target_pos.x / 128, characters[i].target_pos.y / 128)
+		var other_orig_pos = Vector2(characters[i].original_pos.x / GameData.TileSize, characters[i].original_pos.y / GameData.TileSize)
+		var other_target_pos = Vector2(characters[i].target_pos.x / GameData.TileSize, characters[i].target_pos.y / GameData.TileSize)
 		if (other_orig_pos.x == pos.x and other_orig_pos.y == pos.y) or (other_target_pos.x == pos.x and other_target_pos.y == pos.y):
 			collisions.append(characters[i])
 	print(collisions)
@@ -81,7 +81,6 @@ func closestEnemy():
 		return null
 
 func walkable(x, y):
-	print("In walkable in GameData.gd")
 	return tilemap.walkable(x, y)
 
 func reset():
