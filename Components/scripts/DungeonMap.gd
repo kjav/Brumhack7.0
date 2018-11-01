@@ -21,7 +21,7 @@ var BottomTileMap
 
 func _ready():
 	BottomTileMap = get_node("BottomTileMap")
-	map = TestMap.new(10)
+	map = TestMap.new(40)
 	for i in range(0, 128):
 		flat_not_walkable.push_back(not_walkable.has(i))
 	set_map_type(GameData.chosen_map)

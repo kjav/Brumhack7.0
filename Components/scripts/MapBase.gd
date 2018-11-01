@@ -1,12 +1,16 @@
 var tiles = []
+var initial_tile
 var changed_tiles = {}
 
 var tree = load("res://Components/scripts/SurroundingsTree.gd").new(10)
+var Distribution = load("res://Components/Distributions/Distribution.gd")
 
 func is_wall(tile):
 	return tile in [6, 13, 21, 28, 30, 32, 33, 34, 35, 39, 41, 42]
 	
 func _init(width, height, initial_tile=-1):
+	self.initial_tile = initial_tile
+	
 	tree.add_value([
 		null, null, null,
 		null, false, null,
@@ -70,7 +74,7 @@ func _init(width, height, initial_tile=-1):
 		true, true, false,
 		null, true, null, null
 	], 30)
-		
+	
 	# Above horizontal wall
 	tree.add_value([
 		null, null, null,
@@ -133,7 +137,7 @@ func _init(width, height, initial_tile=-1):
 		false, true, false, null
 	], 28)
 	tree.add_value([
-		null, true, null,
+		null, null, null,
 		true, true, true,
 		false, true, false, null
 	], 41)
@@ -219,6 +223,11 @@ func remove_wall(path):
 		tiles[point.y][point.x] = 0
 		changed_tiles[point] = true
 
+func draw_floor(position, extents):
+	for x in range(position.x, position.x + extents.x):
+		for y in range(position.y, position.y + extents.y):
+			tiles[y][x] = 0
+
 func make_walls_consistent():
 	print("Making walls consistent: ")
 	for point in changed_tiles:
@@ -231,7 +240,13 @@ func make_walls_consistent():
 				point + downleft, point + down, point + downright,
 				point + downdown
 			]
+			if point.x == 105 && point.y == 104:
+				print(surroundings)
+			
 			for i in range(0, surroundings.size()):
 				surroundings[i] = is_wall(tiles[surroundings[i].y][surroundings[i].x])
+				
+			if point.x == 105 && point.y == 104:
+				print(surroundings)
 			tiles[point.y][point.x] = tree.get_value(surroundings)
 	changed_tiles = {}

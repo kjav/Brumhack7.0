@@ -37,10 +37,13 @@ func add_value(position, val):
 func get_value(position):
 	var tree_index = 0
 	var index = 0
+	var last_value = null
 	while (2 * tree_index + 1 < tree_array.size()) and (index < position.size()):
 		if position[index]:
 			tree_index = 2 * tree_index + 1
 		else:  
 			tree_index = 2 * tree_index + 2
+		if tree_array[tree_index] != null:
+			last_value = tree_array[tree_index]
 		index += 1
-	return tree_array[tree_index]
+	return last_value
