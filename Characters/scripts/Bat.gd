@@ -4,10 +4,9 @@ const Turn = preload("res://Characters/scripts/behaviours/Turn.gd")
 var turnBehaviour = Turn.InRangeMoveToOtherwiseRandom.new()
 const Process = preload("res://Characters/scripts/behaviours/_Process.gd")
 var processBehaviour = Process.StraightTransition.new()
-
 func _ready():
 	self.damage = 1
-	self.health = 3
+	self.health = 4
 	self.name = 'Bat'
 	turnBehaviour.setLimit(100)
 
@@ -20,4 +19,5 @@ func _process(delta):
 		self.set_pos(state[0])
 	if (self.moving && !state[1]):
 		original_pos = get_pos()
-	self.moving = state[1]
+	if state[1] != null:
+		self.moving = state[1]

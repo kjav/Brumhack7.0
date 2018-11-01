@@ -1,4 +1,3 @@
-tool
 extends Node2D
 
 export(String) var text setget setText, getText
