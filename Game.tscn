@@ -47,12 +47,12 @@ transform/pos = Vector2( 1088, 192 )
 
 [node name="Baby Ogre" parent="Enemies" instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 448, 448 )
+transform/pos = Vector2( 576, 448 )
 transform/scale = Vector2( 4, 4 )
 
 [node name="Ghost" parent="Enemies" instance=ExtResource( 7 )]
 
-transform/pos = Vector2( 192, 448 )
+transform/pos = Vector2( 960, 448 )
 transform/scale = Vector2( 4, 4 )
 
 [node name="Environements" type="Node" parent="."]
