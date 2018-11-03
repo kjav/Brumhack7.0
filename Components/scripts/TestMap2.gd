@@ -2,8 +2,8 @@ extends "MapBase.gd"
 
 var rooms = []
 var exterior_walls = []
-var map_seed = 133412
-
+#var map_seed = 133412
+var map_seed = 133421
 
 func add_room(name, room, wall):
 	var door
@@ -127,7 +127,7 @@ func _init(n_rooms).(200, 200, -1):
 	var mid_2 = OS.get_ticks_msec()
 	print("    Rooms time: ", OS.get_ticks_msec() - mid_1)
 	
-	make_walls_consistent()
+	#make_walls_consistent()
 	print("    Make walls consistent time: ", OS.get_ticks_msec() - mid_2)
 	
 	print("Total Time: ", OS.get_ticks_msec() - start)
