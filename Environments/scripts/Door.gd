@@ -11,15 +11,23 @@ var sideLock = preload("res://assets//floor_tiles/door_side_locks.png")
 
 func setFacing(_facing):
 	if typeof(_facing) == TYPE_STRING:
-		facing = _facing
-		if facing == "Side":
-			self.set_texture(sideDoor)
-			if get_node("Locks") != null:
-				get_node("Locks").set_texture(sideLock)
-		elif facing == "Front":
-			self.set_texture(frontDoor)
-			if get_node("Locks") != null:
-				get_node("Locks").set_texture(frontLock)
+		if changeOfState(facing, _facing):
+			facing = _facing
+			if facing == "Side":
+				self.set_texture(sideDoor)
+				self.set_pos(self.get_pos() + Vector2(0,16))
+					
+				if get_node("Locks") != null:
+					get_node("Locks").set_texture(sideLock)
+			elif facing == "Front":
+				self.set_texture(frontDoor)
+				self.set_pos(self.get_pos() - Vector2(0,16))
+				
+				if get_node("Locks") != null:
+					get_node("Locks").set_texture(frontLock)
+
+func changeOfState(original, new):
+	return original != new
 
 func getFacing():
 	return facing

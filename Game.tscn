@@ -57,7 +57,7 @@ transform/scale = Vector2( 4, 4 )
 
 [node name="Environements" type="Node" parent="."]
 
-[node name="Sprite" parent="Environements" instance=ExtResource( 8 )]
+[node name="Door" parent="Environements" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 448, 176 )
 texture = ExtResource( 9 )

@@ -10,6 +10,7 @@ var chosen_player
 var player
 var chosen_map
 var characters = []
+var environmentObjects = []
 var placedItems = []
 var TileSize = 128;
 
@@ -45,15 +46,20 @@ func addSpells(new_spells):
 		spells.append(spell)
 
 func charactersAtPos(pos):
+	return arrayAtPos(pos, characters)
+
+func environmentObjectAtPos(pos):
+	return arrayAtPos(pos, environmentObjects)
+
+func arrayAtPos(pos, array):
 	var collisions = []
-	for i in range(characters.size()):
-		var other_orig_pos = Vector2(characters[i].original_pos.x / GameData.TileSize, characters[i].original_pos.y / GameData.TileSize)
-		var other_target_pos = Vector2(characters[i].target_pos.x / GameData.TileSize, characters[i].target_pos.y / GameData.TileSize)
+	for i in range(array.size()):
+		var other_orig_pos = Vector2(array[i].original_pos.x / GameData.TileSize, array[i].original_pos.y / GameData.TileSize)
+		var other_target_pos = Vector2(array[i].target_pos.x / GameData.TileSize, array[i].target_pos.y / GameData.TileSize)
 		if (other_orig_pos.x == pos.x and other_orig_pos.y == pos.y) or (other_target_pos.x == pos.x and other_target_pos.y == pos.y):
-			collisions.append(characters[i])
-	print(collisions)
+			collisions.append(array[i])
 	return collisions
-	
+
 func pickedUp(item):
 	placedItems.remove(placedItems.find(item))
 
@@ -89,5 +95,6 @@ func reset():
 	spells = []
 	tilemap = null
 	player = null
+	environmentObjects = []
 	characters = []
 	placedItems = []
