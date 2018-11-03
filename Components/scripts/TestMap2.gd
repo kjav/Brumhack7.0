@@ -1,51 +1,133 @@
 extends "MapBase.gd"
 
-func _init(n_rooms).(200, 200):
-	fill(0)
-	var rooms = [{
-		"name": "main",
-		"extents": [
-			Vector2(103, 104), Vector2(109, 104), Vector2(109, 110), Vector2(103, 110)
-		]
-	}]
+var rooms = []
+var exterior_walls = []
+var map_seed = 133412
+
+
+func add_room(name, room, wall):
+	var door
+	var shared_wall_index = -1
+	var position
+	if wall == null:
+		position = Vector2(103, 104)
+	else:
+		# Get the direction of the wall, with the interior on the right hand side.
+		var wall_direction = (wall[1] - wall[0]).normalized().snapped(Vector2(1, 1))
+		
+		# Choose a door in the wall, excluding the corners of the wall.
+		var door_index = 1 + (randi() % (int((wall[1] - wall[0]).length()) - 2))
+		door = door_index * wall_direction + wall[0]
+		
+		
+		if wall_direction == Vector2(0, 1):
+			position = wall[0]
+			shared_wall_index = 3
+		elif wall_direction == Vector2(-1, 0):
+			position = wall[1]
+			shared_wall_index = 0
+		elif wall_direction == Vector2(0, -1):
+			position = wall[1] - Vector2(room.extents.x - 1, 0)
+			shared_wall_index = 1
+		elif wall_direction == Vector2(1, 0):
+			position = wall[0] - Vector2(0, room.extents.y - 1)
+			shared_wall_index = 2
+		else:
+			print("WARNING: Wall direction not valid!")
+			print(wall_direction)
+			position = wall[0]
+			shared_wall_index = 1
 	
-	wall([Vector2(103, 104), Vector2(109, 104), Vector2(109, 110), Vector2(103, 110), Vector2(103, 104)])
+	# Check if the interior of the room fits on the map
+	for x in range(position.x + 1, position.x + room.extents.x - 2):
+		for y in range(position.y + 1, position.y + room.extents.y - 2):
+			var abc = tiles[y][x]
+			if tiles[y][x] != initial_tile:
+				return false
 	
-	var exterior_walls = []
+	var corners = [
+		position,
+		position + Vector2(room.extents.x - 1, 0),
+		position + room.extents - Vector2(1, 1),
+		position + Vector2(0, room.extents.y - 1)
+	]
 	
+	# Add room to rooms array
+	rooms.push_back({
+		"name": name,
+		"corners": corners
+	})
+	
+	# Draw floor on map
+	draw_floor(position, room.extents)
+	
+	# Draw walls on map
+	wall([corners[0], corners[1], corners[2], corners[3], corners[0]])
+	
+	# Remove the door
+	if door != null:
+		remove_wall([door])
+	
+	# Add exterior walls to walls list, so other rooms can be placed adjacent
 	for i in range(0, 3):
-		exterior_walls.push_back([rooms[0].extents[i], rooms[0].extents[(i + 1) % 4]])
+		if i != shared_wall_index:
+			exterior_walls.push_back([corners[i], corners[(i + 1) % 4]])
 	
-	# TODO: Remove
-	seed(13337)
+	# Room added successfully: return true
+	return true
+
+func _init(n_rooms).(200, 200, -1):
+	seed(map_seed)
+	print("Starting: ")
+	print("\n\n\n\n\n")
+	print("# # ")
+	print("# # ")
+	print("# # ")
+	var DefaultRoom = load("res://Components/Rooms/DefaultRoom.gd").new()
+	var TallRoom = load("res://Components/Rooms/TallRoom.gd").new()
+	var SuperTallRoom = load("res://Components/Rooms/SuperTallRoom.gd").new()
+	var WideRoom = load("res://Components/Rooms/WideRoom.gd").new()
+	var main_room = DefaultRoom.get()
+	print(main_room.extents)
+	print(main_room.npcs)
+	print("# # ")
+	print("# # ")
+	print("# # ")
+	print("\n\n\n\n\n")
+	var tree = load("res://Components/scripts/SurroundingsTree.gd").new(10)
+	print("Tree: ")
+	tree.add_value([
+		null, true, null,
+		false, true, false,
+		null, false, null, null
+	], 42)
 	
+	var start = OS.get_ticks_msec()
+	print("    Fill Time: ", OS.get_ticks_msec() - start)
+	add_room("main", main_room, null)
+	
+	var mid_1 = OS.get_ticks_msec()
+
 	var i = 0;
-	while rooms.size() < n_rooms + 1:
+	var room_distribution = Distribution.new([{"p": 0.3, "value": DefaultRoom}, {"p": 0.3, "value": TallRoom}, {"p": 0.3, "value": WideRoom}, {"p": 0.1, "value": SuperTallRoom}])
+	while rooms.size() < n_rooms:
 		# Pick a wall
 		var wall_index = randi() % exterior_walls.size()
 		var wall = exterior_walls[wall_index]
-		if true:
-			print("Chosen wall: ", wall)
+		print("Chosen wall: ", wall)
+		var room = room_distribution.pick()[0].get()
+		
+		var success = add_room(str(i), room, wall)
+		if success:
 			exterior_walls.remove(wall_index)
-			var wall_direction = (wall[1] - wall[0]).normalized()
-			var out_direction = wall_direction.rotated(PI / 2)
-			var in_direction = wall_direction.rotated(3 * PI / 2)
-			var wall_length = int((wall[1] - wall[0]).length())
-			var joint_index = 1 + (randi() % ( - 2))
-			var joint = joint_index * wall_direction + wall[0]
-			remove_wall([joint, joint])
-			var room = {
-				"name": str(i),
-				"extents": [wall[0], wall[0] + out_direction * 6, wall[1] + out_direction * 6, wall[1]]
-			}
-			wall(room.extents)
-			rooms.push_back(room)
 			i = i + 1
-			for i in range(0, 2):
-				exterior_walls.push_back([room.extents[i], room.extents[i + 1]])
+		else:
+			print("Not successful.")
+	
+	var mid_2 = OS.get_ticks_msec()
+	print("    Rooms time: ", OS.get_ticks_msec() - mid_1)
 	
 	make_walls_consistent()
-	#for  i in range(0, n_rooms):
-	#	wall([Vector2(95, 90), Vector2(95, 110), Vector2(115, 110)])
-	#	wall([Vector2(104, 107), Vector2(104, 113)])
-	#	wall([Vector2(95, 104), Vector2(98, 104), Vector2(98, 110)])
+	print("    Make walls consistent time: ", OS.get_ticks_msec() - mid_2)
+	
+	print("Total Time: ", OS.get_ticks_msec() - start)
