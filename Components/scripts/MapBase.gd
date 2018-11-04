@@ -14,12 +14,12 @@ func _init(width, height, initial_tile=-1):
 	tree.add_value([
 		null, null, null,
 		null, false, null,
-		true, true, null, false
+		true, true, null, null
 	], 14)
 	tree.add_value([
 		null, null, null,
 		null, false, null,
-		null, true, true, false
+		null, true, true, null
 	], 14)
 	
 	tree.add_value([
@@ -141,6 +141,7 @@ func _init(width, height, initial_tile=-1):
 		true, true, true,
 		false, true, false, null
 	], 41)
+	
 	for j in range(0, height):
 		tiles.push_back([])
 		for i in range(0, width):
@@ -177,6 +178,7 @@ var downleft = Vector2(-1, 1)
 var downright = Vector2(1, 1)
 var zero = Vector2(0, 0)
 var downdown = Vector2(0, 2)
+var upup = Vector2(0, -2)
 # Create a wall between the given points
 func wall(path):
 	var path_size = path.size()
@@ -208,6 +210,8 @@ func wall(path):
 				changed_tiles[point_a + left] = true
 				changed_tiles[point_a + down] = true
 				changed_tiles[point_a + up] = true
+				changed_tiles[point_a + upup] = true
+				changed_tiles[point_a + downdown] = true
 				point_a += move
 		var point = path[-1]
 		tiles[point.y][point.x] = 6
@@ -216,6 +220,8 @@ func wall(path):
 		changed_tiles[point + left] = true
 		changed_tiles[point + down] = true
 		changed_tiles[point + up] = true
+		changed_tiles[point + upup] = true
+		changed_tiles[point + downdown] = true
 
 func remove_wall(path):
 	for index in range(0, path.size()):
@@ -233,20 +239,16 @@ func make_walls_consistent():
 	for point in changed_tiles:
 		# If point in map
 		if true:
-			# Get the 9 tiles affecting the display of this tile
+			# Get the 10 tiles affecting the display of this tile
 			var surroundings = [
 				point + upleft, point + up, point + upright,
 				point + left, point + zero, point + right,
 				point + downleft, point + down, point + downright,
 				point + downdown
 			]
-			if point.x == 105 && point.y == 104:
-				print(surroundings)
 			
 			for i in range(0, surroundings.size()):
 				surroundings[i] = is_wall(tiles[surroundings[i].y][surroundings[i].x])
 				
-			if point.x == 105 && point.y == 104:
-				print(surroundings)
 			tiles[point.y][point.x] = tree.get_value(surroundings)
 	changed_tiles = {}
