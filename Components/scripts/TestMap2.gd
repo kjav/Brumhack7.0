@@ -2,8 +2,8 @@ extends "MapBase.gd"
 
 var rooms = []
 var exterior_walls = []
-var map_seed = 133412
-
+#var map_seed = 133412
+var map_seed = 133421
 
 func add_room(name, room, wall):
 	var door
@@ -95,7 +95,6 @@ func _init(n_rooms).(200, 200, -1):
 	print("# # ")
 	print("\n\n\n\n\n")
 	var tree = load("res://Components/scripts/SurroundingsTree.gd").new(10)
-	print("Tree: ")
 	tree.add_value([
 		null, true, null,
 		false, true, false,
@@ -114,15 +113,12 @@ func _init(n_rooms).(200, 200, -1):
 		# Pick a wall
 		var wall_index = randi() % exterior_walls.size()
 		var wall = exterior_walls[wall_index]
-		print("Chosen wall: ", wall)
 		var room = room_distribution.pick()[0].get()
 		
 		var success = add_room(str(i), room, wall)
 		if success:
 			exterior_walls.remove(wall_index)
 			i = i + 1
-		else:
-			print("Not successful.")
 	
 	var mid_2 = OS.get_ticks_msec()
 	print("    Rooms time: ", OS.get_ticks_msec() - mid_1)

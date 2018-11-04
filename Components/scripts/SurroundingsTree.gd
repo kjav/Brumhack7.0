@@ -4,7 +4,7 @@ extends "res://Components/scripts/Tree.gd"
 var tree_array = []
 
 func _init(depth):
-	for i in range(0, pow(2, depth) - 1):
+	for i in range(0, pow(2, depth + 1) - 1):
 		tree_array.push_back(0)
 
 func depths_0(tree_indices):
