@@ -1,5 +1,5 @@
-extends Sprite
+extends AnimatedSprite
 
 func _ready():
-	var parent =get_parent()
+	var parent = get_parent()
 	parent.reset()
