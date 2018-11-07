@@ -76,14 +76,25 @@ func getNextTargetPos(pos, direction):
 	return pos
 
 func handleCollisions(pos):
+	var attack = handleEnemyCollisions(pos)
+	if (!attack):
+		handleEnvironmentCollisions(pos)
+	
+	return attack
+
+func handleEnemyCollisions(pos):
 	var attack = false
 	var collisions = GameData.charactersAtPos(pos)
 	for i in range(collisions.size()):
 			if not (collisions[i] == self):
 				attack(collisions[i])
 				attack = true
-	
 	return attack
+
+func handleEnvironmentCollisions(pos):
+	var collisions = GameData.environmentObjectAtPos(pos)
+	for i in range(collisions.size()):
+		collisions[i].onWalkedInto(self)
 
 func attack(character, damage):
 	if alive:

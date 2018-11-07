@@ -4,6 +4,7 @@ const Turn = preload("res://Characters/scripts/behaviours/Turn.gd")
 var turnBehaviour = Turn.InRangeMoveToOtherwiseRandom.new()
 const Process = preload("res://Characters/scripts/behaviours/_Process.gd")
 var processBehaviour = Process.StraightTransition.new()
+
 func _ready():
 	self.damage = 1
 	self.health = 4

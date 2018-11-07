@@ -46,17 +46,25 @@ func addSpells(new_spells):
 		spells.append(spell)
 
 func charactersAtPos(pos):
-	return arrayAtPos(pos, characters)
+	return arrayAtPosForMoving(pos, characters)
 
-func environmentObjectAtPos(pos):
-	return arrayAtPos(pos, environmentObjects)
-
-func arrayAtPos(pos, array):
+func arrayAtPosForMoving(pos, array):
 	var collisions = []
 	for i in range(array.size()):
 		var other_orig_pos = Vector2(array[i].original_pos.x / GameData.TileSize, array[i].original_pos.y / GameData.TileSize)
 		var other_target_pos = Vector2(array[i].target_pos.x / GameData.TileSize, array[i].target_pos.y / GameData.TileSize)
 		if (other_orig_pos.x == pos.x and other_orig_pos.y == pos.y) or (other_target_pos.x == pos.x and other_target_pos.y == pos.y):
+			collisions.append(array[i])
+	return collisions
+
+func environmentObjectAtPos(pos):
+	return arrayAtPosForStationary(pos, environmentObjects)
+
+func arrayAtPosForStationary(pos, array):
+	var collisions = []
+	for i in range(array.size()):
+		var other_pos = Vector2(array[i].get_pos().x / GameData.TileSize, array[i].get_pos().y / GameData.TileSize)
+		if (other_pos.x == pos.x and other_pos.y == pos.y):
 			collisions.append(array[i])
 	return collisions
 

@@ -1,11 +1,11 @@
 tool
-extends AnimatedSprite
+extends "EnvironmentBase.gd"
 
 export(String, "side", "front") var facing = "front" setget setFacing, getFacing
 export(String, "closed", "open") var state = "closed" setget setState, getState
 export(bool) var locked = true setget setLocked, getLocked
 
-func setDoorAnimation():
+func handleDoorAnimation():
 	self.set_animation(facing + "_" + state)
 
 func changeOfState(original, new):
@@ -19,7 +19,7 @@ func setFacing(_facing):
 				self.set_pos(self.get_pos() + Vector2(0,16))
 			elif facing == "front":
 				self.set_pos(self.get_pos() - Vector2(0,16))
-			setDoorAnimation()
+			handleDoorAnimation()
 			if get_node("Locks") != null:
 				get_node("Locks").set_animation(facing + "_locked")
 
@@ -30,7 +30,7 @@ func setState(_state):
 	if typeof(_state) == TYPE_STRING:
 		if changeOfState(state, _state):
 			state = _state
-			setDoorAnimation()
+			handleDoorAnimation()
 
 func getState():
 	return state
@@ -38,6 +38,7 @@ func getState():
 func setLocked(_locked):
 	if typeof(_locked) == TYPE_BOOL:
 		locked = _locked
+		walkable = !locked
 		if get_node("Locks") != null:
 			get_node("Locks").set_hidden(!locked)
 
@@ -47,3 +48,8 @@ func getLocked():
 func reset():
 	setFacing(facing)
 	setLocked(locked)
+
+func onWalkedInto(character):
+	if walkable:
+		state = "open"
+		handleDoorAnimation()
