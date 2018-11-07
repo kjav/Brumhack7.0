@@ -2,8 +2,6 @@ extends "MapBase.gd"
 
 var rooms = []
 var exterior_walls = []
-#var map_seed = 133412
-var map_seed = 133421
 
 func add_room(name, room, wall):
 	var door
@@ -33,7 +31,7 @@ func add_room(name, room, wall):
 			position = wall[0] - Vector2(0, room.extents.y - 1)
 			shared_wall_index = 2
 		else:
-			print("WARNING: Wall direction not valid!")
+			print("WARNING: Wall direction not valid! Wall direction was set to: ")
 			print(wall_direction)
 			position = wall[0]
 			shared_wall_index = 1
@@ -73,11 +71,15 @@ func add_room(name, room, wall):
 		if i != shared_wall_index:
 			exterior_walls.push_back([corners[i], corners[(i + 1) % 4]])
 	
+	# Add the NPCs to the map
+	for enemy in room.npcs:
+		npcs.push_back({"position": position + Vector2(1, 1), "value": enemy})
+	
 	# Room added successfully: return true
 	return true
 
 func _init(n_rooms).(200, 200, -1):
-	seed(map_seed)
+	seed(13683)
 	print("Starting: ")
 	print("\n\n\n\n\n")
 	print("# # ")
@@ -108,7 +110,12 @@ func _init(n_rooms).(200, 200, -1):
 	var mid_1 = OS.get_ticks_msec()
 
 	var i = 0;
-	var room_distribution = Distribution.new([{"p": 0.3, "value": DefaultRoom}, {"p": 0.3, "value": TallRoom}, {"p": 0.3, "value": WideRoom}, {"p": 0.1, "value": SuperTallRoom}])
+	var room_distribution = Distribution.new([
+		{"p": 0.3, "value": DefaultRoom},
+		{"p": 0.3, "value": TallRoom},
+		{"p": 0.3, "value": WideRoom},
+		{"p": 0.1, "value": SuperTallRoom}
+	])
 	while rooms.size() < n_rooms:
 		# Pick a wall
 		var wall_index = randi() % exterior_walls.size()

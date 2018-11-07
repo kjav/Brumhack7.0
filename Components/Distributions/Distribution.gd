@@ -15,8 +15,8 @@ func _init(elements).(elements):
 			if element.has("p"):
 				element.p = element.p / p_sum
 	elif p_sum < 1:
-		# Add a null element to fill the rest of the [0, 1] probability range.
-		cumulative_elements.push_back({ "p": 1 - p_sum, "value": null })
+		# Add a null element to be picked for the rest of the [0, 1] probability range.
+		cumulative_elements.push_back({ "p": p_sum, "value": null })
 
 func pick():
 	var HIGH_INDEX = cumulative_elements.size() - 1
