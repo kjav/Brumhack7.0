@@ -11,7 +11,6 @@ func _ready():
 	GameData.characters.append(self)
 
 func attack(character):
-	emit_signal("attack", self, damage);
 	.attack(character, damage);
 	
 func turn():
