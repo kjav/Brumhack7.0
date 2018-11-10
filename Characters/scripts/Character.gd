@@ -99,6 +99,7 @@ func handleEnvironmentCollisions(pos):
 func attack(character, damage):
 	if alive:
 		if (character == GameData.player) or (self == GameData.player):
+			emit_signal("attack", self, damage);
 			if (character.damageable):
 				Audio.playHit()
 				character.takeDamage(damage)

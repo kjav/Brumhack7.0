@@ -1,4 +1,5 @@
 var tiles = []
+var npcs = []
 var initial_tile
 var changed_tiles = {}
 
@@ -35,6 +36,11 @@ func _init(width, height, initial_tile=-1):
 	tree.add_value([
 		null, false, null,
 		true, true, false,
+		null, false, null, null
+	], 6)
+	tree.add_value([
+		null, true, null,
+		true, true, true,
 		null, false, null, null
 	], 6)
 	

@@ -8,6 +8,8 @@ export(int, "Basic Dungeon", "Maze Dungeon") var map_type = 0 setget set_map_typ
 var TestMap = load("res://Components/scripts/TestMap2.gd")
 
 var not_walkable = [-1, 6, 13, 21, 22, 23, 25, 26, 27, 28, 30, 32, 33, 34, 35, 39, 41, 42]
+# This array is a boolean array, with elements at positions in the above array
+# set to true, and all other elements false.
 var flat_not_walkable = []
 
 var Pathfinder
@@ -30,6 +32,7 @@ func set_map_type(type):
 	if has_node("BottomTileMap"):
 		var BTM = self.get_node("BottomTileMap")
 		var TTM = self.get_node("BottomTileMap")
+		var Enemies = self.get_node("/root/Node2D/Enemies")
 		Pathfinder = AStar.new()
 		GameData.tilemap = self
 		
@@ -56,6 +59,13 @@ func set_map_type(type):
 						Pathfinder.connect_points(id, points[point_up], true)
 				i = i + 1
 			j = j + 1
+
+		print("@@@ ### @@@ ### " + str(map.npcs.size()))
+		for enemy in map.npcs:
+			var node = enemy.value.instance()
+			Enemies.add_child(node)
+			node.set_pos((enemy.position - Vector2(100, 100)) * 128)
+	
 	map_type = type
 
 func get_map_type():
