@@ -7,7 +7,7 @@ var processBehaviour = Process.StraightTransition.new()
 
 func _ready():
 	self.damage = 1
-	self.health = 4
+	self.health = 1
 	self.name = 'Bat'
 	turnBehaviour.setLimit(100)
 

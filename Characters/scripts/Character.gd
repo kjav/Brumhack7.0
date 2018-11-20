@@ -33,13 +33,16 @@ func handleMove(direction):
 	#think this is why enemies never use stand animation, face direction has no option for direction.none
 	faceDirection(direction)
 	var pos = setTarget(direction)
-	var attack = handleCollisions(pos)
-	if targetWalkable(pos, attack):
-		setWalkAnimation(direction)
-		
-		return direction
-	else:
-		return Enums.DIRECTION.NONE
+	var attacking = handleEnemyCollisions(pos)
+	if not attacking:
+		var walkableEnvironment = handleEnvironmentCollisions(pos)
+		if walkableEnvironment:
+			if targetWalkable(pos):
+				setWalkAnimation(direction)
+				
+				return direction
+			else:
+				return Enums.DIRECTION.NONE
 
 func faceDirection(direction):
 	if alive:
@@ -75,26 +78,22 @@ func getNextTargetPos(pos, direction):
 	
 	return pos
 
-func handleCollisions(pos):
-	var attack = handleEnemyCollisions(pos)
-	if (!attack):
-		handleEnvironmentCollisions(pos)
-	
-	return attack
-
 func handleEnemyCollisions(pos):
-	var attack = false
 	var collisions = GameData.charactersAtPos(pos)
 	for i in range(collisions.size()):
 			if not (collisions[i] == self):
 				attack(collisions[i])
-				attack = true
-	return attack
+				return true
+	return false
 
 func handleEnvironmentCollisions(pos):
+	var walkable = true
 	var collisions = GameData.environmentObjectAtPos(pos)
 	for i in range(collisions.size()):
 		collisions[i].onWalkedInto(self)
+		if !collisions[i].walkable:
+			walkable = false
+	return walkable
 
 func attack(character, damage):
 	if alive:
@@ -128,8 +127,8 @@ func createHitmarker():
 	newNode.setAmount(damage)
 	self.add_child(newNode)
 
-func targetWalkable(pos, attack):
-	return !attack and GameData.walkable(pos.x, pos.y)
+func targetWalkable(pos):
+	return GameData.walkable(pos.x, pos.y)
 
 func setWalkAnimation(direction):
 	if direction == Enums.DIRECTION.UP:

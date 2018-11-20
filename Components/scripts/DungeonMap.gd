@@ -41,10 +41,10 @@ func set_map_type(type):
 			var i = -100
 			for tile in row:
 				BTM.set_cell(i, j, tile)
-
+				
 				if tile in top_layer_tiles:
 					TTM.set_cell(i, j, tile)
-
+				
 				if !flat_not_walkable[tile]:
 					var vec = Vector3(i, j, 0)
 					var id = Pathfinder.get_available_point_id()
@@ -59,8 +59,9 @@ func set_map_type(type):
 						Pathfinder.connect_points(id, points[point_up], true)
 				i = i + 1
 			j = j + 1
-
-		print("@@@ ### @@@ ### " + str(map.npcs.size()))
+		
+		disconectEnvironmentBlocked()
+		
 		for enemy in map.npcs:
 			var node = enemy.value.instance()
 			Enemies.add_child(node)
@@ -74,6 +75,22 @@ func get_map_type():
 func walkable(x, y):
 	var cell = BottomTileMap.get_cell(x, y)
 	return !not_walkable.has(cell)
+
+func disconectEnvironmentBlocked():
+	for environmentObject in GameData.environmentObjects:
+		if !environmentObject.walkable:
+			var x = environmentObject.pos.x
+			var y = environmentObject.pos.y
+			
+			var point = Vector3(x, y, 0)
+			var point_left = Vector3(x-1, y, 0)
+			var point_up = Vector3(x, y-1, 0)
+			
+			if points.has(point_left):
+				Pathfinder.disconnect_points(points[point], points[point_left])
+			if points.has(point_up):
+				Pathfinder.disconnect_points(points[point], points[point_up])
+
 
 func findPath(a, b):
 	var a_vec3 = Vector3(a.x, a.y, 0)

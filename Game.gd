@@ -2,6 +2,9 @@ extends Node2D
 
 func _ready():
 	get_node("FloorItems").setupConnection()
+	get_node("Environements/Door").setLocked(true)
+	get_node("Environements/Door").setFacing("front")
+	
 	connectEnemies()
 
 func connectEnemies():

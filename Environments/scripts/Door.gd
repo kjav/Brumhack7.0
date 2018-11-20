@@ -1,4 +1,3 @@
-tool
 extends "EnvironmentBase.gd"
 
 export(String, "side", "front") var facing = "front" setget setFacing, getFacing
@@ -50,6 +49,6 @@ func reset():
 	setLocked(locked)
 
 func onWalkedInto(character):
-	if walkable:
+	if !locked:
 		state = "open"
 		handleDoorAnimation()

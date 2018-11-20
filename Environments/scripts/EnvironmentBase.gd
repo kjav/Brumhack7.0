@@ -10,3 +10,6 @@ func _ready():
 func setPos(_pos):
 	set_pos(_pos)
 	pos = _pos
+
+func onWalkedInto(character):
+	pass
