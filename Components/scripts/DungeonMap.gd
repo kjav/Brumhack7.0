@@ -65,6 +65,11 @@ func set_map_type(type):
 			var node = enemy.value.instance()
 			Enemies.add_child(node)
 			node.set_pos((enemy.position - Vector2(100, 100)) * 128)
+		
+		for item in map.items:
+			var node = item.value.new()
+			node.pos = (item.position - Vector2(100, 100)) * 128
+			GameData.placeItem(node)
 	
 	map_type = type
 

@@ -22,16 +22,10 @@ const Weapons = preload("res://Items/scripts/Weapons.gd")
 func _ready():
 	var instance = PotionClasses.HealthPotion.new()
 	addPotions([instance, instance, instance])
-	instance.pos = Vector2(4 * 128, 8 * 128)
-	placeItem(instance)
 	var instance = FoodClasses.CookedSteak.new()
 	addFoods([instance, instance])
-	instance.pos = Vector2(2 * 128, 2 * 128)
-	placeItem(instance)
 	var instance = SpellClasses.FireSpell.new()
 	addSpells([instance, instance])
-	instance.pos = Vector2(6 * 128, 12 * 128)
-	placeItem(instance)
 
 func addPotions(new_potions):
 	for potion in new_potions:
