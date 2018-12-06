@@ -42,7 +42,7 @@ func hideAllButCurrent():
 
 func DisableUnusableArrows():
 	var leftArrowOpacity = 1
-	var rightArrowOpacity = current_item == items.size() - 1
+	var rightArrowOpacity = 1
 	
 	if current_item == 0:
 		leftArrowOpacity = 0.2
