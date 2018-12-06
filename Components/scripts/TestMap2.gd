@@ -78,8 +78,9 @@ func add_room(name, room, wall):
 	# Room added successfully: return true
 	return true
 
-func _init(n_rooms).(200, 200, -1):
-	seed(13683)
+func _init().(200, 200, -1):
+	var n_rooms = 40
+	randomize()
 	print("Starting: ")
 	print("\n\n\n\n\n")
 	print("# # ")

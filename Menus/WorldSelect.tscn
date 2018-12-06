@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://Menus/scripts/WorldSelect.gd" type="Script" id=1]
 [ext_resource path="res://assets/parallax-mountain-3.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/maps/dungeon_map_screenshot.png" type="Texture" id=6]
 [ext_resource path="res://assets/8BitTheme.tres" type="Theme" id=7]
 [ext_resource path="res://assets/maps/maze_map_screenshot.png" type="Texture" id=8]
+[ext_resource path="res://assets/flask.png" type="Texture" id=9]
 
 [node name="Node2D" type="Node2D"]
 
@@ -102,6 +103,43 @@ margin/top = 484.0
 margin/right = -248.0
 margin/bottom = 500.0
 text = "MAZE MAP"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="TestMap" type="Node2D" parent="."]
+
+transform/pos = Vector2( 1600, 700 )
+
+[node name="TextureFrame" type="TextureFrame" parent="TestMap"]
+
+rect/scale = Vector2( 1.2, 1.4 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -335.0
+margin/top = -340.0
+margin/right = 215.0
+margin/bottom = 210.0
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="TestMap"]
+
+rect/scale = Vector2( 5, 5 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+theme/theme = ExtResource( 7 )
+margin/left = -424.0
+margin/top = 484.0
+margin/right = -248.0
+margin/bottom = 500.0
+text = "TEST MAP"
 align = 1
 percent_visible = 1.0
 lines_skipped = 0

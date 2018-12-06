@@ -5,7 +5,10 @@ export(int) var bottom_z_index = 0
 export(int) var top_z_index = 2
 export(int, "Basic Dungeon", "Maze Dungeon") var map_type = 0 setget set_map_type, get_map_type
 
-var TestMap = load("res://Components/scripts/TestMap2.gd")
+var Maps = {
+  "DungeonMap": load("res://Components/scripts/TestMap2.gd"),
+  "TestMap": load("res://Components/scripts/TestMap.gd")
+}
 
 var not_walkable = [-1, 6, 13, 21, 22, 23, 25, 26, 27, 28, 30, 32, 33, 34, 35, 39, 41, 42]
 # This array is a boolean array, with elements at positions in the above array
@@ -23,13 +26,13 @@ var BottomTileMap
 
 func _ready():
 	BottomTileMap = get_node("BottomTileMap")
-	map = TestMap.new(40)
 	for i in range(0, 128):
 		flat_not_walkable.push_back(not_walkable.has(i))
 	set_map_type(GameData.chosen_map)
 
 func set_map_type(type):
 	if has_node("BottomTileMap"):
+		map = Maps[type].new()
 		var BTM = self.get_node("BottomTileMap")
 		var TTM = self.get_node("BottomTileMap")
 		var Enemies = self.get_node("/root/Node2D/Enemies")
