@@ -74,6 +74,10 @@ func add_room(name, room, wall):
 	# Add the NPCs to the map
 	for enemy in room.npcs:
 		npcs.push_back({"position": position + Vector2(1, 1), "value": enemy})
+	# Add the items to the map
+	
+	for item in room.items:
+		items.push_back({"position": position + Vector2(1, 1), "value": item})
 	
 	# Room added successfully: return true
 	return true
