@@ -1,5 +1,6 @@
 var tiles = []
 var npcs = []
+var items = []
 var initial_tile
 var changed_tiles = {}
 

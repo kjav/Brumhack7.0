@@ -86,7 +86,7 @@ func _init().(200, 200, -1):
 	print("# # ")
 	print("# # ")
 	print("# # ")
-	var DefaultRoom = load("res://Components/Rooms/DefaultRoom.gd").new()
+	var DefaultRoom = load("res://Components/Rooms/DefaultRoomWithMonster.gd").new()
 	var TallRoom = load("res://Components/Rooms/TallRoom.gd").new()
 	var SuperTallRoom = load("res://Components/Rooms/SuperTallRoom.gd").new()
 	var WideRoom = load("res://Components/Rooms/WideRoom.gd").new()
