@@ -1,10 +1,7 @@
 extends "Character.gd"
 
-signal attack(character, amount)
-
 var attack
 var name = 'Unset'
-
 
 func _ready():
 	set_process(true)

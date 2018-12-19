@@ -31,9 +31,9 @@ color = Color( 0.12549, 0.12549, 0.12549, 1 )
 
 z/z = 1
 
-[node name="Environements" type="Node" parent="."]
+[node name="Environments" type="Node" parent="."]
 
-[node name="Door" parent="Environements" instance=ExtResource( 4 )]
+[node name="Door" parent="Environments" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 640, 768 )
 

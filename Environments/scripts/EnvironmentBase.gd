@@ -1,5 +1,7 @@
 extends AnimatedSprite
 
+signal blockStateChanged(environmentObject, blockedState)
+
 var walkable
 var pos
 
@@ -13,3 +15,6 @@ func setPos(_pos):
 
 func onWalkedInto(character):
 	pass
+
+func emitSignal(lockedState):
+	emit_signal("blockStateChanged", self, true);

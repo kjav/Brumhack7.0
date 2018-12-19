@@ -1,6 +1,7 @@
 tool
 extends Node2D
 
+
 export(int) var bottom_z_index = 0
 export(int) var top_z_index = 2
 export(int, "Basic Dungeon", "Maze Dungeon") var map_type = 0 setget set_map_type, get_map_type
@@ -30,6 +31,58 @@ func _ready():
 		flat_not_walkable.push_back(not_walkable.has(i))
 	set_map_type(GameData.chosen_map)
 
+func addPoint(i, j):
+	var vec = Vector3(i, j, 0)
+	if !points.has(vec):
+		var id = Pathfinder.get_available_point_id()
+		points[vec] = id
+		ids[id] = vec
+		Pathfinder.add_point(id, vec)
+
+func connectPointHorizontalAndVertical(i, j):
+	var vec = Vector3(i, j, 0)
+	if points.has(vec):
+		var id = points[vec]
+		
+		var point_right = Vector3(i+1, j, 0)
+		var point_down = Vector3(i, j+1, 0)
+		
+		if points.has(point_right):
+			Pathfinder.connect_points(id, points[point_right], true)
+		if points.has(point_down):
+			Pathfinder.connect_points(id, points[point_down], true)
+			
+		connectPointsUpAndLeft(i, j)
+
+func connectPointsUpAndLeft(i, j):
+	var vec = Vector3(i, j, 0)
+	if points.has(vec):
+		var id = points[vec]
+		
+		var point_left = Vector3(i-1, j, 0)
+		var point_up = Vector3(i, j-1, 0)
+		
+		if points.has(point_left):
+			Pathfinder.connect_points(id, points[point_left], true)
+		if points.has(point_up):
+			Pathfinder.connect_points(id, points[point_up], true)
+
+func disconnectPoint(i, j):
+	var point = Vector3(i, j, 0)
+	var point_left = Vector3(i-1, j, 0)
+	var point_up = Vector3(i, j-1, 0)
+	var point_right = Vector3(i+1, j, 0)
+	var point_down = Vector3(i, j+1, 0)
+	
+	if points.has(point_left):
+		Pathfinder.disconnect_points(points[point], points[point_left])
+	if points.has(point_up):
+		Pathfinder.disconnect_points(points[point], points[point_up])
+	if points.has(point_right):
+		Pathfinder.disconnect_points(points[point], points[point_right])
+	if points.has(point_down):
+		Pathfinder.disconnect_points(points[point], points[point_down])
+
 func set_map_type(type):
 	if has_node("BottomTileMap"):
 		map = Maps[type].new()
@@ -49,21 +102,10 @@ func set_map_type(type):
 					TTM.set_cell(i, j, tile)
 				
 				if !flat_not_walkable[tile]:
-					var vec = Vector3(i, j, 0)
-					var id = Pathfinder.get_available_point_id()
-					points[vec] = id
-					ids[id] = vec
-					Pathfinder.add_point(id, vec)
-					var point_left = Vector3(i-1, j, 0)
-					var point_up = Vector3(i, j-1, 0)
-					if points.has(point_left):
-						Pathfinder.connect_points(id, points[point_left], true)
-					if points.has(point_up):
-						Pathfinder.connect_points(id, points[point_up], true)
+					addPoint(i, j)
+					connectPointsUpAndLeft(i, j)
 				i = i + 1
 			j = j + 1
-		
-		disconectEnvironmentBlocked()
 		
 		for enemy in map.npcs:
 			var node = enemy.value.instance()
@@ -78,22 +120,6 @@ func get_map_type():
 func walkable(x, y):
 	var cell = BottomTileMap.get_cell(x, y)
 	return !not_walkable.has(cell)
-
-func disconectEnvironmentBlocked():
-	for environmentObject in GameData.environmentObjects:
-		if !environmentObject.walkable:
-			var x = environmentObject.pos.x
-			var y = environmentObject.pos.y
-			
-			var point = Vector3(x, y, 0)
-			var point_left = Vector3(x-1, y, 0)
-			var point_up = Vector3(x, y-1, 0)
-			
-			if points.has(point_left):
-				Pathfinder.disconnect_points(points[point], points[point_left])
-			if points.has(point_up):
-				Pathfinder.disconnect_points(points[point], points[point_up])
-
 
 func findPath(a, b):
 	var a_vec3 = Vector3(a.x, a.y, 0)
@@ -138,3 +164,13 @@ func findNextDirection(a, b):
 		elif direction.y == -1:
 			direction = Enums.DIRECTION.UP
 	return direction
+
+func _on_Environment_blockStateChanged(environmentObject, blockedState):
+	var x = environmentObject.pos.x / GameData.TileSize
+	var y = environmentObject.pos.y / GameData.TileSize
+	
+	if blockedState:
+		disconnectPoint(x, y)
+	else:
+		addPoint(x, y)
+		connectPointHorizontalAndVertical(x, y)

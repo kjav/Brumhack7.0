@@ -38,6 +38,7 @@ func setLocked(_locked):
 	if typeof(_locked) == TYPE_BOOL:
 		locked = _locked
 		walkable = !locked
+		emitSignal(true)
 		if get_node("Locks") != null:
 			get_node("Locks").set_hidden(!locked)
 

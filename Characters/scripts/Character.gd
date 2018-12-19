@@ -1,5 +1,7 @@
 extends AnimatedSprite
 
+signal attack(character, amount)
+
 var moving = false
 var movement_direction
 var original_pos = get_pos()
