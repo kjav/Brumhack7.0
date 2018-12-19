@@ -116,6 +116,14 @@ func set_map_type(type):
 			var node = item.value.new()
 			node.pos = (item.position - Vector2(100, 100)) * 128
 			GameData.placeItem(node)
+		
+		for env in map.environmentObjects:
+			var Environments = self.get_node("/root/Node2D/Environments")
+			var node = env.value.instance()
+			Environments.add_child(node)
+			node.setFacing(env.facing)
+			GameData.environmentObjects.append(node)
+			node.set_pos((env.position - Vector2(100, 100)) * 128)
 	
 	map_type = type
 

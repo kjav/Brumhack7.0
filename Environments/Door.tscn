@@ -55,7 +55,7 @@ offset = Vector2( 16, 12 )
 script/script = ExtResource( 4 )
 facing = "front"
 state = "closed"
-locked = true
+locked = false
 
 [node name="Locks" type="AnimatedSprite" parent="."]
 

@@ -2,7 +2,7 @@ extends "EnvironmentBase.gd"
 
 export(String, "side", "front") var facing = "front" setget setFacing, getFacing
 export(String, "closed", "open") var state = "closed" setget setState, getState
-export(bool) var locked = true setget setLocked, getLocked
+export(bool) var locked = false setget setLocked, getLocked
 
 func handleDoorAnimation():
 	self.set_animation(facing + "_" + state)

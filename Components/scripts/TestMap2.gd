@@ -7,11 +7,13 @@ func add_room(name, room, wall):
 	var door
 	var shared_wall_index = -1
 	var position
+	var wall_direction
+	
 	if wall == null:
 		position = Vector2(103, 104)
 	else:
 		# Get the direction of the wall, with the interior on the right hand side.
-		var wall_direction = (wall[1] - wall[0]).normalized().snapped(Vector2(1, 1))
+		wall_direction = (wall[1] - wall[0]).normalized().snapped(Vector2(1, 1))
 		
 		# Choose a door in the wall, excluding the corners of the wall.
 		var door_index = 1 + (randi() % (int((wall[1] - wall[0]).length()) - 2))
@@ -62,9 +64,10 @@ func add_room(name, room, wall):
 	# Draw walls on map
 	wall([corners[0], corners[1], corners[2], corners[3], corners[0]])
 	
-	# Remove the door
+	# Remove the wall and add a door
 	if door != null:
 		remove_wall([door])
+		environmentObjects.push_back({"position": door, "value": doorClass, "facing": get_facing(wall_direction)})
 	
 	# Add exterior walls to walls list, so other rooms can be placed adjacent
 	for i in range(0, 3):
@@ -81,6 +84,12 @@ func add_room(name, room, wall):
 	
 	# Room added successfully: return true
 	return true
+
+func get_facing(wall_direction):
+	if (wall_direction != null):
+		if (wall_direction.x == 0):
+			return "side"
+	return "front"
 
 func _init().(200, 200, -1):
 	var n_rooms = 40
