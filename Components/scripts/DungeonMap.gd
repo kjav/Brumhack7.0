@@ -74,14 +74,15 @@ func disconnectPoint(i, j):
 	var point_right = Vector3(i+1, j, 0)
 	var point_down = Vector3(i, j+1, 0)
 	
-	if points.has(point_left):
-		Pathfinder.disconnect_points(points[point], points[point_left])
-	if points.has(point_up):
-		Pathfinder.disconnect_points(points[point], points[point_up])
-	if points.has(point_right):
-		Pathfinder.disconnect_points(points[point], points[point_right])
-	if points.has(point_down):
-		Pathfinder.disconnect_points(points[point], points[point_down])
+	if points.has(point):
+		if points.has(point_left):
+			Pathfinder.disconnect_points(points[point], points[point_left])
+		if points.has(point_up):
+			Pathfinder.disconnect_points(points[point], points[point_up])
+		if points.has(point_right):
+			Pathfinder.disconnect_points(points[point], points[point_right])
+		if points.has(point_down):
+			Pathfinder.disconnect_points(points[point], points[point_down])
 
 func set_map_type(type):
 	if has_node("BottomTileMap"):
