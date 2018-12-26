@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=11 format=1]
 
 [ext_resource path="res://Hud/scripts/Hud.gd" type="Script" id=1]
 [ext_resource path="res://Hud/HudButton.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://assets/if_Settings_gear_setting_tools_392496.png" type="Texture" id=6]
 [ext_resource path="res://Hud/scripts/SettingsClick.gd" type="Script" id=7]
 [ext_resource path="res://Hud/EventMessageHolder.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Hud/Death.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Hud/scripts/Death.gd" type="Script" id=10]
 
 [node name="HudNode" type="Node2D"]
 
@@ -98,5 +100,10 @@ script/script = ExtResource( 7 )
 [node name="EventMessageHolder" parent="HudCanvasLayer" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 390.218, 115.807 )
+
+[node name="DeathMenu" parent="HudCanvasLayer" instance=ExtResource( 9 )]
+
+visibility/visible = false
+script/script = ExtResource( 10 )
 
 
