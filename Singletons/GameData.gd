@@ -5,6 +5,7 @@ signal itemDropped(item)
 var potions = []
 var foods = []
 var spells = []
+var keys = []
 var tilemap
 var chosen_player
 var player
@@ -27,16 +28,23 @@ func _ready():
 	var instance = SpellClasses.FireSpell.new()
 	addSpells([instance, instance])
 
+func addKey(new_key):
+	#todo, needs to check if inventory is full first
+	keys.append(new_key)
+
 func addPotions(new_potions):
 	for potion in new_potions:
+		#todo, needs to check if inventory is full first
 		potions.append(potion)
 
 func addFoods(new_foods):
 	for food in new_foods:
+		#todo, needs to check if inventory is full first
 		foods.append(food)
 
 func addSpells(new_spells):
 	for spell in new_spells:
+		#todo, needs to check if inventory is full first
 		spells.append(spell)
 
 func charactersAtPos(pos):

@@ -6,6 +6,8 @@ var inc = 40
 
 const Heart = preload("res://Hud/Heart.tscn")
 
+const KeyBase = preload("res://Items/scripts/KeyBase.gd")
+
 func _ready():
 	inventoryOpen = false
 	settingsOpen = false
@@ -56,6 +58,9 @@ func PlayerHealthChanged(change, value):
 		get_node("HudCanvasLayer/HealthBar").add_child(new_node)
 
 func _on_Player_itemPickedUp(item):
+	if item extends KeyBase:
+		get_node("HudCanvasLayer/Keys").AddKey(item)
+	
 	get_node("HudCanvasLayer/EventMessageHolder")._on_Player_itemPickedUp(item);
 
 func _on_Player_weaponChanged(slot, weapon):
