@@ -54,6 +54,9 @@ func PlayerHealthChanged(change, value):
 			new_node.setType("Empty")
 		
 		get_node("HudCanvasLayer/HealthBar").add_child(new_node)
+	
+	if health <= 0:
+		get_node("HudCanvasLayer/DeathMenu").died()
 
 func _on_Player_itemPickedUp(item):
 	get_node("HudCanvasLayer/EventMessageHolder")._on_Player_itemPickedUp(item);
