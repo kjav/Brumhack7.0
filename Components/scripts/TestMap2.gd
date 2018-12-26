@@ -81,6 +81,9 @@ func add_room(name, room, wall):
 	
 	for item in room.items:
 		items.push_back({"position": position + Vector2(1, 1), "value": item})
+		
+	for env in room.environments:
+		environmentObjects.push_back({"position": position + Vector2(1, 1), "value": env})
 	
 	# Room added successfully: return true
 	return true
@@ -103,6 +106,7 @@ func _init().(200, 200, -1):
 	var TallRoom = load("res://Components/Rooms/TallRoom.gd").new()
 	var SuperTallRoom = load("res://Components/Rooms/SuperTallRoom.gd").new()
 	var WideRoom = load("res://Components/Rooms/WideRoom.gd").new()
+	var UpgradeRoom = load("res://Components/Rooms/UpgradeRoom.gd").new()
 	var main_room = DefaultRoom.get()
 	print(main_room.extents)
 	print(main_room.npcs)
@@ -126,9 +130,10 @@ func _init().(200, 200, -1):
 	var i = 0;
 	var room_distribution = Distribution.new([
 		{"p": 0.3, "value": DefaultRoom},
-		{"p": 0.3, "value": TallRoom},
+		{"p": 0.3, "value": UpgradeRoom},
 		{"p": 0.3, "value": WideRoom},
-		{"p": 0.1, "value": SuperTallRoom}
+		{"p": 0.05, "value": TallRoom},
+		{"p": 0.05, "value": SuperTallRoom}
 	])
 	while rooms.size() < n_rooms:
 		# Pick a wall
