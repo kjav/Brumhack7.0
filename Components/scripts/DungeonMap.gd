@@ -122,7 +122,18 @@ func set_map_type(type):
 			var Environments = self.get_node("/root/Node2D/Environments")
 			var node = env.value.instance()
 			Environments.add_child(node)
-			node.setFacing(env.facing)
+			# Insert the node at the correct position, sorted by y coordinate, to prevent overdraw
+			var children = Environments.get_children()
+			var i = 0
+			while i < children.size() and (children[i] == node or children[i].get_pos().y < node.get_pos().y):
+				i += 1
+			if i >= children.size() or children[i].get_pos().y > node.get_pos().y:
+				i = max(0, i - 1)
+			Environments.move_child(node, i)
+			
+			if env.has("facing"):
+				node.setFacing(env.facing)
+			
 			GameData.environmentObjects.append(node)
 			node.set_pos((env.position - Vector2(100, 100)) * 128)
 	
@@ -159,11 +170,11 @@ func findNextDirection(a, b):
 	var a_id = points[a_vec3]
 	var b_id = points[b_vec3]
 	
-	print("Getting id path ", a_vec3, ", ", b_vec3)
+	#print("Getting id path ", a_vec3, ", ", b_vec3)
 	
 	var id_path = Pathfinder.get_id_path(a_id, b_id)
 	
-	print("Got id path ", a_vec3, ", ", b_vec3, ". Length: ", id_path.size())
+	#print("Got id path ", a_vec3, ", ", b_vec3, ". Length: ", id_path.size())
 	
 	var direction = Enums.DIRECTION.NONE
 	if id_path.size() > 1:

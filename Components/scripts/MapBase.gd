@@ -2,6 +2,7 @@ var tiles = []
 var npcs = []
 var items = []
 var environmentObjects = []
+var doors = []
 var initial_tile
 var changed_tiles = {}
 var doorClass = preload("res://Environments/Door.tscn")
@@ -261,3 +262,12 @@ func make_walls_consistent():
 				
 			tiles[point.y][point.x] = tree.get_value(surroundings)
 	changed_tiles = {}
+
+func add_door(v):
+	doors.push_back(v)
+
+func is_door(v):
+	for d in doors:
+		if d == v:
+			return true
+	return false

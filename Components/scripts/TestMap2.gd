@@ -19,18 +19,20 @@ func add_room(name, room, wall):
 		var door_index = 1 + (randi() % (int((wall[1] - wall[0]).length()) - 2))
 		door = door_index * wall_direction + wall[0]
 		
+		# Choose how much to move the new room by
+		var room_index = 1 + (randi() % (abs(int(room.extents.dot(wall_direction))) - 2))
 		
 		if wall_direction == Vector2(0, 1):
-			position = wall[0]
+			position = door - Vector2(0, room_index)
 			shared_wall_index = 3
 		elif wall_direction == Vector2(-1, 0):
-			position = wall[1]
+			position = door - Vector2(room_index, 0)
 			shared_wall_index = 0
 		elif wall_direction == Vector2(0, -1):
-			position = wall[1] - Vector2(room.extents.x - 1, 0)
+			position = door - Vector2(room.extents.x - 1, room_index)
 			shared_wall_index = 1
 		elif wall_direction == Vector2(1, 0):
-			position = wall[0] - Vector2(0, room.extents.y - 1)
+			position = door - Vector2(room_index, room.extents.y - 1)
 			shared_wall_index = 2
 		else:
 			print("WARNING: Wall direction not valid! Wall direction was set to: ")
@@ -41,9 +43,24 @@ func add_room(name, room, wall):
 	# Check if the interior of the room fits on the map
 	for x in range(position.x + 1, position.x + room.extents.x - 2):
 		for y in range(position.y + 1, position.y + room.extents.y - 2):
-			var abc = tiles[y][x]
 			if tiles[y][x] != initial_tile:
 				return false
+	
+	# Check that the walls do not cover up another door
+	for x in range(position.x, room.extents.x):
+		for y in [0, room.extents.y - 1]:
+			# Check this door is not our door!
+			var this_coord = Vector2(x, y)
+			if door != this_coord:
+				if is_door(this_coord):
+					return false
+	for y in range(position.y + 1, position.y + room.extents.y - 2):
+		for x in [0, room.extents.x - 1]:
+			# Check this door is not our door!
+			var this_coord = Vector2(x, y)
+			if door != this_coord:
+				if is_door(this_coord):
+					return false
 	
 	var corners = [
 		position,
@@ -66,6 +83,7 @@ func add_room(name, room, wall):
 	
 	# Remove the wall and add a door
 	if door != null:
+		add_door(door)
 		remove_wall([door])
 		environmentObjects.push_back({"position": door, "value": doorClass, "facing": get_facing(wall_direction)})
 	
@@ -81,6 +99,9 @@ func add_room(name, room, wall):
 	
 	for item in room.items:
 		items.push_back({"position": position + Vector2(1, 1), "value": item})
+		
+	for env in room.environments:
+		environmentObjects.push_back({"position": position + Vector2(1, 1), "value": env})
 	
 	# Room added successfully: return true
 	return true
@@ -126,9 +147,9 @@ func _init().(200, 200, -1):
 	var i = 0;
 	var room_distribution = Distribution.new([
 		{"p": 0.3, "value": DefaultRoom},
-		{"p": 0.3, "value": TallRoom},
 		{"p": 0.3, "value": WideRoom},
-		{"p": 0.1, "value": SuperTallRoom}
+		{"p": 0.2, "value": TallRoom},
+		{"p": 0.2, "value": SuperTallRoom}
 	])
 	while rooms.size() < n_rooms:
 		# Pick a wall
