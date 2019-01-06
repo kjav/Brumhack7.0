@@ -41,20 +41,20 @@ func add_room(name, room, wall):
 			shared_wall_index = 1
 	
 	# Check if the interior of the room fits on the map
-	for x in range(position.x + 1, position.x + room.extents.x - 2):
-		for y in range(position.y + 1, position.y + room.extents.y - 2):
+	for x in range(position.x + 1, position.x + room.extents.x - 1):
+		for y in range(position.y + 1, position.y + room.extents.y - 1):
 			if tiles[y][x] != initial_tile:
 				return false
 	
 	# Check that the walls do not cover up another door
-	for x in range(position.x, room.extents.x):
+	for x in range(position.x, room.extents.x + 1):
 		for y in [0, room.extents.y - 1]:
 			# Check this door is not our door!
 			var this_coord = Vector2(x, y)
 			if door != this_coord:
 				if is_door(this_coord):
 					return false
-	for y in range(position.y + 1, position.y + room.extents.y - 2):
+	for y in range(position.y + 1, position.y + room.extents.y - 1):
 		for x in [0, room.extents.x - 1]:
 			# Check this door is not our door!
 			var this_coord = Vector2(x, y)
