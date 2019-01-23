@@ -47,6 +47,12 @@ func addSpells(new_spells):
 		#todo, needs to check if inventory is full first
 		spells.append(spell)
 
+func RemoveKey(unlockGuid):
+	for i in range(keys.size(), 0, -1):
+		if keys[i].UnlockGuid == unlockGuid:
+			keys.remove(i)
+			return
+
 func charactersAtPos(pos):
 	return arrayAtPosForMoving(pos, characters)
 

@@ -6,7 +6,7 @@ func AddKey(key):
 	KeyAmountChanged()
 
 func KeyAmountChanged():
-	for child in get_node("HudCanvasLayer/Keys").get_children():
+	for child in get_node(".").get_children():
 		child.queue_free()
 		child.hide()
 	
@@ -16,7 +16,8 @@ func KeyAmountChanged():
 		if !UnlockGuidsFound.has(key.UnlockGuid):
 			var new_node = KeyIcon.instance()
 			new_node.setTexture(key.texture)
+			new_node.setPosition(UnlockGuidsFound.size())
 			
-			get_node("HudCanvasLayer/Keys").add_child(new_node)
+			get_node(".").add_child(new_node)
 			
 			UnlockGuidsFound.append(key.UnlockGuid)

@@ -3,6 +3,9 @@ extends "UnlockableBase.gd"
 export(String, "side", "front") var facing = "front" setget setFacing, getFacing
 export(String, "closed", "open") var state = "closed" setget setState, getState
 
+func _ready():
+	name = "Door"
+
 func handleDoorAnimation():
 	self.set_animation(facing + "_" + state)
 

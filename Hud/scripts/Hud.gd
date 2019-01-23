@@ -14,6 +14,7 @@ func _ready():
 	PlayerHealthChanged("", 0)
 	GameData.player.connect("healthChanged", self, "PlayerHealthChanged")
 	GameData.player.connect("weaponChanged", self, "PlayerWeaponChanged")
+	GameData.player.connect("itemPickedUp", self, "_on_Player_itemPickedUp")
 	GameData.player.connect("playerMove", self, "CheckFloor")
 	get_node("HudCanvasLayer/SpellInvent/front").connect("InventoryOpened", self, "SpellInventoryOpened")
 	get_node("HudCanvasLayer/PotInvent/front").connect("InventoryOpened", self, "PotInventoryOpened")
@@ -56,6 +57,11 @@ func PlayerHealthChanged(change, value):
 			new_node.setType("Empty")
 		
 		get_node("HudCanvasLayer/HealthBar").add_child(new_node)
+
+func _on_Environment_unlocked(unlockGuid, environmentObjectsName):
+	get_node("HudCanvasLayer/Keys").KeyAmountChanged()
+	
+	get_node("HudCanvasLayer/EventMessageHolder")._on_Environment_unlocked(environmentObjectsName);
 
 func _on_Player_itemPickedUp(item):
 	if item extends KeyBase:
