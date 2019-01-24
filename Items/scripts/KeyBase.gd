@@ -7,7 +7,7 @@ func openUnlockableEnvronment(unlockableEnvironment):
 	if UnlockGuid != null:
 		if unlockableEnvironment.UnlockGuid == UnlockGuid:
 			GameData.keys.remove(GameData.keys.find(self))
-			unlockableEnvironment.setLocked(false)
+			unlockableEnvironment.keyUnlocked()
 
 func setUnlockGuid(unlockGuid):
 	UnlockGuid = unlockGuid

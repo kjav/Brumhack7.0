@@ -4,7 +4,7 @@ export(String, "side", "front") var facing = "front" setget setFacing, getFacing
 export(String, "closed", "open") var state = "closed" setget setState, getState
 
 func _ready():
-	name = "Door"
+	Name = "Door"
 
 func handleDoorAnimation():
 	self.set_animation(facing + "_" + state)

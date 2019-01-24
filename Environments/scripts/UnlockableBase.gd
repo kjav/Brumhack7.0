@@ -14,9 +14,11 @@ func setLocked(_locked):
 		walkable = !locked
 		if get_node("Locks") != null:
 			get_node("Locks").set_hidden(!locked)
-		if !locked:
-			GameData.RemoveKey(unlockGuid)
-			emit_signal("keyUsed", UnlockGuid, Name)
+
+func keyUnlocked():
+	GameData.RemoveKey(UnlockGuid)
+	emit_signal("keyUsed", UnlockGuid, Name)
+	setLocked(false)
 
 func getLocked():
 	return locked
