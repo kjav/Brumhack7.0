@@ -48,10 +48,17 @@ func addSpells(new_spells):
 		spells.append(spell)
 
 func RemoveKey(unlockGuid):
-	for i in range(keys.size(), 0, -1):
-		if keys[i].UnlockGuid == unlockGuid:
+	for i in range(keys.size()-1, -1, -1):
+		#in the future when we save the current floor this should pass that aswell
+		if keys[i].IsValidKey(unlockGuid):
 			keys.remove(i)
 			return
+
+func HasKey(unlockGuid):
+	for i in range(keys.size()-1, -1, -1):
+		#in the future when we save the current floor this should pass that aswell
+		if keys[i].IsValidKey(unlockGuid):
+			return keys[i]
 
 func charactersAtPos(pos):
 	return arrayAtPosForMoving(pos, characters)

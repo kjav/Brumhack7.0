@@ -44,3 +44,8 @@ func onWalkedInto(character):
 	if !locked:
 		state = "open"
 		handleDoorAnimation()
+	elif character == GameData.player:
+		var key = GameData.HasKey(UnlockGuid)
+		
+		if key != null:
+			keyUnlocked()

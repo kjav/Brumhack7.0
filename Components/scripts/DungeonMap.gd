@@ -123,6 +123,8 @@ func set_map_type(type):
 			var node = env.value.instance()
 			Environments.add_child(node)
 			node.setFacing(env.facing)
+			node.setLocked(true)
+			node.setUnlockGuid("Silver")
 			GameData.environmentObjects.append(node)
 			node.set_pos((env.position - Vector2(100, 100)) * 128)
 	
