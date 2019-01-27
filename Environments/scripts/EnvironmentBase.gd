@@ -4,6 +4,7 @@ signal blockStateChanged(environmentObject, blockedState)
 
 var walkable
 var pos
+var Name
 
 func _ready():
 	GameData.environmentObjects.append(self)

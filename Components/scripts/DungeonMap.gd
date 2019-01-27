@@ -122,18 +122,25 @@ func set_map_type(type):
 			var Environments = self.get_node("/root/Node2D/Environments")
 			var node = env.value.instance()
 			Environments.add_child(node)
+      
 			# Insert the node at the correct position, sorted by y coordinate, to prevent overdraw
 			var children = Environments.get_children()
 			var i = 0
+      
 			while i < children.size() and (children[i] == node or children[i].get_pos().y < node.get_pos().y):
 				i += 1
+        
 			if i >= children.size() or children[i].get_pos().y > node.get_pos().y:
 				i = max(0, i - 1)
+        
 			Environments.move_child(node, i)
 			
 			if env.has("facing"):
 				node.setFacing(env.facing)
 			
+			node.setFacing(env.facing)
+			node.setLocked(false)
+      
 			GameData.environmentObjects.append(node)
 			node.set_pos((env.position - Vector2(100, 100)) * 128)
 	

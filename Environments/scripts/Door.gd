@@ -1,8 +1,10 @@
-extends "EnvironmentBase.gd"
+extends "UnlockableBase.gd"
 
 export(String, "side", "front") var facing = "front" setget setFacing, getFacing
 export(String, "closed", "open") var state = "closed" setget setState, getState
-export(bool) var locked = false setget setLocked, getLocked
+
+func _ready():
+	Name = "Door"
 
 func handleDoorAnimation():
 	self.set_animation(facing + "_" + state)
@@ -34,17 +36,6 @@ func setState(_state):
 func getState():
 	return state
 
-func setLocked(_locked):
-	if typeof(_locked) == TYPE_BOOL:
-		locked = _locked
-		walkable = !locked
-		emitSignal(true)
-		if get_node("Locks") != null:
-			get_node("Locks").set_hidden(!locked)
-
-func getLocked():
-	return locked
-
 func reset():
 	setFacing(facing)
 	setLocked(locked)
@@ -53,3 +44,8 @@ func onWalkedInto(character):
 	if !locked:
 		state = "open"
 		handleDoorAnimation()
+	elif character == GameData.player:
+		var key = GameData.HasKey(UnlockGuid)
+		
+		if key != null:
+			keyUnlocked()

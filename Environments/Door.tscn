@@ -16,6 +16,11 @@ animations = [ {
 "name": "front_opened",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "side_opened",
+"speed": 1.0
+}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": false,
 "name": "front_closed",
@@ -24,11 +29,6 @@ animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": false,
 "name": "side_closed",
-"speed": 1.0
-}, {
-"frames": [ ExtResource( 1 ) ],
-"loop": false,
-"name": "side_opened",
 "speed": 1.0
 } ]
 
@@ -53,9 +53,9 @@ frames = SubResource( 1 )
 animation = "front_closed"
 offset = Vector2( 16, 12 )
 script/script = ExtResource( 4 )
+locked = true
 facing = "front"
 state = "closed"
-locked = false
 
 [node name="Locks" type="AnimatedSprite" parent="."]
 
