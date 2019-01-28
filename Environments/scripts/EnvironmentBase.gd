@@ -20,3 +20,7 @@ func onWalkedInto(character):
 
 func emitSignal(lockedState):
 	emit_signal("blockStateChanged", self, true);
+
+func remove():
+	#needs to remove from gamedata
+	#need to delete self
