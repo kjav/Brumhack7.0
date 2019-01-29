@@ -21,5 +21,5 @@ func getState():
 func keyUnlocked():
 	#get item from a distribution
 	#place item
-	#remove chest
 	base.keyUnlocked()
+	base.remove()

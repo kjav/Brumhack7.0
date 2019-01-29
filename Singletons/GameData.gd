@@ -47,6 +47,12 @@ func addSpells(new_spells):
 		#todo, needs to check if inventory is full first
 		spells.append(spell)
 
+func RemoveEnvironment(environmentObjectToRemove):
+	for i in range(0, environmentObjects.size()-1):
+		if environmentObjects[i] == environmentObjectToRemove:
+			environmentObjects.remove(i)
+			return
+
 func RemoveKey(unlockGuid):
 	for i in range(keys.size()-1, -1, -1):
 		#in the future when we save the current floor this should pass that aswell
