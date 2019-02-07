@@ -2,6 +2,6 @@ extends 'RoomBase.gd'
 
 func setup_params():
 	extents_distribution = Set.new([Vector2(7, 7)])
-	npc_distribution = Distribution.new([{"p": 0.4, "value": load("res://Characters/Ghost.tscn")}])
-	environment_distribution = Distribution.new([])
-	item_distribution = Distribution.new([{"p": 0.5, "value": PotionClasses.HealthPotion}])
+	npc_distribution = Distribution.new([])
+	environment_distribution = Distribution.new([{"p": 1.0, "value": load("res://Environments/Chest.tscn")}])
+	item_distribution = Distribution.new([{"p": 1.0, "value": Constants.KeyClasses.SilverKey}])

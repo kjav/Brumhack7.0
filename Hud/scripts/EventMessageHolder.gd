@@ -6,6 +6,9 @@ func _ready():
 	GameData.player.connect("healthChanged", self, "PlayerHealthChanged")
 	pass
 
+func _on_Environment_unlocked(environmentObjectsName):
+	addMessage('You unlocked a ' + str(environmentObjectsName) + '.');
+
 func _on_Player_healthChanged(change, value):
 	if(change == "Up"):
 		addMessage('You healed: ' + str(value) + '.');

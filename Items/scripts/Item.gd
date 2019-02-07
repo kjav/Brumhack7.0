@@ -13,5 +13,4 @@ func place(newPos):
 	GameData.placeItem(self)
 
 func pickup():
-	pos = null
 	GameData.pickedUp(self)

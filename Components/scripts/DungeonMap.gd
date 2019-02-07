@@ -1,6 +1,7 @@
 tool
 extends Node2D
 
+var Distribution = load("res://Components/Distributions/Distribution.gd")
 
 export(int) var bottom_z_index = 0
 export(int) var top_z_index = 2
@@ -115,24 +116,41 @@ func set_map_type(type):
 		
 		for item in map.items:
 			var node = item.value.new()
-			node.pos = (item.position - Vector2(100, 100)) * 128
-			GameData.placeItem(node)
+			node.place((item.position - Vector2(100, 100)) * 128)
 		
 		for env in map.environmentObjects:
 			var Environments = self.get_node("/root/Node2D/Environments")
 			var node = env.value.instance()
 			Environments.add_child(node)
+      
 			# Insert the node at the correct position, sorted by y coordinate, to prevent overdraw
 			var children = Environments.get_children()
 			var i = 0
+      
 			while i < children.size() and (children[i] == node or children[i].get_pos().y < node.get_pos().y):
 				i += 1
+        
 			if i >= children.size() or children[i].get_pos().y > node.get_pos().y:
 				i = max(0, i - 1)
+        
 			Environments.move_child(node, i)
 			
 			if env.has("facing"):
 				node.setFacing(env.facing)
+			
+			if env != null:
+				if node != null:
+					if node.name != null:
+						print("Nodes name: " + node.name)
+						print(env.has("facing"))
+			
+			#this is just temporary
+			if node.name == "Chest":
+				node.setLocked(true)
+				node.setUnlockGuid("Silver")
+				node.setDistribution(Distribution.new([{"p": 1.0, "value": Constants.SpellClasses.FireSpell}]))
+			elif node.name == "Door":
+				node.setLocked(false)
 			
 			GameData.environmentObjects.append(node)
 			node.set_pos((env.position - Vector2(100, 100)) * 128)

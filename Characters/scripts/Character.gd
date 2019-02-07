@@ -91,10 +91,12 @@ func handleEnemyCollisions(pos):
 func handleEnvironmentCollisions(pos):
 	var walkable = true
 	var collisions = GameData.environmentObjectAtPos(pos)
+	
 	for i in range(collisions.size()):
-		collisions[i].onWalkedInto(self)
 		if !collisions[i].walkable:
 			walkable = false
+		collisions[i].onWalkedInto(self)
+		
 	return walkable
 
 func attack(character, damage):

@@ -6,12 +6,15 @@ var inc = 40
 
 const Heart = preload("res://Hud/Heart.tscn")
 
+const KeyBase = preload("res://Items/scripts/KeyBase.gd")
+
 func _ready():
 	inventoryOpen = false
 	settingsOpen = false
 	PlayerHealthChanged("", 0)
 	GameData.player.connect("healthChanged", self, "PlayerHealthChanged")
 	GameData.player.connect("weaponChanged", self, "PlayerWeaponChanged")
+	GameData.player.connect("itemPickedUp", self, "_on_Player_itemPickedUp")
 	GameData.player.connect("playerMove", self, "CheckFloor")
 	get_node("HudCanvasLayer/SpellInvent/front").connect("InventoryOpened", self, "SpellInventoryOpened")
 	get_node("HudCanvasLayer/PotInvent/front").connect("InventoryOpened", self, "PotInventoryOpened")
@@ -58,7 +61,15 @@ func PlayerHealthChanged(change, value):
 	if health <= 0:
 		get_node("HudCanvasLayer/DeathMenu").died()
 
+func _on_Environment_unlocked(unlockGuid, environmentObjectsName):
+	get_node("HudCanvasLayer/Keys").KeyAmountChanged()
+	
+	get_node("HudCanvasLayer/EventMessageHolder")._on_Environment_unlocked(environmentObjectsName);
+
 func _on_Player_itemPickedUp(item):
+	if item extends KeyBase:
+		get_node("HudCanvasLayer/Keys").AddKey(item)
+	
 	get_node("HudCanvasLayer/EventMessageHolder")._on_Player_itemPickedUp(item);
 
 func _on_Player_weaponChanged(slot, weapon):

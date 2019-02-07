@@ -5,6 +5,7 @@ signal itemDropped(item)
 var potions = []
 var foods = []
 var spells = []
+var keys = []
 var tilemap
 var chosen_player
 var player
@@ -14,30 +15,48 @@ var environmentObjects = []
 var placedItems = []
 var TileSize = 128;
 
-const PotionClasses = preload("res://Items/scripts/Potions.gd")
-const FoodClasses = preload("res://Items/scripts/Foods.gd")
-const SpellClasses = preload("res://Items/scripts/Spells.gd")
-const Weapons = preload("res://Items/scripts/Weapons.gd")
-
 func _ready():
-	var instance = PotionClasses.HealthPotion.new()
+	var instance = Constants.PotionClasses.HealthPotion.new()
 	addPotions([instance, instance, instance])
-	var instance = FoodClasses.CookedSteak.new()
+	var instance = Constants.FoodClasses.CookedSteak.new()
 	addFoods([instance, instance])
-	var instance = SpellClasses.FireSpell.new()
+	var instance = Constants.SpellClasses.FireSpell.new()
 	addSpells([instance, instance])
+
+func addKey(new_key):
+	#todo, needs to check if inventory is full first
+	keys.append(new_key)
 
 func addPotions(new_potions):
 	for potion in new_potions:
+		#todo, needs to check if inventory is full first
 		potions.append(potion)
 
 func addFoods(new_foods):
 	for food in new_foods:
+		#todo, needs to check if inventory is full first
 		foods.append(food)
 
 func addSpells(new_spells):
 	for spell in new_spells:
+		#todo, needs to check if inventory is full first
 		spells.append(spell)
+
+func RemoveEnvironment(environmentObjectToRemove):
+	environmentObjects.remove(environmentObjects.find(environmentObjectToRemove))
+
+func RemoveKey(unlockGuid):
+	for i in range(keys.size()-1, -1, -1):
+		#in the future when we save the current floor this should pass that aswell
+		if keys[i].IsValidKey(unlockGuid):
+			keys.remove(i)
+			return
+
+func HasKey(unlockGuid):
+	for i in range(keys.size()-1, -1, -1):
+		#in the future when we save the current floor this should pass that aswell
+		if keys[i].IsValidKey(unlockGuid):
+			return keys[i]
 
 func charactersAtPos(pos):
 	return arrayAtPosForMoving(pos, characters)
