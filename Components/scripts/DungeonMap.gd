@@ -1,7 +1,7 @@
 tool
 extends Node2D
 
-var Distribution = load("res://Components/Distributions/Distribution.gd")
+var Distribution = Constants.Distribution
 
 export(int) var bottom_z_index = 0
 export(int) var top_z_index = 2

@@ -12,7 +12,7 @@ func _ready():
 	turnBehaviour.setWaitEvery(3)
 	turnBehaviour.setLimit(100)
 	turnBehaviour.init()
-	item_distribution = Distribution.new([{"p": 0.5, "value": Constants.FoodClasses.CookedSteak}])
+	item_distribution = Constants.IndependentDistribution.new([{"p": 0.5, "value": Constants.FoodClasses.CookedSteak}])
 
 func turn():
 	moving = moveDirection(turnBehaviour.getDirection(original_pos))

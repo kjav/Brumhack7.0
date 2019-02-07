@@ -1,8 +1,5 @@
 extends "Character.gd"
 
-
-var Distribution = load("res://Components/Distributions/IndependentDistributions.gd")
-
 var attack
 var name = 'Unset'
 var item_distribution

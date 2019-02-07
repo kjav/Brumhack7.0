@@ -12,7 +12,7 @@ func _ready():
 	turnBehaviour.setTurnWait(2)
 	turnBehaviour.setLimit(100)
 	turnBehaviour.init()
-	item_distribution = Distribution.new([{"p": 0.1, "value": Constants.SpellClasses.FireSpell}])
+	item_distribution = Constants.IndependentDistribution.new([{"p": 0.1, "value": Constants.SpellClasses.FireSpell}])
 
 
 func turn():

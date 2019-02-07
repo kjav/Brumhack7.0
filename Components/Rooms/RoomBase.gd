@@ -1,7 +1,7 @@
-var Set = load("res://Components/Distributions/Set.gd")
-var NumberOf = load("res://Components/Distributions/NumberOf.gd")
-var Distribution = load("res://Components/Distributions/Distribution.gd")
-var IndependentDistribution = load("res://Components/Distributions/Distribution.gd")
+var Set = Constants.Set
+var NumberOf = Constants.NumberOf
+var Distribution = Constants.Distribution
+var IndependentDistribution = Constants.IndependentDistribution
 
 var environment_distribution
 var item_distribution

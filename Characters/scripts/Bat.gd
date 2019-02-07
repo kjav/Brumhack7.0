@@ -10,7 +10,7 @@ func _ready():
 	self.health = 1
 	self.name = 'Bat'
 	turnBehaviour.setLimit(100)
-	item_distribution = Distribution.new([{"p": 1, "value": Constants.FoodClasses.CookedSteak}, {"p": 1, "value": Constants.PotionClasses.HealthPotion}])
+	item_distribution = Constants.IndependentDistribution.new([{"p": 1, "value": Constants.FoodClasses.CookedSteak}, {"p": 1, "value": Constants.PotionClasses.HealthPotion}])
 
 func turn():
 	moving = moveDirection(turnBehaviour.getDirection(original_pos))

@@ -7,5 +7,8 @@ const SpellClasses = preload("res://Items/scripts/Spells.gd")
 const Weapons = preload("res://Items/scripts/Weapons.gd")
 const KeyClasses = preload("res://Items/scripts/Keys.gd")
 
-#Distributions
-#todo
+#Distribution Classes
+const Set = preload("res://Components/Distributions/Set.gd")
+const NumberOf = preload("res://Components/Distributions/NumberOf.gd")
+const Distribution = preload("res://Components/Distributions/Distribution.gd")
+const IndependentDistribution = preload("res://Components/Distributions/IndependentDistributions.gd")
