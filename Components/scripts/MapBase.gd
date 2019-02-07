@@ -258,8 +258,13 @@ func make_walls_consistent():
 			]
 			
 			for i in range(0, surroundings.size()):
-				surroundings[i] = is_wall(tiles[surroundings[i].y][surroundings[i].x])
-				
+				var x = surroundings[i].x
+				var y = surroundings[i].y
+				# Doors should count as walls to the tiles to their left and right.
+				# Therefore we exclute the centre column of surroundings above in the
+				# is_door check.
+				surroundings[i] = is_wall(tiles[y][x]) or (i % 3 != 1 and is_door(Vector2(x, y)))
+
 			tiles[point.y][point.x] = tree.get_value(surroundings)
 	changed_tiles = {}
 
