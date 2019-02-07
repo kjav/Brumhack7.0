@@ -8,7 +8,7 @@ var changed_tiles = {}
 var doorClass = preload("res://Environments/Door.tscn")
 
 var tree = load("res://Components/scripts/SurroundingsTree.gd").new(10)
-var Distribution = load("res://Components/Distributions/Distribution.gd")
+var Distribution = Constants.Distribution
 
 func is_wall(tile):
 	return tile in [6, 13, 21, 28, 30, 32, 33, 34, 35, 39, 41, 42]

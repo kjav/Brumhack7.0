@@ -4,6 +4,7 @@ const Turn = preload("res://Characters/scripts/behaviours/Turn.gd")
 var turnBehaviour = Turn.InRangeMoveToOtherwiseRandomEveryNTurnsInvinsibleOnWait.new()
 const Process = preload("res://Characters/scripts/behaviours/_Process.gd")
 var processBehaviour = Process.StraightTransition.new()
+
 func _ready():
 	self.damage = 2
 	self.health = 1
@@ -11,6 +12,8 @@ func _ready():
 	turnBehaviour.setTurnWait(2)
 	turnBehaviour.setLimit(100)
 	turnBehaviour.init()
+	item_distribution = Constants.IndependentDistribution.new([{"p": 0.1, "value": Constants.SpellClasses.FireSpell}])
+
 
 func turn():
 	moving = moveDirection(turnBehaviour.getDirection(original_pos))
