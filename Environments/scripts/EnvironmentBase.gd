@@ -18,10 +18,9 @@ func onWalkedInto(character):
 	pass
 
 func emitSignal(lockedState):
-	emit_signal("blockStateChanged", self, true);
+	emit_signal("blockStateChanged", self, true)
 
 func remove():
-	var a = GameData.environmentObjectAtPos(pos/GameData.TileSize)
-	GameData.RemoveEnvironment(a[0])
+	GameData.RemoveEnvironment(self)
 	hide()
 	queue_free()
