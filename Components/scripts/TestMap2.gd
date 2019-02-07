@@ -167,7 +167,7 @@ func _init().(200, 200, -1):
 	var mid_2 = OS.get_ticks_msec()
 	print("    Rooms time: ", OS.get_ticks_msec() - mid_1)
 	
-	#make_walls_consistent()
+	make_walls_consistent()
 	print("    Make walls consistent time: ", OS.get_ticks_msec() - mid_2)
 	
 	print("Total Time: ", OS.get_ticks_msec() - start)
