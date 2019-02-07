@@ -32,6 +32,12 @@ func _ready():
 func turn():
 	pass
 
+func consume_stat(stat, amount):
+	if stats[stat].value >= amount:
+		stats[stat].value -= amount
+		return true
+	return false
+
 func roll_damage():
 	# TODO: Calculate damage here
 	return 1

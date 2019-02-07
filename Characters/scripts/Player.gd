@@ -101,7 +101,7 @@ func _process(delta):
 
 func takeDamage(damage):
 	.takeDamage(damage)
-	emit_signal("statsChanged", "Health", "Down", -damage)
+	emit_signal("statsChanged", "health", "Down", -damage)
 
 func pickUp():
 	var item = GameData.itemAtPos(self.get_pos()/128)
@@ -112,11 +112,18 @@ func pickUp():
 func heal(amount):
 	if self.health.value < self.health.maximum:
 		self.health.value = min(self.health.value + amount, self.health.maximum)
-		emit_signal("statsChanged", "Health", "Up", amount)
+		emit_signal("statsChanged", "health", "Up", amount)
+
+func consume_stat(stat, amount):
+	if stats[stat].value >= amount:
+		stats[stat].value -= amount
+		emit_signal("statsChanged", stat, "Down", amount)
+		return true
+	return false
 
 func increaseMax(amount):
 	self.health.maximum += amount
-	emit_signal("statsChanged", "MaxHealth", "Up", amount)
+	emit_signal("statsChanged", "maxhealth", "Up", amount)
 
 func set_weapon_positions(dir):
 	var weapon = self.get_node("PrimaryWeapon")

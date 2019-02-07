@@ -74,10 +74,9 @@ func PlayerManaChanged(mana, maxMana):
 		get_node("HudCanvasLayer/ManaBar").add_child(new_node)
 
 func PlayerStatChanged(stat, direction, value):
-	print("Stat: ", stat)
-	if stat == "Health":
+	if stat == "health":
 		PlayerHealthChanged(GameData.player.stats.health.value, GameData.player.stats.health.maximum)
-	elif stat == "Mana":
+	elif stat == "mana":
 		PlayerManaChanged(GameData.player.stats.mana.value, GameData.player.stats.mana.maximum)
 
 func _on_Player_itemPickedUp(item):
