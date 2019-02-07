@@ -4,10 +4,9 @@ signal blockStateChanged(environmentObject, blockedState)
 
 var walkable
 var pos
-var Name
+var name
 
 func _ready():
-	GameData.environmentObjects.append(self)
 	self.get_node("/root/Node2D").connectEnvironmentToPathfinding(self)
 	pos = get_pos()
 
@@ -22,6 +21,7 @@ func emitSignal(lockedState):
 	emit_signal("blockStateChanged", self, true);
 
 func remove():
-	GameData.RemoveEnvironment(self)
-	get_parent().remove_child(self)
+	var a = GameData.environmentObjectAtPos(pos/GameData.TileSize)
+	GameData.RemoveEnvironment(a[0])
+	hide()
 	queue_free()

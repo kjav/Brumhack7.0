@@ -17,7 +17,7 @@ func setLocked(_locked):
 
 func keyUnlocked():
 	GameData.RemoveKey(UnlockGuid)
-	emit_signal("keyUsed", UnlockGuid, Name)
+	emit_signal("keyUsed", UnlockGuid, name)
 	setLocked(false)
 
 func getLocked():
@@ -25,13 +25,3 @@ func getLocked():
 
 func setUnlockGuid(unlockGuid):
 	UnlockGuid = unlockGuid
-
-func onWalkedInto(character):
-	if !locked:
-		state = "open"
-		handleDoorAnimation()
-	elif character == GameData.player:
-		var key = GameData.HasKey(UnlockGuid)
-		
-		if key != null:
-			keyUnlocked()

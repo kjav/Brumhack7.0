@@ -1,6 +1,7 @@
 tool
 extends Node2D
 
+var Distribution = load("res://Components/Distributions/Distribution.gd")
 
 export(int) var bottom_z_index = 0
 export(int) var top_z_index = 2
@@ -115,8 +116,7 @@ func set_map_type(type):
 		
 		for item in map.items:
 			var node = item.value.new()
-			node.pos = (item.position - Vector2(100, 100)) * 128
-			GameData.placeItem(node)
+			node.place((item.position - Vector2(100, 100)) * 128)
 		
 		for env in map.environmentObjects:
 			var Environments = self.get_node("/root/Node2D/Environments")
@@ -138,9 +138,20 @@ func set_map_type(type):
 			if env.has("facing"):
 				node.setFacing(env.facing)
 			
-			node.setFacing(env.facing)
-			node.setLocked(false)
-      
+			if env != null:
+				if node != null:
+					if node.name != null:
+						print("Nodes name: " + node.name)
+						print(env.has("facing"))
+			
+			#this is just temporary
+			if node.name == "Chest":
+				node.setLocked(true)
+				node.setUnlockGuid("Silver")
+				node.setDistribution(Distribution.new([{"p": 1.0, "value": Constants.SpellClasses.FireSpell}]))
+			elif node.name == "Door":
+				node.setLocked(false)
+			
 			GameData.environmentObjects.append(node)
 			node.set_pos((env.position - Vector2(100, 100)) * 128)
 	

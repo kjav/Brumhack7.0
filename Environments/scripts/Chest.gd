@@ -1,25 +1,45 @@
 tool
 extends "UnlockableBase.gd"
 
-export(String, "closed", "open") var state = "closed" setget setState, getState
+var item_distribution
 
-func _ready():
-	Name = "Chest"
+func _init():
+	name = "Chest"
+	walkable = true
 
-func changeOfState(original, new):
-	return original != new
+func handleAnimation():
+	var state
+	
+	if locked:
+		state = "closed"
+	else:
+		state = "open"
+	
+	self.set_animation(state)
 
-func setState(_state):
-	if typeof(_state) == TYPE_STRING:
-		if changeOfState(state, _state):
-			state = _state
-			self.set_animation(state)
-
-func getState():
-	return state
+func setLocked(_locked):
+	.setLocked(_locked)
+	handleAnimation();
 
 func keyUnlocked():
-	#get item from a distribution
-	#place item
-	base.keyUnlocked()
-	base.remove()
+	.keyUnlocked()
+
+func setDistribution(_distribution):
+	item_distribution = _distribution
+
+func remove():
+	if(item_distribution != null):
+		var item = item_distribution.pick()[0].new()
+		item.place(get_pos())
+	
+	.remove()
+
+func onWalkedInto(character):
+	if !locked:
+		remove()
+	
+	if locked && character == GameData.player:
+		var key = GameData.HasKey(UnlockGuid)
+		
+		if key != null:
+			keyUnlocked()
