@@ -170,11 +170,11 @@ func findNextDirection(a, b):
 	var a_id = points[a_vec3]
 	var b_id = points[b_vec3]
 	
-	print("Getting id path ", a_vec3, ", ", b_vec3)
+	#print("Getting id path ", a_vec3, ", ", b_vec3)
 	
 	var id_path = Pathfinder.get_id_path(a_id, b_id)
 	
-	print("Got id path ", a_vec3, ", ", b_vec3, ". Length: ", id_path.size())
+	#print("Got id path ", a_vec3, ", ", b_vec3, ". Length: ", id_path.size())
 	
 	var direction = Enums.DIRECTION.NONE
 	if id_path.size() > 1:

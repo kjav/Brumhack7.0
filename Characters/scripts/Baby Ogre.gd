@@ -5,8 +5,6 @@ var turnBehaviour = Turn.InRangeMoveToOtherwiseRandomWaitEveryNTurns.new()
 const Process = preload("res://Characters/scripts/behaviours/_Process.gd")
 var processBehaviour = Process.StraightTransition.new()
 func _ready():
-	self.damage = 2
-	self.health = 4
 	self.name = 'Baby Ogre'
 	turnBehaviour.setWaitEvery(3)
 	turnBehaviour.setLimit(100)

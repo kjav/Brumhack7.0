@@ -6,8 +6,6 @@ const Process = preload("res://Characters/scripts/behaviours/_Process.gd")
 var processBehaviour = Process.StraightTransition.new()
 
 func _ready():
-	self.damage = 1
-	self.health = 1
 	self.name = 'Bat'
 	turnBehaviour.setLimit(100)
 

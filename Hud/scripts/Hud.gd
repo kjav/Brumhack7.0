@@ -5,12 +5,15 @@ var settingsOpen
 var inc = 40
 
 const Heart = preload("res://Hud/Heart.tscn")
+const Hat = preload("res://Hud/Hat.tscn")
 
 func _ready():
 	inventoryOpen = false
 	settingsOpen = false
-	PlayerHealthChanged("", 0)
-	GameData.player.connect("healthChanged", self, "PlayerHealthChanged")
+	PlayerHealthChanged(GameData.player.stats.health.value, GameData.player.stats.health.maximum)
+	PlayerManaChanged(GameData.player.stats.mana.value, GameData.player.stats.mana.maximum)
+	GameData.player.connect("healthChanged", self, "PlayerStatChanged")
+	GameData.player.connect("statsChanged", self, "PlayerStatChanged")
 	GameData.player.connect("weaponChanged", self, "PlayerWeaponChanged")
 	GameData.player.connect("playerMove", self, "CheckFloor")
 	get_node("HudCanvasLayer/SpellInvent/front").connect("InventoryOpened", self, "SpellInventoryOpened")
@@ -39,12 +42,10 @@ func PlayerWeaponChanged(slot, weapon):
 		selectedSlot = get_node("HudCanvasLayer/SecondaryWeaponSlot")
 	selectedSlot.setIconTexture(weapon.texture)
 
-func PlayerHealthChanged(change, value):
+func PlayerHealthChanged(health, maxHealth):
 	for child in get_node("HudCanvasLayer/HealthBar").get_children():
 		child.queue_free()
 		child.hide()
-	var health = GameData.player.health
-	var maxHealth = GameData.player.maxHealth
 	for i in range(maxHealth):
 		var new_node = Heart.instance()
 		new_node.set_pos(Vector2(inc*i, 0))
@@ -57,6 +58,27 @@ func PlayerHealthChanged(change, value):
 	
 	if health <= 0:
 		get_node("HudCanvasLayer/DeathMenu").died()
+
+func PlayerManaChanged(mana, maxMana):
+	for child in get_node("HudCanvasLayer/ManaBar").get_children():
+		child.queue_free()
+		child.hide()
+	for i in range(maxMana):
+		var new_node = Hat.instance()
+		new_node.set_pos(Vector2(inc*i, 0))
+		if (i < mana):
+			new_node.setType("Full")
+		else:
+			new_node.setType("Empty")
+		
+		get_node("HudCanvasLayer/ManaBar").add_child(new_node)
+
+func PlayerStatChanged(stat, direction, value):
+	print("Stat: ", stat)
+	if stat == "Health":
+		PlayerHealthChanged(GameData.player.stats.health.value, GameData.player.stats.health.maximum)
+	elif stat == "Mana":
+		PlayerManaChanged(GameData.player.stats.mana.value, GameData.player.stats.mana.maximum)
 
 func _on_Player_itemPickedUp(item):
 	get_node("HudCanvasLayer/EventMessageHolder")._on_Player_itemPickedUp(item);

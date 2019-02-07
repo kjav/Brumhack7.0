@@ -9,7 +9,7 @@ func _ready():
 	self.get_node("/root/Node2D").connectEnemy(self)
 
 func attack(character):
-	.attack(character, damage);
+	.attack(character, roll_damage());
 	
 func turn():
 	pass

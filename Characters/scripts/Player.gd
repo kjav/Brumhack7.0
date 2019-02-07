@@ -1,6 +1,6 @@
 extends "Character.gd"
 
-signal healthChanged(change, value)
+signal statsChanged(change, value)
 signal weaponChanged(slot, weapon)
 signal itemPickedUp(item)
 signal playerMove(pos)
@@ -8,7 +8,6 @@ signal playerAttack(character, amount)
 
 var time_elapsed = 0
 var attack
-var maxHealth
 var weapons = preload("res://Items/scripts/Weapons.gd")
 var primaryWeapon = weapons.BasicSword.new()
 var secondaryWeapon = weapons.BasicShield.new()
@@ -19,7 +18,7 @@ func _ready():
 	set_process(true)
 	swipe_funcref = funcref(self, "swiped")
 	EventListener.listen("SwipeCommand", swipe_funcref)
-	maxHealth = health
+	stats.health.value = stats.health.maximum
 	GameData.player = self
 	GameData.characters.append(self)
 	self.frames = load("res://assets/SpriteFrames/" + GameData.chosen_player + ".tres")
@@ -59,7 +58,7 @@ func swiped(direction):
 		emit_signal("playerMove", self.target_pos / 128)
 
 func attack(character):
-	if alive:
+	if alive():
 		emit_signal("playerAttack", character, primaryWeapon.damage)
 		.attack(character, primaryWeapon.damage)
 
@@ -102,7 +101,7 @@ func _process(delta):
 
 func takeDamage(damage):
 	.takeDamage(damage)
-	emit_signal("healthChanged", "Down", -damage)
+	emit_signal("statsChanged", "Health", "Down", -damage)
 
 func pickUp():
 	var item = GameData.itemAtPos(self.get_pos()/128)
@@ -111,13 +110,13 @@ func pickUp():
 		item.pickup()
 
 func heal(amount):
-	if self.health < self.maxHealth:
-		self.health += amount
-		emit_signal("healthChanged", "Up", amount)
+	if self.health.value < self.health.maximum:
+		self.health.value = min(self.health.value + amount, self.health.maximum)
+		emit_signal("statsChanged", "Health", "Up", amount)
 
 func increaseMax(amount):
-	self.maxHealth += amount
-	emit_signal("healthChanged", "Max", 0)
+	self.health.maximum += amount
+	emit_signal("statsChanged", "MaxHealth", "Up", amount)
 
 func set_weapon_positions(dir):
 	var weapon = self.get_node("PrimaryWeapon")

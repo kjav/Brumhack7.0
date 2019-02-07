@@ -6,11 +6,22 @@ var moving = false
 var movement_direction
 var original_pos = get_pos()
 var target_pos = get_pos()
-var alive = true
 var damageable = true
-var health = 3
-var strengh = 5
-var damage = 1
+
+var stats = {
+	"health": {
+		"value": 3,
+		"maximum": 3
+	},
+	"mana": {
+		"value": 3,
+		"maximum": 3
+	},
+	"strength": {
+		"value": 5,
+		"maximum": 5
+	}
+}
 
 const Hitmarker = preload("res://Characters/Hitmarker.tscn")
 
@@ -21,8 +32,12 @@ func _ready():
 func turn():
 	pass
 
+func roll_damage():
+	# TODO: Calculate damage here
+	return 1
+
 func moveDirection(direction):
-	if (not moving) and alive:
+	if (not moving) and alive():
 		original_pos = get_pos()
 		movement_direction = Enums.DIRECTION.NONE
 		if direction != Enums.DIRECTION.NONE:
@@ -47,7 +62,7 @@ func handleMove(direction):
 				return Enums.DIRECTION.NONE
 
 func faceDirection(direction):
-	if alive:
+	if alive():
 		if direction == Enums.DIRECTION.UP:
 			set_animation("stand_up")
 		elif direction == Enums.DIRECTION.DOWN:
@@ -98,7 +113,7 @@ func handleEnvironmentCollisions(pos):
 	return walkable
 
 func attack(character, damage):
-	if alive:
+	if alive():
 		if (character == GameData.player) or (self == GameData.player):
 			emit_signal("attack", self, damage);
 			if (character.damageable):
@@ -106,15 +121,14 @@ func attack(character, damage):
 				character.takeDamage(damage)
 
 func takeDamage(damage):
-	self.health -= damage
-	if self.health <= 0:
+	stats.health.value -= damage
+	if stats.health.value <= 0:
 		handleCharacterDeath()
-	createHitmarker()
+	createHitmarker(damage)
 
 func handleCharacterDeath():
 	playDeathAudio()
 	GameData.characters.erase(self)
-	alive = false
 	set_animation("death")
 
 func playDeathAudio():
@@ -123,7 +137,7 @@ func playDeathAudio():
 	else:
 		Audio.playSoundEffect("Enemy_Death", true)
 
-func createHitmarker():
+func createHitmarker(damage):
 	var newNode = Hitmarker.instance()
 	newNode.set_scale(Vector2(1,1) / (7*self.get_scale()) )
 	newNode.setAmount(damage)
@@ -131,6 +145,9 @@ func createHitmarker():
 
 func targetWalkable(pos):
 	return GameData.walkable(pos.x, pos.y)
+
+func alive():
+	return stats.health.value > 0
 
 func setWalkAnimation(direction):
 	if direction == Enums.DIRECTION.UP:
