@@ -1,6 +1,5 @@
 extends Node2D
 
-
 func _ready():
 	for i in GameData.placedItems:
 		addItem(i)

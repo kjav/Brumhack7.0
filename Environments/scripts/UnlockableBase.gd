@@ -17,7 +17,7 @@ func setLocked(_locked):
 
 func keyUnlocked():
 	GameData.RemoveKey(UnlockGuid)
-	emit_signal("keyUsed", UnlockGuid, Name)
+	emit_signal("keyUsed", UnlockGuid, name)
 	setLocked(false)
 
 func getLocked():

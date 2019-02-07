@@ -8,13 +8,6 @@ var item_distribution
 var npc_distribution
 var extents_distribution
 
-# Item Classes
-const PotionClasses = preload("res://Items/scripts/Potions.gd")
-const FoodClasses = preload("res://Items/scripts/Foods.gd")
-const SpellClasses = preload("res://Items/scripts/Spells.gd")
-const Weapons = preload("res://Items/scripts/Weapons.gd")
-const KeyClasses = preload("res://Items/scripts/Keys.gd")
-
 # Specifies the mirror axis that this room is symmetrical on
 enum SYMMETRY {
 	all,

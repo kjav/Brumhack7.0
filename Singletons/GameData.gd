@@ -15,17 +15,12 @@ var environmentObjects = []
 var placedItems = []
 var TileSize = 128;
 
-const PotionClasses = preload("res://Items/scripts/Potions.gd")
-const FoodClasses = preload("res://Items/scripts/Foods.gd")
-const SpellClasses = preload("res://Items/scripts/Spells.gd")
-const Weapons = preload("res://Items/scripts/Weapons.gd")
-
 func _ready():
-	var instance = PotionClasses.HealthPotion.new()
+	var instance = Constants.PotionClasses.HealthPotion.new()
 	addPotions([instance, instance, instance])
-	var instance = FoodClasses.CookedSteak.new()
+	var instance = Constants.FoodClasses.CookedSteak.new()
 	addFoods([instance, instance])
-	var instance = SpellClasses.FireSpell.new()
+	var instance = Constants.SpellClasses.FireSpell.new()
 	addSpells([instance, instance])
 
 func addKey(new_key):
@@ -46,6 +41,9 @@ func addSpells(new_spells):
 	for spell in new_spells:
 		#todo, needs to check if inventory is full first
 		spells.append(spell)
+
+func RemoveEnvironment(environmentObjectToRemove):
+	environmentObjects.remove(environmentObjects.find(environmentObjectToRemove))
 
 func RemoveKey(unlockGuid):
 	for i in range(keys.size()-1, -1, -1):
