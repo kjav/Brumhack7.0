@@ -148,7 +148,7 @@ func set_map_type(type):
 			if node.name == "Chest":
 				node.setLocked(true)
 				node.setUnlockGuid("Silver")
-				node.setDistribution(Distribution.new([{"p": 1.0, "value": Constants.SpellClasses.FireSpell}]))
+				node.setDistribution(Distribution.new([{"p": 1.0, "value": Constants.WeaponClasses.BasicSpear}]))
 			elif node.name == "Door":
 				node.setLocked(false)
 			
