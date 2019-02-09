@@ -9,9 +9,8 @@ signal playerAttack(character, amount)
 var time_elapsed = 0
 var attack
 var maxHealth
-var weapons = preload("res://Items/scripts/Weapons.gd")
-var primaryWeapon = weapons.BasicSword.new()
-var secondaryWeapon = weapons.BasicShield.new()
+var primaryWeapon = Constants.WeaponClasses.BasicSword.new()
+var secondaryWeapon = Constants.WeaponClasses.BasicShield.new()
 var swipe_funcref
 var name = 'Player'
 
@@ -105,7 +104,7 @@ func takeDamage(damage):
 	emit_signal("healthChanged", "Down", -damage)
 
 func pickUp():
-	var item = GameData.itemAtPos(self.get_pos()/128)
+	var item = GameData.itemAtPos(self.get_pos()/GameData.TileSize)
 	if (item != null):
 		item.pickup()
 		emit_signal("itemPickedUp", item)
