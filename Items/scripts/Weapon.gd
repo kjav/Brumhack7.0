@@ -1,10 +1,7 @@
-extends Node
+extends "Item.gd"
 
 var damage
-var name
 var distance
-var iconFilePath
-var pos
 #Down, Up, Left, Right
 var holdOffset
 
@@ -12,12 +9,7 @@ var holdOffset
 func onUse():
 	pass
 
-func place(newPos):
-	pos = newPos
-	GameData.placeItem(self)
-
 func pickup():
-	pos = null
-	GameData.pickedUp(self)
+	.pickup()
 	GameData.player.dropWeapon()
 	GameData.player.setPrimaryWeapon(self)

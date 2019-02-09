@@ -117,7 +117,7 @@ func set_map_type(type):
 		for item in map.items:
 			var node = item.value.new()
 			node.place((item.position - Vector2(100, 100)) * 128)
-		
+
 		for env in map.environmentObjects:
 			var Environments = self.get_node("/root/Node2D/Environments")
 			var node = env.value.instance()
