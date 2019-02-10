@@ -11,7 +11,7 @@ var damageable = true
 var health = 3
 var strengh = 5
 var damage = 1
-var weaponAttackPositions = []
+var additionalRelativeAttackPositions = []
 
 const Hitmarker = preload("res://Characters/Hitmarker.tscn")
 
@@ -36,7 +36,11 @@ func handleMove(direction):
 	#think this is why enemies never use stand animation, face direction has no option for direction.none
 	faceDirection(direction)
 	var pos = setTarget(direction)
-	var attacking = handleEnemyCollisions([pos] + weaponAttackPositions)
+	var additional = generateAdditionalAbosoluteAttackPositions(direction)
+	if additional != []:
+		pass
+	var attacking = handleEnemyCollisions([pos] + additional)
+	
 	if not attacking:
 		var walkableEnvironment = handleEnvironmentCollisions(pos)
 		if walkableEnvironment:
@@ -80,6 +84,25 @@ func getNextTargetPos(pos, direction):
 		pos.x += 1
 	
 	return pos
+
+func generateAdditionalAbosoluteAttackPositions(direction):
+	var phi
+	
+	if direction == Enums.DIRECTION.UP:
+		phi = 0
+	elif direction == Enums.DIRECTION.DOWN:
+		phi = PI
+	elif direction == Enums.DIRECTION.LEFT:
+		phi = PI /2
+	elif direction == Enums.DIRECTION.RIGHT:
+		phi = 3 * PI / 2
+	
+	var AbsolutePositions = []
+
+	for relativePosition in additionalRelativeAttackPositions:
+		AbsolutePositions = AbsolutePositions + [relativePosition.rotated(phi) + target_pos / GameData.TileSize]
+	
+	return AbsolutePositions
 
 func handleEnemyCollisions(posArray):
 	var collisions = []
