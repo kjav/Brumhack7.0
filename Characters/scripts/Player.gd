@@ -37,6 +37,7 @@ func setPrimaryWeapon(weapon):
 	emit_signal("weaponChanged", "Primary", primaryWeapon)
 	get_node("PrimaryWeapon").set_texture(primaryWeapon.texture)
 	additionalRelativeAttackPositions = weapon.relativeAttackPositions
+	onlyAttacksFirstEnemy = weapon.onlyAttacksFirstEnemy
 
 func setSecondaryWeapon(weapon):
 	secondaryWeapon = weapon

@@ -10,8 +10,6 @@ class BasicSword extends "Weapon.gd":
 	func onUse():
 		pass
 
-
-
 class BasicShield extends "Weapon.gd":
 	const texture = preload("res://assets/basic_shield.png")
 	

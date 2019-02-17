@@ -12,6 +12,7 @@ var health = 3
 var strengh = 5
 var damage = 1
 var additionalRelativeAttackPositions = []
+var onlyAttacksFirstEnemy = true
 
 const Hitmarker = preload("res://Characters/Hitmarker.tscn")
 
@@ -26,8 +27,10 @@ func moveDirection(direction):
 	if (not moving) and alive:
 		original_pos = get_pos()
 		movement_direction = Enums.DIRECTION.NONE
+		
 		if direction != Enums.DIRECTION.NONE:
 			movement_direction = handleMove(direction)
+		
 		moving = true
 		
 		return true
@@ -37,8 +40,6 @@ func handleMove(direction):
 	faceDirection(direction)
 	var pos = setTarget(direction)
 	var additional = generateAdditionalAbosoluteAttackPositions(direction)
-	if additional != []:
-		pass
 	var attacking = handleEnemyCollisions([pos] + additional)
 	
 	if not attacking:
@@ -95,7 +96,7 @@ func generateAdditionalAbosoluteAttackPositions(direction):
 	elif direction == Enums.DIRECTION.LEFT:
 		phi = PI /2
 	elif direction == Enums.DIRECTION.RIGHT:
-		phi = 3 * PI / 2
+		phi = 3 *  PI /2
 	
 	var AbsolutePositions = []
 
@@ -106,15 +107,23 @@ func generateAdditionalAbosoluteAttackPositions(direction):
 
 func handleEnemyCollisions(posArray):
 	var collisions = []
+	var collided = false
 	
 	for pos in posArray:
+		if not targetWalkable(pos):
+			break;
+		
 		collisions += GameData.charactersAtPos(pos)
 
 	for collision in collisions:
 			if not (collision == self):
 				attack(collision)
-				return true
-	return false
+				collided = true
+
+				if onlyAttacksFirstEnemy:
+					return true
+	
+	return collided
 
 func handleEnvironmentCollisions(pos):
 	var walkable = true
@@ -131,14 +140,17 @@ func attack(character, damage):
 	if alive:
 		if (character == GameData.player) or (self == GameData.player):
 			emit_signal("attack", self, damage);
+			
 			if (character.damageable):
 				Audio.playHit()
 				character.takeDamage(damage)
 
 func takeDamage(damage):
 	self.health -= damage
+	
 	if self.health <= 0:
 		handleCharacterDeath()
+	
 	createHitmarker()
 
 func handleCharacterDeath():
