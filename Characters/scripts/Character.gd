@@ -12,9 +12,14 @@ var health = 3
 var strengh = 5
 var damage = 1
 var additionalRelativeAttackPositions = []
+var attackPositionBlockable = true
 var onlyAttacksFirstEnemy = true
 
 const Hitmarker = preload("res://Characters/Hitmarker.tscn")
+
+
+func roundVector2(pos):
+	return Vector2(round(pos.x), round(pos.y))
 
 func _ready():
 	original_pos = get_pos()
@@ -28,6 +33,7 @@ func moveDirection(direction):
 		original_pos = get_pos()
 		movement_direction = Enums.DIRECTION.NONE
 		
+		#think this is why enemies never use stand animation, remove this and add case to face direction and it might work
 		if direction != Enums.DIRECTION.NONE:
 			movement_direction = handleMove(direction)
 		
@@ -36,7 +42,6 @@ func moveDirection(direction):
 		return true
 
 func handleMove(direction):
-	#think this is why enemies never use stand animation, face direction has no option for direction.none
 	faceDirection(direction)
 	var pos = setTarget(direction)
 	var additional = generateAdditionalAbosoluteAttackPositions(direction)
@@ -96,12 +101,14 @@ func generateAdditionalAbosoluteAttackPositions(direction):
 	elif direction == Enums.DIRECTION.LEFT:
 		phi = PI /2
 	elif direction == Enums.DIRECTION.RIGHT:
-		phi = 3 *  PI /2
+		phi = (3 *  PI) / 2
 	
 	var AbsolutePositions = []
 
 	for relativePosition in additionalRelativeAttackPositions:
-		AbsolutePositions = AbsolutePositions + [relativePosition.rotated(phi) + target_pos / GameData.TileSize]
+		var rotated = relativePosition.rotated(phi)
+		var targetPosDivided = target_pos / GameData.TileSize
+		AbsolutePositions = AbsolutePositions + [roundVector2(rotated) + targetPosDivided]
 	
 	return AbsolutePositions
 
@@ -109,19 +116,20 @@ func handleEnemyCollisions(posArray):
 	var collisions = []
 	var collided = false
 	
+	posArray.pop_front()
 	for pos in posArray:
-		if not targetWalkable(pos):
+		if not targetWalkable(pos) and attackPositionBlockable:
 			break;
 		
 		collisions += GameData.charactersAtPos(pos)
 
 	for collision in collisions:
-			if not (collision == self):
-				attack(collision)
-				collided = true
+		if not (collision == self):
+			attack(collision)
+			collided = true
 
-				if onlyAttacksFirstEnemy:
-					return true
+			if onlyAttacksFirstEnemy:
+				return true
 	
 	return collided
 

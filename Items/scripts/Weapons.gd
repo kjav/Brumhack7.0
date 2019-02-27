@@ -32,6 +32,7 @@ class BasicSpear extends "Weapon.gd":
 		relativeAttackPositions = [Vector2(0, -1)]
 		damage = 1
 		holdOffset = [Vector2(10.6666, 16), Vector2(21.3333, 16), Vector2(16, 18), Vector2(16, 18)]
+		onlyAttacksFirstEnemy = false
 	
 	func onUse():
 		pass
