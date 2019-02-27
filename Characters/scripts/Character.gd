@@ -116,7 +116,6 @@ func handleEnemyCollisions(posArray):
 	var collisions = []
 	var collided = false
 	
-	posArray.pop_front()
 	for pos in posArray:
 		if not targetWalkable(pos) and attackPositionBlockable:
 			break;
