@@ -4,6 +4,9 @@ var damage
 var distance
 #Down, Up, Left, Right
 var holdOffset
+var relativeAttackPositions = []
+var onlyAttacksFirstEnemy = true
+var attackPositionBlockable = true
 
 #can be used for things like bows later on
 func onUse():

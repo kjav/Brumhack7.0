@@ -33,13 +33,15 @@ class StraightTransition extends Node:
 	
 	func snapMoveBackToTileSize(movement_direction, original_pos):
 		var returnedPos
+
 		if movement_direction == Enums.DIRECTION.LEFT:
 			returnedPos = (original_pos + Vector2(-GameData.TileSize, 0))
 		elif movement_direction == Enums.DIRECTION.RIGHT:
 			returnedPos = (original_pos + Vector2(GameData.TileSize, 0))
+
 		if movement_direction == Enums.DIRECTION.UP:
 			returnedPos = (original_pos + Vector2(0, -GameData.TileSize))
 		elif movement_direction == Enums.DIRECTION.DOWN:
 			returnedPos = (original_pos + Vector2(0, GameData.TileSize))
-		var returnedMoving = false
-		return ([returnedPos, returnedMoving])
+
+		return ([returnedPos, false])
