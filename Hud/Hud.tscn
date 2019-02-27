@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=1]
+[gd_scene load_steps=15 format=1]
 
 [ext_resource path="res://Hud/scripts/Hud.gd" type="Script" id=1]
 [ext_resource path="res://Hud/Hat.tscn" type="PackedScene" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://Hud/EventMessageHolder.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Hud/Death.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Hud/scripts/Death.gd" type="Script" id=13]
+[ext_resource path="res://Hud/scripts/KeysInterfaceContainer.gd" type="Script" id=14]
+
 
 [node name="HudNode" type="Node2D"]
 
@@ -30,6 +32,12 @@ scale = Vector2( 1, 1 )
 [node name="InactiveSlot" type="Node2D" parent="HudCanvasLayer"]
 
 transform/pos = Vector2( 20, 0 )
+
+[node name="Keys" type="Node2D" parent="HudCanvasLayer"]
+
+transform/pos = Vector2( 45.7208, 372.52 )
+transform/scale = Vector2( 2, 2 )
+script/script = ExtResource( 14 )
 
 [node name="HealthBar" type="Node2D" parent="HudCanvasLayer"]
 
