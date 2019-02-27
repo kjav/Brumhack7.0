@@ -2,6 +2,7 @@ extends "Character.gd"
 
 var attack
 var name = 'Unset'
+var base_damage = 1
 
 func _ready():
 	set_process(true)
@@ -9,7 +10,7 @@ func _ready():
 	self.get_node("/root/Node2D").connectEnemy(self)
 
 func attack(character):
-	.attack(character, roll_damage());
+	.attack(character, base_damage);
 	
 func turn():
 	pass

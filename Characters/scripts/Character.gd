@@ -20,6 +20,10 @@ var stats = {
 	"strength": {
 		"value": 5,
 		"maximum": 5
+	},
+	"defence": {
+		"value": 5,
+		"maximum": 5
 	}
 }
 
@@ -37,10 +41,6 @@ func consume_stat(stat, amount):
 		stats[stat].value -= amount
 		return true
 	return false
-
-func roll_damage():
-	# TODO: Calculate damage here
-	return 1
 
 func moveDirection(direction):
 	if (not moving) and alive():
@@ -118,9 +118,65 @@ func handleEnvironmentCollisions(pos):
 			walkable = false
 	return walkable
 
-func attack(character, damage):
+func sample_normal_distribution(mean, sd):
+	# Use the Box-Muller transform to sample from the given normal distribution.
+	# https://en.wikipedia.org/wiki/Box-Muller_transform
+	return sqrt(-2 * log(randf())) * cos(2 * PI * randf())
+
+func calculate_damage(character, base_damage):
+	# Get the stats to use for the roll
+	var attack = self.stats.strength.value
+	var defence = character.stats.defence.value
+	# Calculate the absolute (i.e. always positive) difference in stats.
+	var difference = abs(attack - defence)
+	# Calculate the sign (i.e. positive or negative) of the difference in stats.
+	var difference_sign
+	if attack >= defence:
+		difference_sign = 1
+	else:
+		difference_sign = -1
+	
+	# The mean of the distribution is 0 by default.
+	var mean = 0
+	if difference > 0:
+		# When there is a difference in stats, use the infinite sum 1/(5 * 1.1^x) to
+		# calculate an adjusted mean, between 0 and 2. When the difference in stats
+		# is 1, the mean will be about 0.18. When the difference is 2, the mean will
+		# be 0.165. Etc.
+		mean = difference_sign / (5 * pow(1.1, difference))
+
+	# Use a fixed standard deviation. The value 1.5 gives a 10% chance of getting
+	# a modifier of 0 or 2 for equal stats (i.e. a difference of 0).
+	var sd = 1.5
+	
+	# Generate a random number, between -infinity and infinity, from the standard
+	# distribution with calculated mean and standard deviation.
+	var modifier = sample_normal_distribution(mean, sd)
+	
+	# Case statement to convert the number to one of the modifier values, 0, 0.5,
+	# 1, 1.5, or 2.
+	if modifier < -2:
+		modifier = 0
+	elif modifier < -1:
+		modifier = 0.5
+	elif modifier < 1:
+		modifier = 1
+	elif modifier < 2:
+		modifier = 1.5
+	else:
+		modifier = 2
+	
+	var damage = base_damage * modifier
+	
+	# Round the result towards base_damage. For instance, for a base damage of 1,
+	# 0.5 should be rounded to 0 and 1.5 should be rounded to 2. As godot rounds
+	# away from 0, we subtract base_damage from damage to achieve this.
+	return base_damage + round(damage - base_damage)
+
+func attack(character, base_damage):
 	if alive():
 		if (character == GameData.player) or (self == GameData.player):
+			var damage = calculate_damage(character, base_damage)
 			emit_signal("attack", self, damage);
 			if (character.damageable):
 				Audio.playHit()
@@ -145,7 +201,8 @@ func playDeathAudio():
 
 func createHitmarker(damage):
 	var newNode = Hitmarker.instance()
-	newNode.set_scale(Vector2(1,1) / (7*self.get_scale()) )
+	newNode.set_scale(Vector2(1,1) / (7*self.get_scale()))
+	print("Hitmarker damage: ", damage)
 	newNode.setAmount(damage)
 	self.add_child(newNode)
 
