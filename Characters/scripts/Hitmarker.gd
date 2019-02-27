@@ -7,6 +7,11 @@ func setAmount(newAmount):
 	if typeof(newAmount) == TYPE_INT:
 		amount = newAmount
 		get_node("Amount").set_text(str(amount))
+	elif typeof(newAmount) == TYPE_REAL:
+		amount = round(newAmount)
+		get_node("Amount").set_text(str(amount))
+	else:
+		print("Error: hitsplat amount not numeric")
 
 func getAmount():
 	return amount

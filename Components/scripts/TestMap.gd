@@ -74,6 +74,9 @@ func add_room(name, room, wall):
 	# Add the NPCs to the map
 	for enemy in room.npcs:
 		npcs.push_back({"position": position + Vector2(1, 1), "value": enemy})
+		
+	for env in room.environments:
+		environmentObjects.push_back({"position": position + Vector2(1, 1), "value": env})
 	
 	# Room added successfully: return true
 	return true
@@ -90,6 +93,7 @@ func _init().(200, 200, -1):
 	var TallRoom = load("res://Components/Rooms/TallRoom.gd").new()
 	var SuperTallRoom = load("res://Components/Rooms/SuperTallRoom.gd").new()
 	var WideRoom = load("res://Components/Rooms/WideRoom.gd").new()
+	var UpgradeRoom = load("res://Components/Rooms/UpgradeRoom.gd").new()
 	var main_room = DefaultRoom.get()
 	print(main_room.extents)
 	print(main_room.npcs)

@@ -26,7 +26,7 @@ class InRangeMoveToOtherwiseRandom extends Node:
 		var player_pos = GameData.player.original_pos
 		player_pos.x = int(player_pos.x / GameData.TileSize)
 		player_pos.y = int(player_pos.y / GameData.TileSize)
-		if GameData.player.alive and divided_pos.distance_squared_to(player_pos) < limit:
+		if GameData.player.alive() and divided_pos.distance_squared_to(player_pos) < limit:
 			# Select movement direction towards player
 			return moveTo.getDirection(pos)
 		else:

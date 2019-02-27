@@ -151,7 +151,7 @@ func set_map_type(type):
 				node.setDistribution(Distribution.new([{"p": 1.0, "value": Constants.SpellClasses.FireSpell}]))
 			elif node.name == "Door":
 				node.setLocked(false)
-			
+
 			GameData.environmentObjects.append(node)
 			node.set_pos((env.position - Vector2(100, 100)) * 128)
 	

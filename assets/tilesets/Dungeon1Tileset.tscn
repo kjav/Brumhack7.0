@@ -380,4 +380,12 @@ centered = false
 region = true
 region_rect = Rect2( 0, 0, 32, 32 )
 
+[node name="ZZZ_Floor1_duplicate" type="Sprite" parent="."]
+
+transform/pos = Vector2( 192, 0 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
 

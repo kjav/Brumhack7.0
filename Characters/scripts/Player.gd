@@ -1,6 +1,6 @@
 extends "Character.gd"
 
-signal healthChanged(change, value)
+signal statsChanged(change, value)
 signal weaponChanged(slot, weapon)
 signal itemPickedUp(item)
 signal playerMove(pos)
@@ -8,7 +8,6 @@ signal playerAttack(character, amount)
 
 var time_elapsed = 0
 var attack
-var maxHealth
 var primaryWeapon = Constants.WeaponClasses.BasicSword.new()
 var secondaryWeapon = Constants.WeaponClasses.BasicShield.new()
 var swipe_funcref
@@ -18,7 +17,7 @@ func _ready():
 	set_process(true)
 	swipe_funcref = funcref(self, "swiped")
 	EventListener.listen("SwipeCommand", swipe_funcref)
-	maxHealth = health
+	stats.health.value = stats.health.maximum
 	GameData.player = self
 	GameData.characters.append(self)
 	self.frames = load("res://assets/SpriteFrames/" + GameData.chosen_player + ".tres")
@@ -58,7 +57,7 @@ func swiped(direction):
 		emit_signal("playerMove", self.target_pos / 128)
 
 func attack(character):
-	if alive:
+	if alive():
 		emit_signal("playerAttack", character, primaryWeapon.damage)
 		.attack(character, primaryWeapon.damage)
 
@@ -101,7 +100,7 @@ func _process(delta):
 
 func takeDamage(damage):
 	.takeDamage(damage)
-	emit_signal("healthChanged", "Down", -damage)
+	emit_signal("statsChanged", "health", "Down", -damage)
 
 func pickUp():
 	var item = GameData.itemAtPos(self.get_pos()/GameData.TileSize)
@@ -110,13 +109,20 @@ func pickUp():
 		emit_signal("itemPickedUp", item)
 
 func heal(amount):
-	if self.health < self.maxHealth:
-		self.health += amount
-		emit_signal("healthChanged", "Up", amount)
+	if self.stats.health.value < self.stats.health.maximum:
+		self.stats.health.value = min(self.stats.health.value + amount, self.stats.health.maximum)
+		emit_signal("statsChanged", "health", "Up", amount)
+
+func consume_stat(stat, amount):
+	if stats[stat].value >= amount:
+		stats[stat].value -= amount
+		emit_signal("statsChanged", stat, "Down", amount)
+		return true
+	return false
 
 func increaseMax(amount):
-	self.maxHealth += amount
-	emit_signal("healthChanged", "Max", 0)
+	self.stats.health.maximum += amount
+	emit_signal("statsChanged", "maxhealth", "Up", amount)
 
 func set_weapon_positions(dir):
 	var weapon = self.get_node("PrimaryWeapon")

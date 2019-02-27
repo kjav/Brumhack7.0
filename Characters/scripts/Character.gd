@@ -6,11 +6,26 @@ var moving = false
 var movement_direction
 var original_pos = get_pos()
 var target_pos = get_pos()
-var alive = true
 var damageable = true
-var health = 3
-var strengh = 5
-var damage = 1
+
+var stats = {
+	"health": {
+		"value": 3,
+		"maximum": 3
+	},
+	"mana": {
+		"value": 3,
+		"maximum": 3
+	},
+	"strength": {
+		"value": 5,
+		"maximum": 5
+	},
+	"defence": {
+		"value": 5,
+		"maximum": 5
+	}
+}
 
 const Hitmarker = preload("res://Characters/Hitmarker.tscn")
 
@@ -21,8 +36,14 @@ func _ready():
 func turn():
 	pass
 
+func consume_stat(stat, amount):
+	if stats[stat].value >= amount:
+		stats[stat].value -= amount
+		return true
+	return false
+
 func moveDirection(direction):
-	if (not moving) and alive:
+	if (not moving) and alive():
 		original_pos = get_pos()
 		movement_direction = Enums.DIRECTION.NONE
 		if direction != Enums.DIRECTION.NONE:
@@ -47,7 +68,7 @@ func handleMove(direction):
 				return Enums.DIRECTION.NONE
 
 func faceDirection(direction):
-	if alive:
+	if alive():
 		if direction == Enums.DIRECTION.UP:
 			set_animation("stand_up")
 		elif direction == Enums.DIRECTION.DOWN:
@@ -99,24 +120,79 @@ func handleEnvironmentCollisions(pos):
 		
 	return walkable
 
-func attack(character, damage):
-	if alive:
+func sample_normal_distribution(mean, sd):
+	# Use the Box-Muller transform to sample from the given normal distribution.
+	# https://en.wikipedia.org/wiki/Box-Muller_transform
+	return sqrt(-2 * log(randf())) * cos(2 * PI * randf())
+
+func calculate_damage(character, base_damage):
+	# Get the stats to use for the roll
+	var attack = self.stats.strength.value
+	var defence = character.stats.defence.value
+	# Calculate the absolute (i.e. always positive) difference in stats.
+	var difference = abs(attack - defence)
+	# Calculate the sign (i.e. positive or negative) of the difference in stats.
+	var difference_sign
+	if attack >= defence:
+		difference_sign = 1
+	else:
+		difference_sign = -1
+	
+	# The mean of the distribution is 0 by default.
+	var mean = 0
+	if difference > 0:
+		# When there is a difference in stats, use the infinite sum 1/(5 * 1.1^x) to
+		# calculate an adjusted mean, between 0 and 2. When the difference in stats
+		# is 1, the mean will be about 0.18. When the difference is 2, the mean will
+		# be 0.165. Etc.
+		mean = difference_sign / (5 * pow(1.1, difference))
+
+	# Use a fixed standard deviation. The value 1.5 gives a 10% chance of getting
+	# a modifier of 0 or 2 for equal stats (i.e. a difference of 0).
+	var sd = 1.5
+	
+	# Generate a random number, between -infinity and infinity, from the standard
+	# distribution with calculated mean and standard deviation.
+	var modifier = sample_normal_distribution(mean, sd)
+	
+	# Case statement to convert the number to one of the modifier values, 0, 0.5,
+	# 1, 1.5, or 2.
+	if modifier < -2:
+		modifier = 0
+	elif modifier < -1:
+		modifier = 0.5
+	elif modifier < 1:
+		modifier = 1
+	elif modifier < 2:
+		modifier = 1.5
+	else:
+		modifier = 2
+	
+	var damage = base_damage * modifier
+	
+	# Round the result towards base_damage. For instance, for a base damage of 1,
+	# 0.5 should be rounded to 0 and 1.5 should be rounded to 2. As godot rounds
+	# away from 0, we subtract base_damage from damage to achieve this.
+	return base_damage + round(damage - base_damage)
+
+func attack(character, base_damage):
+	if alive():
 		if (character == GameData.player) or (self == GameData.player):
+			var damage = calculate_damage(character, base_damage)
 			emit_signal("attack", self, damage);
 			if (character.damageable):
 				Audio.playHit()
 				character.takeDamage(damage)
 
 func takeDamage(damage):
-	self.health -= damage
-	if self.health <= 0:
+	stats.health.value -= damage
+	if stats.health.value <= 0:
 		handleCharacterDeath()
-	createHitmarker()
+	createHitmarker(damage)
 
 func handleCharacterDeath():
 	playDeathAudio()
 	GameData.characters.erase(self)
-	alive = false
 	set_animation("death")
 
 func playDeathAudio():
@@ -125,14 +201,18 @@ func playDeathAudio():
 	else:
 		Audio.playSoundEffect("Enemy_Death", true)
 
-func createHitmarker():
+func createHitmarker(damage):
 	var newNode = Hitmarker.instance()
-	newNode.set_scale(Vector2(1,1) / (7*self.get_scale()) )
+	newNode.set_scale(Vector2(1,1) / (7*self.get_scale()))
+	print("Hitmarker damage: ", damage)
 	newNode.setAmount(damage)
 	self.add_child(newNode)
 
 func targetWalkable(pos):
 	return GameData.walkable(pos.x, pos.y)
+
+func alive():
+	return stats.health.value > 0
 
 func setWalkAnimation(direction):
 	if direction == Enums.DIRECTION.UP:

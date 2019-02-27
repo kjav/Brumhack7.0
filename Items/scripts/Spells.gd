@@ -13,15 +13,16 @@ class FireSpell extends "Item.gd":
 		var closest_enemy = GameData.closestEnemy()
 		if closest_enemy:
 			# Remove potion
-			GameData.spells.remove(GameData.spells.find(self))
-			launchFireball(closest_enemy)
+			if GameData.player.consume_stat("mana", 1):
+				launchFireball(closest_enemy)
+				GameData.spells.remove(GameData.spells.find(self))
 
 
 	func launchFireball(closest_enemy):
 		var new_missile = missile.instance()
 		Audio.playSoundEffect("Fireball_Flying")
 		GameData.player.get_parent().add_child(new_missile)
-		
+	
 		new_missile.init(
 			closest_enemy.get_path(),
 			missile_texture,
