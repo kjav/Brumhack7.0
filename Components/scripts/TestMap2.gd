@@ -101,7 +101,7 @@ func add_room(name, room, wall):
 		items.push_back({"position": position + Vector2(1, 1), "value": item})
 		
 	for env in room.environments:
-		environmentObjects.push_back({"position": position + Vector2(1, 1), "value": env})
+		environmentObjects.push_back({"position": position + Vector2(2, 1), "value": env})
 	
 	# Room added successfully: return true
 	return true
