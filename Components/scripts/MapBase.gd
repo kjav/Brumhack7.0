@@ -47,6 +47,16 @@ func _init(width, height, initial_tile=-1):
 		true, true, true,
 		null, false, null, null
 	], 6)
+	tree.add_value([
+		true, true, true,
+		true, true, true,
+		true, true, true, null
+	], 6)
+	tree.add_value([
+		null, null, null,
+		null, true, null,
+		null, true, null, null
+	], 6)
 	
 	# Vertical wall
 	tree.add_value([

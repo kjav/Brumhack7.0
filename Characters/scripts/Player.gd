@@ -110,8 +110,8 @@ func pickUp():
 		item.pickup()
 
 func heal(amount):
-	if self.health.value < self.health.maximum:
-		self.health.value = min(self.health.value + amount, self.health.maximum)
+	if self.stats.health.value < self.stats.health.maximum:
+		self.stats.health.value = min(self.stats.health.value + amount, self.stats.health.maximum)
 		emit_signal("statsChanged", "health", "Up", amount)
 
 func consume_stat(stat, amount):
@@ -122,7 +122,7 @@ func consume_stat(stat, amount):
 	return false
 
 func increaseMax(amount):
-	self.health.maximum += amount
+	self.stats.health.maximum += amount
 	emit_signal("statsChanged", "maxhealth", "Up", amount)
 
 func set_weapon_positions(dir):
