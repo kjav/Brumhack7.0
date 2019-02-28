@@ -8,7 +8,7 @@ func setAmount(newAmount):
 		amount = newAmount
 		get_node("Amount").set_text(str(amount))
 	elif typeof(newAmount) == TYPE_REAL:
-		amount = round(newAmount)
+		amount = round(newAmount * 2) / 2
 		get_node("Amount").set_text(str(amount))
 	else:
 		print("Error: hitsplat amount not numeric")

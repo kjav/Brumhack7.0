@@ -212,12 +212,7 @@ func calculate_damage(character, base_damage):
 	else:
 		modifier = 2
 	
-	var damage = base_damage * modifier
-	
-	# Round the result towards base_damage. For instance, for a base damage of 1,
-	# 0.5 should be rounded to 0 and 1.5 should be rounded to 2. As godot rounds
-	# away from 0, we subtract base_damage from damage to achieve this.
-	return base_damage + round(damage - base_damage)
+	return base_damage * modifier
 
 func attack(character, base_damage):
 	if alive():

@@ -50,14 +50,15 @@ func PlayerHealthChanged(health, maxHealth):
 		child.queue_free()
 		child.hide()
 	for i in range(maxHealth):
-		var new_node = Heart.instance()
-		new_node.set_pos(Vector2(inc*i, 0))
-		if (i < health):
-			new_node.setType("Full")
+		var heart = Heart.instance()
+		heart.set_pos(Vector2(inc * i, 0))
+		get_node("HudCanvasLayer/HealthBar").add_child(heart)
+		if i < health:
+			heart.setType("Full")
+		elif health == i - 0.5:
+			heart.setType("Half")
 		else:
-			new_node.setType("Empty")
-		
-		get_node("HudCanvasLayer/HealthBar").add_child(new_node)
+			heart.setType("Empty")
 	
 	if health <= 0:
 		get_node("HudCanvasLayer/DeathMenu").died()
@@ -81,7 +82,7 @@ func PlayerManaChanged(mana, maxMana):
 		get_node("HudCanvasLayer/ManaBar").add_child(new_node)
 
 func PlayerStatChanged(stat, direction, value):
-	if stat == "health":
+	if stat == "health" or stat == "maxhealth":
 		PlayerHealthChanged(GameData.player.stats.health.value, GameData.player.stats.health.maximum)
 	elif stat == "mana":
 		PlayerManaChanged(GameData.player.stats.mana.value, GameData.player.stats.mana.maximum)
