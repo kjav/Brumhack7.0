@@ -58,6 +58,7 @@ func moveDirection(direction):
 		if direction != Enums.DIRECTION.NONE:
 			movement_direction = handleMove(direction)
 		
+		setTarget(movement_direction)
 		moving = true
 		
 		return true
@@ -77,6 +78,8 @@ func handleMove(direction):
 				return direction
 			else:
 				return Enums.DIRECTION.NONE
+	
+	return Enums.DIRECTION.NONE
 
 func faceDirection(direction):
 	if alive():
