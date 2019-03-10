@@ -49,11 +49,11 @@ func PlayerHealthChanged(health, maxHealth):
 	for child in get_node("HudCanvasLayer/HealthBar").get_children():
 		child.queue_free()
 		child.hide()
-	for i in range(maxHealth):
+	for i in range(1, maxHealth + 1):
 		var heart = Heart.instance()
 		heart.set_pos(Vector2(inc * i, 0))
 		get_node("HudCanvasLayer/HealthBar").add_child(heart)
-		if i < health:
+		if i <= health:
 			heart.setType("Full")
 		elif health == i - 0.5:
 			heart.setType("Half")
