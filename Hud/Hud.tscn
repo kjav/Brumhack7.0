@@ -1,19 +1,20 @@
-[gd_scene load_steps=15 format=1]
+[gd_scene load_steps=16 format=1]
 
 [ext_resource path="res://Hud/scripts/Hud.gd" type="Script" id=1]
 [ext_resource path="res://Hud/scripts/KeysInterfaceContainer.gd" type="Script" id=2]
 [ext_resource path="res://Hud/Hat.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/half_grey_hat.png" type="Texture" id=4]
 [ext_resource path="res://assets/grey_hat.png" type="Texture" id=5]
-[ext_resource path="res://Hud/HudButton.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Hud/Minimap.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Hud/InventoryHudButton.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Hud/PickupHudButton.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/if_Settings_gear_setting_tools_392496.png" type="Texture" id=10]
-[ext_resource path="res://Hud/scripts/SettingsClick.gd" type="Script" id=11]
-[ext_resource path="res://Hud/EventMessageHolder.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Hud/Death.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Hud/scripts/Death.gd" type="Script" id=14]
+[ext_resource path="res://Hud/WeaponHudButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/change_arrow.png" type="Texture" id=7]
+[ext_resource path="res://Hud/Minimap.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Hud/InventoryHudButton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Hud/PickupHudButton.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/if_Settings_gear_setting_tools_392496.png" type="Texture" id=11]
+[ext_resource path="res://Hud/scripts/SettingsClick.gd" type="Script" id=12]
+[ext_resource path="res://Hud/EventMessageHolder.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Hud/Death.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Hud/scripts/Death.gd" type="Script" id=15]
 
 [node name="HudNode" type="Node2D"]
 
@@ -62,42 +63,57 @@ texture = ExtResource( 5 )
 
 [node name="SecondaryWeaponSlot" parent="HudCanvasLayer" instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 176.252, 1767.53 )
+transform/pos = Vector2( 154.679, 1759.67 )
 transform/scale = Vector2( 1.5, 1.5 )
 frameStyle = "Right"
 type = "Shield"
 
 [node name="PrimaryWeaponSlot" parent="HudCanvasLayer" instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 5.09036, 1744.24 )
+transform/pos = Vector2( 6.61581, 1737.72 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = "Left"
 type = "Sword"
 
-[node name="Node2D" parent="HudCanvasLayer" instance=ExtResource( 7 )]
+[node name="ChangeArrow" type="TextureFrame" parent="HudCanvasLayer"]
 
-[node name="FoodInvent" parent="HudCanvasLayer" instance=ExtResource( 8 )]
+visibility/behind_parent = true
+rect/scale = Vector2( 1.5, 1.5 )
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 140.0
+margin/top = 1744.0
+margin/right = 180.0
+margin/bottom = 1784.0
+texture = ExtResource( 7 )
+stretch_mode = 0
+
+[node name="Node2D" parent="HudCanvasLayer" instance=ExtResource( 8 )]
+
+[node name="FoodInvent" parent="HudCanvasLayer" instance=ExtResource( 9 )]
 
 transform/pos = Vector2( 544.626, 1743.11 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = "Left"
 type = "Food"
 
-[node name="PotInvent" parent="HudCanvasLayer" instance=ExtResource( 8 )]
+[node name="PotInvent" parent="HudCanvasLayer" instance=ExtResource( 9 )]
 
 transform/pos = Vector2( 880.509, 1744.86 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = "Right"
 type = "Potion"
 
-[node name="SpellInvent" parent="HudCanvasLayer" instance=ExtResource( 8 )]
+[node name="SpellInvent" parent="HudCanvasLayer" instance=ExtResource( 9 )]
 
 transform/pos = Vector2( 713, 1745.23 )
 transform/scale = Vector2( 2, 2 )
 frameStyle = "Centre"
 type = "Spell"
 
-[node name="Pickup" parent="HudCanvasLayer" instance=ExtResource( 9 )]
+[node name="Pickup" parent="HudCanvasLayer" instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 710.954, 1547.64 )
 transform/scale = Vector2( 2, 2 )
@@ -115,19 +131,19 @@ margin/bottom = 70.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = ExtResource( 10 )
+textures/normal = ExtResource( 11 )
 params/resize_mode = 0
 params/scale = Vector2( 0.25, 0.25 )
 params/stretch_mode = 0
-script/script = ExtResource( 11 )
+script/script = ExtResource( 12 )
 
-[node name="EventMessageHolder" parent="HudCanvasLayer" instance=ExtResource( 12 )]
+[node name="EventMessageHolder" parent="HudCanvasLayer" instance=ExtResource( 13 )]
 
 transform/pos = Vector2( 390.218, 115.807 )
 
-[node name="DeathMenu" parent="HudCanvasLayer" instance=ExtResource( 13 )]
+[node name="DeathMenu" parent="HudCanvasLayer" instance=ExtResource( 14 )]
 
 visibility/visible = false
-script/script = ExtResource( 14 )
+script/script = ExtResource( 15 )
 
 

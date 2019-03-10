@@ -26,8 +26,10 @@ func _ready():
 
 func FoodInventoryOpened(inventory):
 	inventory.connect("ItemUsed", get_node("HudCanvasLayer/EventMessageHolder"), "_on_FoodItem_used")
+
 func SpellInventoryOpened(inventory):
 	inventory.connect("ItemUsed", get_node("HudCanvasLayer/EventMessageHolder"), "_on_SpellItem_used")
+
 func PotInventoryOpened(inventory):
 	inventory.connect("ItemUsed", get_node("HudCanvasLayer/EventMessageHolder"), "_on_PotItem_used")
 
