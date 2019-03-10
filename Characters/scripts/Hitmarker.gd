@@ -1,23 +1,60 @@
 extends Node2D
 
-
 var amount setget setAmount, getAmount
+var n = 0 setget setN, getN
+signal death(n)
 
 func setAmount(newAmount):
 	if typeof(newAmount) == TYPE_INT:
 		amount = newAmount
-		get_node("Amount").set_text(str(amount))
+		get_node("Container/Amount").set_text(str(amount))
 	elif typeof(newAmount) == TYPE_REAL:
 		amount = round(newAmount * 2) / 2
-		get_node("Amount").set_text(str(amount))
+		get_node("Container/Amount").set_text(str(amount))
 	else:
 		print("Error: hitsplat amount not numeric")
 
 func getAmount():
 	return amount
+
+func get_offset(n):
+	# Place the hit splat on a hexagonal grid - see "Rings", "Spiral rings" at:
+	# https://www.redblobgames.com/grids/hexagons
+	var ring = floor((1.5 + sqrt(pow(1.5, 2) + 10 * n)) / 5.0)
+	var index = n - ring * (2 + (ring - 1) * 5) / 2.0
 	
+	var radius = ring
+	var edge = radius
+	var traversal = Vector2(-1.0/2.0, sqrt(3.0)/2.0) * 512.0
+	
+	if radius == 0:
+		return Vector2(0, 0)
+	else:
+		# Move from centre to ring
+		# Set initial position
+		var position = Vector2(1, 0) * radius * 512.0
+		while index > 0:
+			# Traverse each edge <radius> times and then rotate
+			edge -= 1
+			position += traversal
+			if edge == 0:
+				# Rotate traversal by 60 degrees
+				traversal = traversal.rotated(PI * -60/180)
+				edge = radius
+			index -= 1
+		return position
+
+func setN(newN):
+	if typeof(newN) == TYPE_INT:
+		n = newN
+		get_node("Container").set_pos(get_offset(n))
+	else:
+		print("Error: hitsplat number not an integer")
+
+func getN():
+	return n
+
 func _ready():
-	# Called every time the node is added to the scene.
 	# Initialization here
 	var timer = Timer.new()
 	timer.set_wait_time(1)
@@ -25,8 +62,8 @@ func _ready():
 	timer.set_one_shot(true)
 	add_child(timer)
 	timer.start()
-	pass
 
 func Timeout():
+	emit_signal("death", n)
 	self.queue_free()
 	self.hide()
